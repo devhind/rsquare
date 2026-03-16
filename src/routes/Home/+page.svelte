@@ -1,14 +1,13 @@
 <svelte:head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
   <!-- Font Awesome (you can also use a Kit or the official CDN) -->
-  
 </svelte:head>
 
 <script>
   import { onMount } from 'svelte';
-
 
   onMount(() => {
     // ----- CAROUSEL LOGIC -----
@@ -80,7 +79,6 @@
       // remove other listeners if needed (simplified)
     };
   });
-  
 </script>
 
 <!-- Fixed header -->
@@ -88,13 +86,13 @@
   <div class="header-container">
     <div class="navbar">
       <div class="logo-container">
-      <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square HR">
+        <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square HR">
       </div>
       <div class="nav-links">
         <a href="#">Home</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
-        <a href="#contact">Mission & Vision</a>
+        <a href="#mission-vision">Mission & Vision</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -108,86 +106,145 @@
     <div class="hero-content">
       <h1>R Square HR Services <span>– a company that cares</span></h1>
       <p class="hero-desc">We all know that Management of any organisation needs “7 Ms” like men, materials, machines, methods, morals, minutes and money to perform their functions and achieve their objectives and goals. R SQUARE HR SERVICES is known for contribution towards “men, methods, morals and minutes” ultimately saving machine time, money and enhancing service and profitability.</p>
-      <p class="hero-desc">R SQUARE HR Services (R SQUARE) is an MSME company founded by Shri S N Rao, Former Head-HR of Indian Institute of Management Ahmedabad  and Former Chief General Manager, The Gujarat State Civil Supplies Corporation Limited, a public sector enterprise of the Government of Gujarat. During his tenure with GSCSC, Mr. S N Rao and his team were awarded with CSI-Nihilent Award for e-Governance: 2011-12, National Award for e-Governance: 2012-13, and CSI-Nihilent Award for Supply-Logistics using Information & Communication Technology: 2012-13 from the Government of India. R Square is an innovator in HR solutions with strategy consulting and analytics. R Square core focus is to support business operations of the clients to enhance their efficiency and effectiveness and in turn increase overall productivity and profit by providing all possible combinations of HR and IT solutions.</p>
+      <p class="hero-desc">R SQUARE HR Services (R SQUARE) is an MSME company founded by Shri S N Rao, Former Head-HR of Indian Institute of Management Ahmedabad and Former Chief General Manager, The Gujarat State Civil Supplies Corporation Limited, a public sector enterprise of the Government of Gujarat. During his tenure with GSCSC, Mr. S N Rao and his team were awarded with CSI-Nihilent Award for e-Governance: 2011-12, National Award for e-Governance: 2012-13, and CSI-Nihilent Award for Supply-Logistics using Information & Communication Technology: 2012-13 from the Government of India. R Square is an innovator in HR solutions with strategy consulting and analytics. R Square core focus is to support business operations of the clients to enhance their efficiency and effectiveness and in turn increase overall productivity and profit by providing all possible combinations of HR and IT solutions.</p>
       <div class="hero-buttons">
         <button class="btn-primary btn-large">Explore services</button>
         <button class="btn-outline btn-large btn-secondary">Talk to our expert</button>
       </div>
     </div>
     <div class="hero-image">
-      <i class="fas fa-hand-holding-heart"><img class="hero-img" src="https://media.istockphoto.com/id/2083454645/photo/male-boss-discussing-online-project-with-employee-in-the-office.jpg?s=170667a&w=0&k=20&c=YAjWMxEJRSlaQeT0N7Ki3moDBi-hU3ky8s9IHEzXcs8=" alt="Boss and employee" /></i>
+      <img class="hero-img" src="https://media.istockphoto.com/id/2083454645/photo/male-boss-discussing-online-project-with-employee-in-the-office.jpg?s=170667a&w=0&k=20&c=YAjWMxEJRSlaQeT0N7Ki3moDBi-hU3ky8s9IHEzXcs8=" alt="Boss and employee">
     </div>
   </section>
+
   <!-- Mission & Vision -->
-    <section id="Mission-Vision" class="Mission_Vision">
-      <h2 class="section-heading">Mission_Vision</h2>
-      <p class="Mission-Vision-subhead">R SQUARE HR SERVICE’s vision is to emerge as one of the most respected HR services companies in the world anchored on the values of growth, professionalism, dignity and diversity.</p>
-<p class="Mission-Vision-subhead">R SQUARE HR promotes learning with humility, serving with dignity and growing with integrity. Members of R SQUARE HR care about customers deeply and deliver best-in-class solutions keeping the interest of all other stakeholders in mind. R SQUARE HR will combine the power of technology with the capability of its members to deliver value to its stakeholders through rigorous execution.</p>
-    </section>
+  <section id="mission-vision" class="mission-vision">
+    <h2 class="section-heading">Mission & Vision</h2>
+    <p class="mission-vision-subhead">R SQUARE HR SERVICE’s vision is to emerge as one of the most respected HR services companies in the world anchored on the values of growth, professionalism, dignity and diversity.</p>
+    <p class="mission-vision-subhead">R SQUARE HR promotes learning with humility, serving with dignity and growing with integrity. Members of R SQUARE HR care about customers deeply and deliver best-in-class solutions keeping the interest of all other stakeholders in mind. R SQUARE HR will combine the power of technology with the capability of its members to deliver value to its stakeholders through rigorous execution.</p>
+  </section>
 
   <!-- Services section -->
   <section id="services" class="services">
     <h2 class="section-heading">Our comprehensive HR services</h2>
-    <h2 class="Mission-Vision-heading" >PERMANENT RECRUITMENT:</h2>
-    <p class="Mission-Vision-subhead">R SQUARE HR Services is basically an effort to create value in talent management domains and business consulting services. We specialize in talent acquisition, deployment & outsourcing, corporate learning & development to name a few. We also cater to the organization consulting space primarily servicing the industry through business process improvement, managerial outsourcing and other organizational development interventions. We are connected to companies in India helping them source best solutions to their intellectual & resourcing needs for both their onsite / offshore requirements.
+    <h3 class="mission-vision-heading">PERMANENT RECRUITMENT:</h3>
+    <p class="mission-vision-subhead">R SQUARE HR Services is basically an effort to create value in talent management domains and business consulting services. We specialize in talent acquisition, deployment & outsourcing, corporate learning & development to name a few. We also cater to the organization consulting space primarily servicing the industry through business process improvement, managerial outsourcing and other organizational development interventions. We are connected to companies in India helping them source best solutions to their intellectual & resourcing needs for both their onsite / offshore requirements.</p>
+    <p class="mission-vision-subhead">Team R SQUARE HR is a pool of well qualified and experienced professionals in their respective areas, which enables them to serve key consulting needs across all corporate disciplines & promote quality service delivery through its people, affiliations & associates in India & Overseas.</p>
+    <p class="mission-vision-subhead">The main and only concern for R SQUARE HR is Human Resources. Today the company has its remarkable presence in various industries like Tourism, Education, Information Technology, Pharmaceuticals, Engineering, etc.Further accentuating our presence in the enterprise restructuring area we now deliver critical competitive advantage packages to small and medium enterprises for business process improvements and organizational excellence.</p>
+    <p class="mission-vision-subhead">We understand your hiring philosophy and are perfectly placed to undertake all your recruitment and staffing needs. We understand the role context and advertise in online and offline channels to attract the best talent. We undertake recruitment outsourcing services, which equips us to understand clearly challenges faced by the employers.</p>
+    <p class="mission-vision-subhead">Job seekers are increasingly relying on smartphones and mobile devices to conduct job searches. Ensuring that job posts and accompanying images are mobile optimized is essential for the success of hiring strategies. With the prevalence of social media, HR recruitment agencies like us understand the benefits of enhancing candidate experience. A positive experience enhances employer brand image immediately and immensely. An HR recruitment agency needs to maintain a healthy pipeline of candidates to meet hiring demands on a daily basis. A focused approach to develop a passive candidate pool is vital. Engaging with passive job seekers and unsuccessful candidates helps in not only enlarging the talent pool to work with, but also helps in strengthening employer reputation. With an aim to reign in infrastructural costs, a number of companies are opting to allow remote working employees. Manpower recruiting companies have to develop specific strategies to tap into the target candidate pool.</p>
+    <h3 class="mission-vision-heading">TALENT ACQUISITION:</h3>
+    <p class="mission-vision-subhead">R SQUARE HR strives to make sure our services are dedicated to support HR solution. Our in-house research and recruiting capabilities are extensive. We follow the best systems & processes in the recruitment industry, and so have the ability to serve our clients the relevant & quality profiles with a minimum lead-time.</p>
+    <p class="mission-vision-subhead">We are committed for the accurate search & selection of professionals with the help of highly trained search team, widely spread network as well as existing database of skilled and experienced professionals.</p>
+    <p class="mission-vision-subhead">We specialize in Executive Search/ Middle management/ Board Member & CXO Search. In addition, we have expertise in Mass Hiring or Team Hiring within a stipulated time and we take these assignments on a specific & reasonable term unlike general requisitions.</p>
+    <p class="mission-vision-subhead">For an excellent output in the client side we follow a robust internal process which is time tested and which intertwines the recruiters, leads and directors. We concentrate on research methods, client confidentiality, documentation, strict timelines, reporting and follow up process, constant service feedback.</p>
+    <p class="mission-vision-subhead">Our team includes experienced consultants, who work across the key industry segments and functions to deliver the executive search service. Whether you are a startup, a mid-market firm looking to expand your Board, or a Fortune 500 company working on your succession plan, we stand by to partner with you.</p>
+    <p class="mission-vision-subhead">R SQUARE Differentiation: Unlike our generalist competitors, we choose to specialize - in industries and applications that are highly information-intensive and such increasingly challenging areas as HR consulting and executive search along with our specialization in IT recruitment.</p>
+    <p class="mission-vision-subhead">Presence across Industries & Locations: Our clients are spread across India in different segments including Tourism, Education, Information Technology, Pharmaceuticals, Engineering, Manufacturing, Services and Retail etc.</p>
+    <p class="mission-vision-subhead">Leadership: They see R SQUARE HR as a leader too - often as the biggest "specialist" company, more often as leading consulting thinking and setting the standard in business values and service delivery.</p>
+    <p class="mission-vision-subhead">Secret of our success: We are sure that with our experience and expertise in the field of recruitment & training, we together with the client can accomplish optimum productivity commitment of client’s employees to achieve the goal of client organization.</p>
+    <h3 class="mission-vision-heading">R SQUARE’s Executive Search:</h3>
+    <p class="mission-vision-subhead">At R SQUARE HR, we invest in understanding the context of the client, the organization’s structure, the role to be filled and its context. This understanding is captured in a document and forms the basis of the next few steps in the search process, followed by the premier staffing companies in India.</p>
+    <p class="mission-vision-subhead">Based on the brief prepared earlier in the process, we create a plan to identify the possible matches. We review this plan with the client and co-create it. Then, we plan the communication with the potential candidates. We get into the next step, talent attraction, followed by talent assessment.</p>
+    <p class="mission-vision-subhead">We present our assessment of the short-listed candidates to the client and discuss further to draw up meeting schedules. With debriefs and reference checks happening simultaneously, we arrive at the selects. Offers are worked out in collaboration with the client. Throughout the process, we anchor the relationship with the candidates and help them set the ‘right expectations’ about the process, the role, the support systems and the offer.</p>
+    <h4 class="mission-vision-heading-sub">R SQUARE HR Advantages</h4>
+    <h4 class="mission-vision-heading-sub">Process</h4>
+    <p class="mission-vision-subhead">Robust assignment tracking Process.</p>
+    <p class="mission-vision-subhead">Special 2-member team working on each assignment.</p>
+    <p class="mission-vision-subhead">Use of data sciences and analytics to match roles with candidates.</p>
+    <h4 class="mission-vision-heading-sub">Research</h4>
+    <p class="mission-vision-subhead">Strong research team with exceptional market intelligence to give you the best service among the recruitment agencies in India.</p>
+    <p class="mission-vision-subhead">Internal Knowledge Management Framework.</p>
+    <h4 class="mission-vision-heading-sub">Depth</h4>
+    <p class="mission-vision-subhead">Consultants professionally qualified with experience in the respective domains for providing you a detailed and customized experience.</p>
+    <p class="mission-vision-subhead">Proven expertise of having recruited top management hires.</p>
+    <h3 class="mission-vision-heading">SELECTION SERVICE:</h3>
+    <p class="mission-vision-subhead">At R SQUARE HR Services, we understand the importance of filling up a vacancy whether it’s a new or a replacement position. Realizing fully well that speed and selection of the right profiles are of the essence, our experienced recruiters are specially trained to understand the context in which the candidate has to perform; this in tandem with our unique algorithm used in the matching process ensures that we find the best matches in the quickest possible time.</p>
+    <p class="mission-vision-subhead">We believe that context is very important in recruitment apart from the job description, the resume and the competencies that a candidate has. Our consultants are trained to understand the context of an organization and that of the role in the organisation’s structure. These contexts are unique and need to be understood. Similarly, a candidate has a context apart from the competencies that he/she possesses. We not only match the job description of the role with the competencies of a candidate but also assess if the context of the organization and the role match with the competencies of the candidate. Thus the match ensures finding the best candidate for the job while also improving the retention rate. We are aspiring to be one of the premier staffing companies in India.</p>
+    <h4 class="mission-vision-heading-sub">Advantages of R SQUARE HR</h4>
+    <p class="mission-vision-subhead">Expertise in attracting and finding the best candidates using advanced data sciences</p>
+    <p class="mission-vision-subhead">Expert consultants – that helps you reduce your hiring time and cost with their rich industry experience.</p>
+    <p class="mission-vision-subhead">Unsuccessful candidates are added to a database to aid a referral process</p>
+    <p class="mission-vision-subhead">Ability to identify individuals who technically and culturally match a client’s requirements with the advanced use of algorithms.</p>
+    <p class="mission-vision-subhead">Proven methodology for notifying unsuccessful candidates while protecting the client brand.</p>
 
-Team R SQUARE HR is a pool of well qualified and experienced professionals in their respective areas, which enables them to serve key consulting needs across all corporate disciplines & promote quality service delivery through its people, affiliations & associates in India & Overseas. </p>
-<p class="Mission-Vision-subhead">The main and only concern for R SQUARE HR is Human Resources. Today the company has its remarkable presence in various industries like Tourism, Education, Information Technology, Pharmaceuticals, Engineering, etc.Further accentuating our presence in the enterprise restructuring area we now deliver critical competitive advantage packages to small and medium enterprises for business process improvements and organizational excellence.</p>
-<p class="Mission-Vision-subhead">We understand your hiring philosophy and are perfectly placed to undertake all your recruitment and staffing needs. We understand the role context and advertise in online and offline channels to attract the best talent. We undertake recruitment outsourcing services, which equips us to understand clearly challenges faced by the employers.</p>
-<p class="Mission-Vision-subhead">Job seekers are increasingly relying on smartphones and mobile devices to conduct job searches. Ensuring that job posts and accompanying images are mobile optimized is essential for the success of hiring strategies. With the prevalence of social media, HR recruitment agencies like us understand the benefits of enhancing candidate experience. A positive experience enhances employer brand image immediately and immensely. An HR recruitment agency needs to maintain a healthy pipeline of candidates to meet hiring demands on a daily basis. A focused approach to develop a passive candidate pool is vital. Engaging with passive job seekers and unsuccessful candidates helps in not only enlarging the talent pool to work with, but also helps in strengthening employer reputation. With an aim to reign in infrastructural costs, a number of companies are opting to allow remote working employees. Manpower recruiting companies have to develop specific strategies to tap into the target candidate pool.</p>
-<h2 class="Mission-Vision-heading" >TALENT ACQUISITION:</h2>   
-<p class="Mission-Vision-subhead">R SQUARE HR strives to make sure our services are dedicated to support HR solution. Our in-house research and recruiting capabilities are extensive. We follow the best systems & processes in the recruitment industry, and so have the ability to serve our clients the relevant & quality profiles with a minimum lead-time.</p> 
-<p class="Mission-Vision-subhead">We are committed for the accurate search & selection of professionals with the help of highly trained search team, widely spread network as well as existing database of skilled and experienced professionals.</p>
-<p class="Mission-Vision-subhead">We specialize in Executive Search/ Middle management/ Board Member & CXO Search. In addition, we have expertise in Mass Hiring or Team Hiring within a stipulated time and we take these assignments on a specific & reasonable term unlike general requisitions.</p>
-<p class="Mission-Vision-subhead">For an excellent output in the client side we follow a robust internal process which is time tested and which intertwines the recruiters, leads and directors. We concentrate on research methods, client confidentiality, documentation, strict timelines, reporting and follow up process, constant service feedback.</p>
-<p class="Mission-Vision-subhead">Our team includes experienced consultants, who work across the key industry segments and functions to deliver the executive search service. Whether you are a startup, a mid-market firm looking to expand your Board, or a Fortune 500 company working on your succession plan, we stand by to partner with you.</p>
-<p class="Mission-Vision-subhead">R SQUARE Differentiation: Unlike our generalist competitors, we choose to specialize - in industries and applications that are highly information-intensive and such increasingly challenging areas as HR consulting and executive search along with our specialization in IT recruitment.</p>
-<p class="Mission-Vision-subhead">Presence across Industries & Locations: Our clients are spread across India in different segments including Tourism, Education, Information Technology, Pharmaceuticals, Engineering, Manufacturing, Services and Retail etc.</p>
-<p class="Mission-Vision-subhead">Leadership: They see R SQUARE HR as a leader too - often as the biggest "specialist" company, more often as leading consulting thinking and setting the standard in business values and service delivery.</p>
-<p class="Mission-Vision-subhead">Secret of our success: We are sure that with our experience and expertise in the field of recruitment & training, we together with the client can accomplish optimum productivity commitment of client’s employees to achieve the goal of client organization.</p>
-<h2 class="Mission-Vision-heading" >R SQUARE’s Executive Search:</h2>
-<p class="Mission-Vision-subhead">At R SQUARE HR, we invest in understanding the context of the client, the organization’s structure, the role to be filled and its context. This understanding is captured in a document and forms the basis of the next few steps in the search process, followed by the premier staffing companies in India.</p>
-<p class="Mission-Vision-subhead">Based on the brief prepared earlier in the process, we create a plan to identify the possible matches. We review this plan with the client and co-create it. Then, we plan the communication with the potential candidates. We get into the next step, talent attraction, followed by talent assessment.</p>
-<p class="Mission-Vision-subhead">We present our assessment of the short-listed candidates to the client and discuss further to draw up meeting schedules. With debriefs and reference checks happening simultaneously, we arrive at the selects. Offers are worked out in collaboration with the client. Throughout the process, we anchor the relationship with the candidates and help them set the ‘right expectations’ about the process, the role, the support systems and the offer.</p>
-<p class="Mission-Vision-subhead">We present our assessment of the short-listed candidates to the client and discuss further to draw up meeting schedules. With debriefs and reference checks happening simultaneously, we arrive at the selects. Offers are worked out in collaboration with the client. Throughout the process, we anchor the relationship with the candidates and help them set the ‘right expectations’ about the process, the role, the support systems and the offer.
-<h2 class="Mission-Vision-heading-sub" >R SQUARE HR Advantages</h2>
-<h2 class="Mission-Vision-heading-sub" >Process</h2>
-<p class="Mission-Vision-subhead">Robust assignment tracking Process.</p>
-<p class="Mission-Vision-subhead">Special 2-member team working on each assignment.</p>
-<p class="Mission-Vision-subhead">Use of data sciences and analytics to match roles with candidates.</p>
-<h2 class="Mission-Vision-heading-sub" >Research</h2>
-<p class="Mission-Vision-subhead">Strong research team with exceptional market intelligence to give you the best service among the recruitment agencies in India.</p>
-<p class="Mission-Vision-subhead">Internal Knowledge Management Framework.</p>
-<h2 class="Mission-Vision-heading-sub" >Depth</h2>
-<p class="Mission-Vision-subhead">Consultants professionally qualified with experience in the respective domains for providing you a detailed and customized experience.</p>
-<p class="Mission-Vision-subhead">Proven expertise of having recruited top management hires.</p>
-<h2 class="Mission-Vision-heading" >SELECTION SERVICE:</h2>
-<p class="Mission-Vision-subhead">At R SQUARE HR Services, we understand the importance of filling up a vacancy whether it’s a new or a replacement position. Realizing fully well that speed and selection of the right profiles are of the essence, our experienced recruiters are specially trained to understand the context in which the candidate has to perform; this in tandem with our unique algorithm used in the matching process ensures that we find the best matches in the quickest possible time.</p>
-<p class="Mission-Vision-subhead">We believe that context is very important in recruitment apart from the job description, the resume and the competencies that a candidate has. Our consultants are trained to understand the context of an organization and that of the role in the organisation’s structure. These contexts are unique and need to be understood. Similarly, a candidate has a context apart from the competencies that he/she possesses. We not only match the job description of the role with the competencies of a candidate but also assess if the context of the organization and the role match with the competencies of the candidate. Thus the match ensures finding the best candidate for the job while also improving the retention rate. We are aspiring to be one of the premier staffing companies in India.</p>
-<h2 class="Mission-Vision-heading-sub" >Advantages of R SQUARE HR</h2>
-<p class="Mission-Vision-subhead">Expertise in attracting and finding the best candidates using advanced data sciences</p>
-<p class="Mission-Vision-subhead">Expert consultants – that helps you reduce your hiring time and cost with their rich industry experience.</p>
-<p class="Mission-Vision-subhead">Unsuccessful candidates are added to a database to aid a referral process</p>
-<p class="Mission-Vision-subhead">Ability to identify individuals who technically and culturally match a client’s requirements with the advanced use of algorithms.</p>
-<p class="Mission-Vision-subhead">Proven methodology for notifying unsuccessful candidates while protecting the client brand.</p>
-<div class="services-grid">
     <div class="services-grid">
       <!-- Each card uses local images with leading slash -->
-      <div class="service-card"><div class="service-icon"><i class="fas fa-bullhorn"></i><img class="icon-part" src="/images/strategy.png" alt=""></div><h4>Consultancy for HR Strategies, Policies & Services</h4><p>Consultancy for HR strategies, policies & services.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-chalkboard-user"></i><img class="icon-part" src="/images/training.png" alt=""></div><h4>Training & Development</h4><p>Upskill teams with expert modules (soft skills, leadership, techno‑management).</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-magnifying-glass"></i><img class="icon-part" src="/images/cv.png" alt=""></div><h4>Search & Recruitment Services</h4><p>Executive search, mass hiring, RPO – permanent & contract staffing.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-magnifying-glass"></i><img class="icon-part" src="/images/hr-outsourcing.png" alt=""></div><h4>Recruitment Process Outsourcing</h4><p>Executive search, mass hiring, RPO – permanent & contract staffing.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-people-arrows"></i><img class="icon-part" src="/images/job.png" alt=""></div><h4>Contract Staffing(Workforce Service on Outsourcing basis)</h4><p>Workforce on outsourcing, flexi‑staffing with full compliance.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-magnifying-glass"></i><img class="icon-part" src="/images/outsourcing.png" alt=""></div><h4>Functional HR Services on Outsourcing basis</h4><p>Executive search, mass hiring, RPO – permanent & contract staffing.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-calculator"></i><img class="icon-part" src="/images/insight.png" alt=""></div><h4>Processing Payroll and maintaining legal compliance</h4><p>Payroll processing, legal compliance, NAPS, apprenticeship management.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-magnifying-glass"></i><img class="icon-part" src="/OIP%20(16).webp" alt=""></div><h4>National Apprenticeship Promotion Scheme (NAPS)</h4><p>Executive search, mass hiring, RPO – permanent & contract staffing.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-magnifying-glass"></i><img class="icon-part" src="/images/legal-system.png" alt=""></div><h4>Legal Compliance</h4><p>Executive search, mass hiring, RPO – permanent & contract staffing.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-gavel"></i><img class="icon-part" src="/images/compliant.png" alt=""></div><h4>Legal Services under RTI</h4><p>Legal compliance, RTI advisory, labour law liaison.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-umbrella-beach"></i><img class="icon-part" src="/images/web.png" alt=""></div><h4>Tourism Specific Solutions</h4><p>Tourist guide training, cultural programs, destination management.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-hand-holding-heart"></i><img class="icon-part" src="/images/collective.png" alt=""></div><h4>Supporting CSR Activity</h4><p>Support CSR activities, collaborate with institutions & universities.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-magnifying-glass"></i><img class="icon-part" src="/images/9887500.png" alt=""></div><h4>Collaborating with various institutions</h4><p>Executive search, mass hiring, RPO – permanent & contract staffing.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-magnifying-glass"></i><img class="icon-part" src="/images/cultural-activities-concept-icon-leisure-pastime-entertainment-idea-thin-line-illustration-visiting-cinema-city-sightseeing-tour-isolated-outline-drawing-editable-stroke-vector.jpg" alt=""></div><h4>Cultural Activities(musical programs, films, Gujarati serials, drama etc.)</h4><p>Executive search, mass hiring, RPO – permanent & contract staffing.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fas fa-laptop-code"></i><img class="icon-part" src="/images/consultant.png" alt=""></div><h4>IT Consultancy</h4><p>Tech solutions, e‑governance, digital transformation support.</p></div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/strategy.png" alt="Strategy icon"></div>
+        <h4>Consultancy for HR Strategies, Policies & Services</h4>
+        <p>Consultancy for HR strategies, policies & services.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/training.png" alt="Training icon"></div>
+        <h4>Training & Development</h4>
+        <p>Upskill teams with expert modules (soft skills, leadership, techno‑management).</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/cv.png" alt="CV icon"></div>
+        <h4>Search & Recruitment Services</h4>
+        <p>Executive search, mass hiring, RPO – permanent & contract staffing.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/hr-outsourcing.png" alt="HR outsourcing icon"></div>
+        <h4>Recruitment Process Outsourcing</h4>
+        <p>Executive search, mass hiring, RPO – permanent & contract staffing.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/job.png" alt="Job icon"></div>
+        <h4>Contract Staffing (Workforce Service on Outsourcing basis)</h4>
+        <p>Workforce on outsourcing, flexi‑staffing with full compliance.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/outsourcing.png" alt="Outsourcing icon"></div>
+        <h4>Functional HR Services on Outsourcing basis</h4>
+        <p>Executive search, mass hiring, RPO – permanent & contract staffing.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/insight.png" alt="Payroll icon"></div>
+        <h4>Processing Payroll and maintaining legal compliance</h4>
+        <p>Payroll processing, legal compliance, NAPS, apprenticeship management.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/OIP%20(16).webp" alt="NAPS icon"></div>
+        <h4>National Apprenticeship Promotion Scheme (NAPS)</h4>
+        <p>Executive search, mass hiring, RPO – permanent & contract staffing.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/legal-system.png" alt="Legal icon"></div>
+        <h4>Legal Compliance</h4>
+        <p>Executive search, mass hiring, RPO – permanent & contract staffing.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/compliant.png" alt="RTI icon"></div>
+        <h4>Legal Services under RTI</h4>
+        <p>Legal compliance, RTI advisory, labour law liaison.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/web.png" alt="Tourism icon"></div>
+        <h4>Tourism Specific Solutions</h4>
+        <p>Tourist guide training, cultural programs, destination management.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/collective.png" alt="CSR icon"></div>
+        <h4>Supporting CSR Activity</h4>
+        <p>Support CSR activities, collaborate with institutions & universities.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/9887500.png" alt="Collaboration icon"></div>
+        <h4>Collaborating with various institutions</h4>
+        <p>Executive search, mass hiring, RPO – permanent & contract staffing.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/cultural-activities-concept-icon-leisure-pastime-entertainment-idea-thin-line-illustration-visiting-cinema-city-sightseeing-tour-isolated-outline-drawing-editable-stroke-vector.jpg" alt="Cultural activities icon"></div>
+        <h4>Cultural Activities (musical programs, films, Gujarati serials, drama etc.)</h4>
+        <p>Executive search, mass hiring, RPO – permanent & contract staffing.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img class="icon-part" src="/images/consultant.png" alt="IT consultancy icon"></div>
+        <h4>IT Consultancy</h4>
+        <p>Tech solutions, e‑governance, digital transformation support.</p>
+      </div>
     </div>
   </section>
 
@@ -267,22 +324,22 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
   <section class="partners">
     <h2 class="section-heading">Our valued partners & collaborators</h2>
     <div class="partner-grid">
-      <div class="partner-item"><img class="partner-icon" src="/images/IIM.webp" alt=""><p>IIM Ahmedabad</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/IIMU_Logo.jpg" alt=""><p>IIM Udaipur</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/silver-oak-university-logo.jpg" alt=""><p>Silver Oak University</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/Sardarkrushinagar_Dantiwada_Agricultural_University_Gujarat.jpg" alt=""><p>Sardarkrushinagar Agricultural University</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/gujarat%20university.webp" alt=""><p>Gujarat University</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/Nirma%20University.jpg" alt=""><p>Nirma University</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/GLS%20university.png" alt=""><p>GLS University</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/Ahmedabad%20Management%20Association.jpeg" alt=""><p>Ahmedabad Management Association</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/SARDAR%20institute.webp" alt=""><p>Sardar Patel Institute</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/Knowledge%20Consortium%20Of%20Gujarat.webp" alt=""><p>Knowledge Consortium of Gujarat</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/Gujarat%20Disaster%20Management%20Institute.png" alt=""><p>Gujarat Disaster Management Institute</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/computer-society-of-india.jpg" alt=""><p>Computer Society of India</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/Balaji%20Group%20of%20Colleges.webp" alt=""><p>Balaji Group of Colleges</p></div>
-      <div class="partner-item"><img class="partner-icon" src="" alt=""><p>Tirupati Institutions</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/FOREST%20DEPT.jpg" alt=""><p>Forest Department, Gujarat</p></div>
-      <div class="partner-item"><img class="partner-icon" src="/images/Tourism%20Corporation%20of%20gujarat.png" alt=""><p>Tourism Corporation of Gujarat</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/IIM.webp" alt="IIM Ahmedabad"><p>IIM Ahmedabad</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/IIMU_Logo.jpg" alt="IIM Udaipur"><p>IIM Udaipur</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/silver-oak-university-logo.jpg" alt="Silver Oak University"><p>Silver Oak University</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/Sardarkrushinagar_Dantiwada_Agricultural_University_Gujarat.jpg" alt="Sardarkrushinagar Agricultural University"><p>Sardarkrushinagar Agricultural University</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/gujarat%20university.webp" alt="Gujarat University"><p>Gujarat University</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/Nirma%20University.jpg" alt="Nirma University"><p>Nirma University</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/GLS%20university.png" alt="GLS University"><p>GLS University</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/Ahmedabad%20Management%20Association.jpeg" alt="Ahmedabad Management Association"><p>Ahmedabad Management Association</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/SARDAR%20institute.webp" alt="Sardar Patel Institute"><p>Sardar Patel Institute</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/Knowledge%20Consortium%20Of%20Gujarat.webp" alt="Knowledge Consortium of Gujarat"><p>Knowledge Consortium of Gujarat</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/Gujarat%20Disaster%20Management%20Institute.png" alt="Gujarat Disaster Management Institute"><p>Gujarat Disaster Management Institute</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/computer-society-of-india.jpg" alt="Computer Society of India"><p>Computer Society of India</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/Balaji%20Group%20of%20Colleges.webp" alt="Balaji Group of Colleges"><p>Balaji Group of Colleges</p></div>
+      <div class="partner-item"><img class="partner-icon" src="" alt="Tirupati Institutions"><p>Tirupati Institutions</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/FOREST%20DEPT.jpg" alt="Forest Department, Gujarat"><p>Forest Department, Gujarat</p></div>
+      <div class="partner-item"><img class="partner-icon" src="/images/Tourism%20Corporation%20of%20gujarat.png" alt="Tourism Corporation of Gujarat"><p>Tourism Corporation of Gujarat</p></div>
     </div>
   </section>
 
@@ -292,9 +349,9 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
     <div class="contact-container">
       <div class="contact-info">
         <h3>R Square HR Services</h3>
-        <div class="contact-detail"><img class="contact-icon1" src="/images/placeholder.png" alt=""><i class="fas fa-map-marker-alt"></i><span>421, 4th Floor, Samaan Complex, Opp. Satyam Mall, Near Jodhpur Cross Roads, Satellite, Ahmedabad‑380015.</span></div>
-        <div class="contact-detail"><img class="contact-icon1" src="/images/telephone.png" alt=""><i class="fas fa-phone-alt"></i><span>+91 99784 06366 , +91 99246 67855 <br> Phone: +91 79 4009 3259</span></div>
-        <div class="contact-detail"><img class="contact-icon1" src="/images/gmail.png" alt=""><i class="far fa-envelope"></i><span>riddhish@rsquarehr.com, snrao@rsquarehr.com</span></div>
+        <div class="contact-detail"><img class="contact-icon1" src="/images/placeholder.png" alt="Address"><span>421, 4th Floor, Samaan Complex, Opp. Satyam Mall, Near Jodhpur Cross Roads, Satellite, Ahmedabad‑380015.</span></div>
+        <div class="contact-detail"><img class="contact-icon1" src="/images/telephone.png" alt="Phone"><span>+91 99784 06366 , +91 99246 67855 <br> Phone: +91 79 4009 3259</span></div>
+        <div class="contact-detail"><img class="contact-icon1" src="/images/gmail.png" alt="Email"><span>riddhish@rsquarehr.com, snrao@rsquarehr.com</span></div>
         <div style="margin-top:32px;"><button class="btn-primary">Send enquiry</button></div>
       </div>
       <div class="map-container">
@@ -402,8 +459,6 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
     color: #3b71fe;
   }
 
-  /* header-btns removed as requested */
-
   /* ----- MAIN CONTENT CONTAINER (fluid) ----- */
   .site-container {
     max-width: 1440px;
@@ -444,7 +499,6 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
     text-align: justify;
     font-size: 18px;
     color: #475569;
-     /* max-width: 500px;  */
     margin-bottom: 32px;
     max-width: 100%;
   }
@@ -501,10 +555,12 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
     min-height: 280px;
   }
 
-  .hero-image i {
-    font-size: clamp(120px, 12vw, 160px);
-    color: #3b71fe;
-    opacity: 0.8;
+  .hero-img {
+    width: 100%;
+    height: auto;
+    border-radius: 40px;
+    object-fit: cover;
+    max-height: 400px;
   }
 
   /* ----- SECTION HEADINGS ----- */
@@ -521,6 +577,34 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
     font-size: 18px;
     max-width: 600px;
     margin-bottom: 40px;
+  }
+
+  /* ----- MISSION/VISION STYLES ----- */
+  .mission-vision {
+    scroll-margin-top: 30px;
+  }
+
+  .mission-vision-subhead {
+    color: #64748b;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+
+  .mission-vision-heading {
+    color: #0a2540;
+    font-size: clamp(24px, 4vw, 30px);
+    margin-bottom: 20px;
+    text-align: justify;
+    font-weight: 600;
+  }
+
+  .mission-vision-heading-sub {
+    color: #0a2540;
+    font-size: clamp(20px, 3vw, 24px);
+    margin-bottom: 15px;
+    text-align: justify;
+    font-weight: 500;
   }
 
   /* ----- CAROUSEL (fully responsive) ----- */
@@ -685,14 +769,10 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
     margin-bottom: 24px;
   }
 
-  .service-icon i {
-    font-size: 32px;
-    color: #3b71fe;
-  }
-
-  /* hide local images if present, we use font awesome */
   .service-icon img {
-    display: block;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
   }
 
   .service-card h4 {
@@ -816,6 +896,13 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
     transform: scale(1.02);
   }
 
+  .partner-icon {
+    width: 60px;
+    height: 40px;
+    object-fit: contain;
+    margin-bottom: 8px;
+  }
+
   /* ----- CONTACT (flexible) ----- */
   .contact {
     scroll-margin-top: 30px;
@@ -850,40 +937,27 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
     flex-wrap: wrap;
   }
 
-  /* .contact-detail i {
-    width: 48px;
-    height: 48px;
-    background: white;
-    border-radius: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #3b71fe;
-    font-size: 24px;
-    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
-    flex-shrink: 0;
-  } */
-
-  /* hide local contact images, use font awesome */
   .contact-detail img {
-    display: block;
-    width:35px;
-    height:35px;
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    flex-shrink: 0;
   }
 
-  .map-placeholder {
+  .map-container {
     flex: 1;
-    background: linear-gradient(145deg, #d9e2ef, #cbd5e1);
-    border-radius: 40px;
+    width: 100%;
     min-height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1e293b;
-    font-size: 18px;
-    font-weight: 500;
-    text-align: center;
-    padding: 20px;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    min-height: 280px;
   }
 
   /* ----- FOOTER (full width, no fixed offsets) ----- */
@@ -972,7 +1046,7 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
     transform: translateY(-5px);
   }
 
-  /* hide any leftover images that we replaced with FA */
+  /* Helper to hide duplicate icons if needed */
   .icon-part, .up, .contact-icon1, .next-icon {
     display: block;
   }
@@ -1005,77 +1079,24 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
     .hero-content h1 { font-size: 36px; }
     .btn-large { width: 100%; text-align: center; }
     .logo-img { width: 40px; }
-    .hero-image i { font-size: 120px; }
     .partner-grid { padding: 24px 16px; }
     .footer { flex-direction: column; }
     .footer-links { gap: 30px; }
     .copyright { padding: 20px; }
   }
 
-  /* ensure all images scale */
+  /* Ensure all images scale */
   img {
     max-width: 100%;
     height: auto;
   }
-  .map-container{
-    flex:1;
-    width:100%;
-    min-height:280px;
-    border-radius:40px;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+
+  /* Map responsive */
+  @media (max-width: 768px) {
+    .map-container { min-height: 250px; }
   }
 
-  .map-container iframe{
-    width:100%;
-    height:100%;
-    border:0;
-    min-height:280px;
+  @media (max-width: 480px) {
+    .map-container { min-height: 220px; }
   }
-
-  /* tablet */
-  @media (max-width:768px){
-    .map-container{
-      min-height:250px;
-    }
-  }
-
-  /* mobile */
-  @media (max-width:480px){
-    .map-container{
-      min-height:220px;
-    }
-  }
-  .partner-icon{
-    width: 60px;
-    height: 40px;
-  }
-  /* Mission-Vision */
-.Mission-Vision{
-  scroll-margin-top: 30px;
-}
-.Mission-Vision-subhead{
-  color: #64748b;
-  font-size: 18px;
-  margin-bottom: 20px;
-  text-align: justify;
-}
-.hero-img{
-  position: relative;
-  left: 104px;
-}
-.Mission-Vision-heading{
-  color: #0A2540;
-  font-size: 18px;
-  margin-bottom: 20px;
-  text-align: justify;
-  font-size: clamp(28px, 4vw, 30px);
-}
-.Mission-Vision-heading-sub{
-  color: #0A2540;
-  font-size: 18px;
-  margin-bottom: 20px;
-  text-align: justify;
-  font-size: clamp(28px, 4vw, 6px);
-}
 </style>
