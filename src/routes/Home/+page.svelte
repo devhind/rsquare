@@ -92,7 +92,7 @@
         <a href="#">Home</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
-        <a href="#contact">Mission & Vision</a>
+        <a href="#mission">Mission & Vision</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -506,7 +506,7 @@ Team R SQUARE HR is a pool of well qualified and experienced professionals in th
     </div>
     <div class="footer-links">
       <div><h5>Services</h5><a href="#services">Recruitment</a><a href="#services">Training</a><a href="#services">Payroll</a><a href="#services">NAPS</a></div>
-      <div><h5>About</h5><a href="#about">Mission</a><a href="#about">Founder</a><a href="#about">Awards</a></div>
+      <div><h5>About</h5><a href="#mission">Mission</a><a href="#about">Founder</a><a href="#about">Awards</a></div>
       <div><h5>Connect</h5><a href="#contact">Contact</a><a href="#">LinkedIn</a><a href="#">Email</a></div>
     </div>
   </div>
