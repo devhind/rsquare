@@ -78,7 +78,6 @@
       // remove other listeners if needed (simplified)
     };
   });
-  
 </script>
 
 <!-- Fixed header -->
@@ -98,6 +97,7 @@
     </div>
   </div>
 </header>
+
 
 <!-- Main content -->
 <div class="site-container">
