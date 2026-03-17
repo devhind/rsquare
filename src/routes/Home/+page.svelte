@@ -174,7 +174,7 @@
       <button class="close-sidebar" on:click={closeMenu}>&times;</button>
     </div>
     <nav class="sidebar-nav">
-      <a href="#" on:click={closeMenu}>Home</a>
+      <a href="#" on:click={closeMenu}>My Home</a>
       <a href="#services" on:click={closeMenu}>Services</a>
       <a href="#about" on:click={closeMenu}>About</a>
       <a href="#mission" on:click={closeMenu}>Mission & Vision</a>
