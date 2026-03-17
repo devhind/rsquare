@@ -8,8 +8,6 @@
 
 <script>
   import { onMount } from 'svelte';
-
-
   onMount(() => {
     // ----- CAROUSEL LOGIC -----
     const container = document.getElementById('carouselContainer');
