@@ -91,7 +91,7 @@
       <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg">
       </div>
       <div class="nav-links">
-        <a href="#">My Home</a>
+        <a href="#">Home</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
         <a href="#contact">Mission & Vision</a>
