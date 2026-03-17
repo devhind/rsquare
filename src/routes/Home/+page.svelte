@@ -578,8 +578,7 @@
     gap: 16px;
     align-items: center;
     flex-wrap: wrap;
-    position: relative;
-    left: 75px;
+
   }
 
   .btn-header {
