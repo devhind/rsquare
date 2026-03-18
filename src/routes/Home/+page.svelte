@@ -1047,6 +1047,7 @@
     color: #4a5a6b;
     font-size: 1.05rem;
     margin-right: 36px;
+
   }
 
   .founder-box {
@@ -1672,4 +1673,10 @@
       transform: translateY(0);
     }
   }
+  #services,
+#about,
+#mission,
+#contact {
+  scroll-margin-top: 110px;
+}
 </style>
