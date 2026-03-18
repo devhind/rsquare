@@ -440,7 +440,7 @@
       </div>
     </div>
   </div>
-  <div class="copyright">© 2025 R Square HR Services. All rights reserved.</div>
+  <!-- <div class="copyright">© 2025 R Square HR Services. All rights reserved.</div> -->
 </footer>
 
 <!-- PERFECT BACK-TO-TOP BUTTON -->
@@ -478,18 +478,17 @@
   }
 
   /* ===== HEADER (enhanced) ===== */
-  .header-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(135deg, #1E3A4A 0%, #2C5A6E 100%);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 8px 25px rgba(0, 20, 30, 0.3);
-    z-index: 1000;
-    border-bottom: 1px solid rgba(239, 185, 120, 0.3);
-  }
-
+ .header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 25px rgba(0, 20, 30, 0.3);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(239, 185, 120, 0.3);
+}
   .header-container {
     max-width: 1440px;
     margin: 0 auto;
@@ -1386,10 +1385,11 @@
   }
 
   /* ===== FOOTER ===== */
-  footer {
+  /* footer {
     background: #1E3A4A;
-    margin-top: 80px;
-  }
+     margin-top: 80px; 
+    background: linear-gradient(135deg, #1f1c2c 0%, #fcb045  40%, #fcb045 100%);
+  } */
 
   .footer {
     max-width: 1440px;
@@ -1400,6 +1400,7 @@
     flex-wrap: wrap;
     gap: 50px;
     background: #1E3A4A;
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
   }
 
   .footer-col p {
@@ -1458,12 +1459,14 @@
 
   .copyright {
     max-width: 1440px;
+    height: 5px;
     margin: 0 auto;
     text-align: center;
     padding: 24px 32px;
     color: #9bb5d4;
     font-size: 14px;
-    border-top: 1px solid #254b6d;
+    /* border-top: 1px solid #254b6d; */
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
   }
 
   /* ===== BACK-TO-TOP (elegant) ===== */
