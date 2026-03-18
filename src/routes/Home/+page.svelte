@@ -614,22 +614,22 @@
 
   .btn-register:hover {
     background: white;
-    color: #1E3A4A;
+    color: white;
     border-color: white;
     box-shadow: 0 0 15px #EFB978;
     background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
   }
 
   .btn-post {
-    background: #EFB978;
-    border-color: #EFB978;
-    color: #1E3A4A;
+    border-color: white;
+    color: white;
   }
 
   .btn-post:hover {
-    background: #f3ca9c;
-    border-color: #f3ca9c;
+    background: white;
+    border-color: white;
     box-shadow: 0 0 15px #f3ca9c;
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
   }
 
   /* ----- Responsive helpers ----- */
@@ -966,7 +966,7 @@
     left: 0;
     width: 6px;
     height: 0%;
-    background: #D96C4E;
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
     transition: height 0.4s;
   }
 
@@ -1798,7 +1798,7 @@
     top: 0;
     width: 4px;
     height: 0%;
-    background: #D96C4E;
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
     transition: 0.4s;
   }
 
