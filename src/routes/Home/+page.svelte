@@ -1023,27 +1023,26 @@
   }
 
   /* ===== ABOUT ===== */
-  .about {
-    margin: 60px 0;
-  }
+ /* ===== ABOUT (UPDATED – FULLY RESPONSIVE) ===== */
+.about {
+  margin: 60px 0;
+}
 
-  .about-grid {
+.about-grid {
   display: flex;
   gap: 40px;
   align-items: stretch;
   background: white;
   border-radius: 48px;
   padding: 48px;
-  
+
   /* Enhanced shadow – multiple layers for realistic depth */
   box-shadow: 
     0 30px 60px -20px rgba(30, 58, 74, 0.3),
     0 10px 30px -12px rgba(0, 0, 0, 0.2),
     inset 0 1px 2px rgba(255, 255, 255, 0.8);
-  
+
   border: 1px solid rgba(239, 185, 120, 0.2);
-  
-  /* Smooth transitions for hover effect */
   transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.3s ease;
 }
 
@@ -1056,123 +1055,177 @@
   border-color: rgba(239, 185, 120, 0.5);
 }
 
+.about-text {
+  flex: 2;
+  min-width: 300px;
+}
+
+.about-text p {
+  text-align: justify;
+  margin-bottom: 22px;
+  color: #4a5a6b;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Founder card – background image */
+.founder-card {
+  flex: 1;
+  min-width: 280px;
+  border-radius: 40px;
+  overflow: hidden;
+  position: relative;
+  background-image: url('/images/SNR-IIMA-PIC-NANDA-SIR.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+  box-shadow: 0 20px 30px -12px rgba(30,58,74,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+}
+
+.founder-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 40px -15px rgba(30,58,74,0.3);
+}
+
+/* Gradient overlay for text readability */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(30,58,74,0.9) 0%, rgba(30,58,74,0.4) 70%, rgba(30,58,74,0.1) 100%);
+  z-index: 1;
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  padding: 30px 25px;
+  width: 100%;
+  text-align: left;
+  backdrop-filter: blur(2px);
+}
+
+.founder-name {
+  font-weight: 700;
+  font-size: 28px;
+  margin: 0 0 5px;
+  color: white;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.founder-title {
+  color: #EFB978;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.founder-bio {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.founder-awards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.award-badge {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 30px;
+  border: 1px solid rgba(239,185,120,0.5);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* ----- RESPONSIVE FIXES FOR ABOUT SECTION ----- */
+@media (max-width: 820px) {
+  .about-grid {
+    flex-direction: column;
+    padding: 32px;
+    gap: 30px;
+  }
+
   .about-text {
-    flex: 2;
-    min-width: 300px;
+    min-width: auto;
   }
 
   .about-text p {
-    text-align: justify;
-    margin-bottom: 22px;
-    color: #4a5a6b;
-    font-size: 1.05rem;
-    line-height: 1.7;
+    font-size: 1rem;
   }
 
-  /* Founder card – background image */
   .founder-card {
-    flex: 1;
-    min-width: 280px;
-    border-radius: 40px;
-    overflow: hidden;
-    position: relative;
-    background-image: url('/images/SNR-IIMA-PIC-NANDA-SIR.jpg'); /* Replace with your image path */
-    background-size: cover;        /* Ensures the image covers the whole card */
-    background-position: center 20%; /* Adjust vertical position (try center, top, etc.) */
-    background-repeat: no-repeat;
-    box-shadow: 0 20px 30px -12px rgba(30,58,74,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    align-items: flex-end; /* Text sits at bottom, change to center if desired */
-  }
-
-  .founder-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 30px 40px -15px rgba(30,58,74,0.3);
-  }
-
-  /* Gradient overlay for text readability */
-  .card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
+    max-width: 100%;
+    min-width: auto;
     width: 100%;
-    height: 100%;
-    background: linear-gradient(0deg, rgba(30,58,74,0.9) 0%, rgba(30,58,74,0.4) 70%, rgba(30,58,74,0.1) 100%);
-    z-index: 1;
-  }
-
-  .card-content {
-    position: relative;
-    z-index: 2;
-    color: white;
-    padding: 30px 25px;
-    width: 100%;
-    text-align: left;
-    backdrop-filter: blur(2px);
   }
 
   .founder-name {
-    font-weight: 700;
-    font-size: 28px;
-    margin: 0 0 5px;
-    color: white;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    font-size: 26px;
   }
 
   .founder-title {
-    color: #EFB978;
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 15px;
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    font-size: 17px;
   }
 
   .founder-bio {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    color: rgba(255,255,255,0.9);
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-grid {
+    padding: 24px;
+    border-radius: 32px;
   }
 
-  .founder-awards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+  .about-text p {
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+  }
+
+  .founder-card {
+    border-radius: 30px;
+  }
+
+  .card-content {
+    padding: 25px 20px;
+  }
+
+  .founder-name {
+    font-size: 24px;
+  }
+
+  .founder-title {
+    font-size: 16px;
+  }
+
+  .founder-bio {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
   }
 
   .award-badge {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(4px);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 5px 12px;
-    border-radius: 30px;
-    border: 1px solid rgba(239,185,120,0.5);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    font-size: 0.7rem;
+    padding: 4px 10px;
   }
-
-  /* Responsive */
-  /* @media (max-width: 820px) {
-    .about-grid {
-      flex-direction: column;
-      padding: 32px;
-    }
-    .founder-card {
-      max-width: 400px;
-      margin: 0 auto;
-      width: 100%;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .founder-card {
-      min-width: auto;
-    }
-  } */
+}
   /* ===== CAROUSEL ===== */
   .carousel-section {
     margin: 80px 0;
