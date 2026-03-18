@@ -659,7 +659,7 @@
     height: 3px;
     background-color: white;
     border-radius: 10px;
-    transition: 0.3s;
+    transition: 0.3s; 
   }
   .hamburger {
   display: none;
@@ -697,7 +697,6 @@
     left: -320px;
     width: 280px;
     height: 100%;
-    background: linear-gradient(135deg, #1E3A4A 0%, #2C5A6E 100%);
     z-index: 1002;
     padding: 24px 20px;
     box-shadow: 4px 0 20px rgba(0,0,0,0.3);
@@ -705,6 +704,7 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
   }
   .sidebar.open {
     left: 0;
