@@ -345,15 +345,6 @@
   </div>
 </section>
 
-
-  <!-- STATS -->
-  <div class="stats-row section-animate">
-    <div class="stat-item"><span class="stat-number">132+</span><span class="stat-label">Tourist Guides trained for Statue of Unity (praised by PM)</span></div>
-    <div class="stat-item"><span class="stat-number">50+</span><span class="stat-label">Institutional partners (IIMs, Universities, Govt. bodies)</span></div>
-    <div class="stat-item"><span class="stat-number">3</span><span class="stat-label">National e‑Governance Awards</span></div>
-    <div class="stat-item"><span class="stat-number">15+</span><span class="stat-label">Years of leadership in HR</span></div>
-  </div>
-
   <!-- CAROUSEL -->
   <section class="carousel-section section-animate">
     <h2 class="section-heading">Success stories in action</h2>
@@ -425,6 +416,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer">
+  <div class="footer-inner">
     <div class="footer-col">
       <div class="footer-logo">
         <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square HR">
@@ -452,6 +444,7 @@
         <a href="#">LinkedIn</a>
         <a href="#">Email</a>
       </div>
+    </div>
     </div>
   </div>
   <!-- <div class="copyright">© 2025 R Square HR Services. All rights reserved.</div> -->
@@ -1163,7 +1156,7 @@
   }
 
   /* Responsive */
-  @media (max-width: 820px) {
+  /* @media (max-width: 820px) {
     .about-grid {
       flex-direction: column;
       padding: 32px;
@@ -1179,7 +1172,7 @@
     .founder-card {
       min-width: auto;
     }
-  }
+  } */
   /* ===== CAROUSEL ===== */
   .carousel-section {
     margin: 80px 0;
@@ -1465,15 +1458,17 @@
   } */
 
   .footer {
-    max-width: 1440px;
+    /* max-width: 1440px;
     margin: 0 auto;
-    padding: 56px 32px 32px;
+    padding: 56px 32px 32px; */
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 50px;
     background: #1E3A4A;
     background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
+    width: 100%;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
   }
 
   .footer-col p {
@@ -1529,6 +1524,16 @@
   .footer-links div a:hover {
     color: #EFB978;
   }
+  .footer-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 56px 32px 32px;
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 50px;
+}
 
   .copyright {
     max-width: 1440px;
