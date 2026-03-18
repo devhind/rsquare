@@ -1037,6 +1037,8 @@
   .about-text {
     flex: 2;
     min-width: 300px;
+    margin-right: 36px;
+
   }
 
   .about-text p {
@@ -1044,6 +1046,7 @@
     margin-bottom: 22px;
     color: #4a5a6b;
     font-size: 1.05rem;
+    margin-right: 36px;
   }
 
   .founder-box {
