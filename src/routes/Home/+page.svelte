@@ -369,8 +369,8 @@
         {/each}
       </div>
     </div>
-  </section>
-
+    </section>
+  
   <!-- PARTNERS -->
   <section class="partners section-animate">
     <h2 class="section-heading">Our valued partners & collaborators</h2>
@@ -607,16 +607,17 @@
   }
 
   .btn-register {
-    border-color: #EFB978;
-    color: #EFB978;
+    border-color: white;
+    color: white;
     background: rgba(239,185,120,0.05);
   }
 
   .btn-register:hover {
-    background: #EFB978;
+    background: white;
     color: #1E3A4A;
-    border-color: #EFB978;
+    border-color: white;
     box-shadow: 0 0 15px #EFB978;
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
   }
 
   .btn-post {
