@@ -316,21 +316,35 @@
 
   <!-- ABOUT -->
   <section id="about" class="about section-animate">
-    <h2 class="section-heading">About R Square HR Services</h2>
-    <div class="about-grid">
-      <div class="about-text">
-        <p><strong>R SQUARE HR Services (R SQUARE)</strong> is an MSME company founded by <strong>Shri S N Rao</strong>, Former Head-HR of IIM Ahmedabad and Former Chief General Manager, The Gujarat State Civil Supplies Corporation Limited (a PSU of Government of Gujarat). During his tenure, his team was awarded the CSI-Nihilent Award for e‑Governance (2011‑12), National Award for e‑Governance (2012‑13), and the CSI-Nihilent Award for Supply‑Logistics using ICT from the Government of India.</p>
-        <p><strong>Mission & Vision:</strong> To emerge as one of the most respected HR services companies, anchored on growth, professionalism, dignity and diversity. We promote learning with humility, serving with dignity and growing with integrity. We combine the power of technology with the capability of our members to deliver value through rigorous execution.</p>
-        <p>We have prepared HR Policy Manuals for IIM Ahmedabad, IIM Udaipur, India International Boolean Exchange (IFSC) Ltd., Sahaj Solar Limited, and provided training, recruitment & staffing to Tourism Corporation of Gujarat, Statue of Unity, Forest Department, Gujarat Council of Science City, Voltbek, Tenneco and many more.</p>
-      </div>
-      <div class="founder-box">
-        <i class="fas fa-user-tie" style="font-size: 56px; color: #D96C4E;"></i>
-        <div class="founder-name">Shri S N Rao</div>
-        <div class="founder-title">Founder & Mentor</div>
-        <p>Former Head-HR, IIM Ahmedabad<br>Former CGM, Gujarat State Civil Supplies Corp.<br>Over 4 decades of experience in HR, governance & training.</p>
+  <h2 class="section-heading">About R Square HR Services</h2>
+  <div class="about-grid">
+    <!-- Left column: descriptive text -->
+    <div class="about-text">
+      <p><strong>R SQUARE HR Services (R SQUARE)</strong> is an MSME company founded by <strong>Shri S N Rao</strong>, Former Head-HR of IIM Ahmedabad and Former Chief General Manager, The Gujarat State Civil Supplies Corporation Limited (a PSU of Government of Gujarat). During his tenure, his team was awarded the CSI-Nihilent Award for e‑Governance (2011‑12), National Award for e‑Governance (2012‑13), and the CSI-Nihilent Award for Supply‑Logistics using ICT from the Government of India.</p>
+      <p><strong>Mission & Vision:</strong> To emerge as one of the most respected HR services companies, anchored on growth, professionalism, dignity and diversity. We promote learning with humility, serving with dignity and growing with integrity. We combine the power of technology with the capability of our members to deliver value through rigorous execution.</p>
+      <p>We have prepared HR Policy Manuals for IIM Ahmedabad, IIM Udaipur, India International Boolean Exchange (IFSC) Ltd., Sahaj Solar Limited, and provided training, recruitment & staffing to Tourism Corporation of Gujarat, Statue of Unity, Forest Department, Gujarat Council of Science City, Voltbek, Tenneco and many more.</p>
+    </div>
+
+    <!-- Right column: founder card with background image -->
+    <div class="founder-card">
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <h3 class="founder-name">Shri S N Rao</h3>
+        <p class="founder-title">Founder & Mentor</p>
+        <p class="founder-bio">
+          Former Head-HR, IIM Ahmedabad<br />
+          Former CGM, Gujarat State Civil Supplies Corp.<br />
+          Over 4 decades of experience in HR, governance & training.
+        </p>
+        <div class="founder-awards">
+          <span class="award-badge">CSI-Nihilent Award</span>
+          <span class="award-badge">National e‑Governance Award</span>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- STATS -->
   <div class="stats-row section-animate">
@@ -1022,22 +1036,37 @@
   }
 
   .about-grid {
-    display: flex;
-    gap: 60px;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    background: white;
-    border-radius: 48px;
-    padding: 48px;
-    box-shadow: 0 15px 35px -12px rgba(30,58,74,0.1);
-    border: 1px solid #efe2d4;
-  }
+  display: flex;
+  gap: 40px;
+  align-items: stretch;
+  background: white;
+  border-radius: 48px;
+  padding: 48px;
+  
+  /* Enhanced shadow – multiple layers for realistic depth */
+  box-shadow: 
+    0 30px 60px -20px rgba(30, 58, 74, 0.3),
+    0 10px 30px -12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  
+  border: 1px solid rgba(239, 185, 120, 0.2);
+  
+  /* Smooth transitions for hover effect */
+  transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.3s ease;
+}
+
+.about-grid:hover {
+  box-shadow: 
+    0 40px 80px -20px rgba(30, 58, 74, 0.4),
+    0 15px 40px -10px rgba(0, 0, 0, 0.25),
+    inset 0 1px 3px rgba(255, 255, 255, 0.9);
+  transform: translateY(-6px);
+  border-color: rgba(239, 185, 120, 0.5);
+}
 
   .about-text {
     flex: 2;
     min-width: 300px;
-    margin-right: 36px;
-
   }
 
   .about-text p {
@@ -1045,69 +1074,113 @@
     margin-bottom: 22px;
     color: #4a5a6b;
     font-size: 1.05rem;
-    margin-right: 36px;
-
+    line-height: 1.7;
   }
 
-  .founder-box {
+  /* Founder card – background image */
+  .founder-card {
     flex: 1;
     min-width: 280px;
-    background: #f9f4ed;
     border-radius: 40px;
-    padding: 40px 30px;
-    border: 1px solid #e0d6cc;
-    text-align: center;
-    box-shadow: 0 20px 30px -12px rgba(30,58,74,0.1);
+    overflow: hidden;
+    position: relative;
+    background-image: url('/images/SNR-IIMA-PIC-NANDA-SIR.jpg'); /* Replace with your image path */
+    background-size: cover;        /* Ensures the image covers the whole card */
+    background-position: center 20%; /* Adjust vertical position (try center, top, etc.) */
+    background-repeat: no-repeat;
+    box-shadow: 0 20px 30px -12px rgba(30,58,74,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: flex-end; /* Text sits at bottom, change to center if desired */
+  }
+
+  .founder-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 40px -15px rgba(30,58,74,0.3);
+  }
+
+  /* Gradient overlay for text readability */
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(30,58,74,0.9) 0%, rgba(30,58,74,0.4) 70%, rgba(30,58,74,0.1) 100%);
+    z-index: 1;
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    padding: 30px 25px;
+    width: 100%;
+    text-align: left;
+    backdrop-filter: blur(2px);
   }
 
   .founder-name {
     font-weight: 700;
     font-size: 28px;
-    color: #1E3A4A;
-    margin-top: 16px;
+    margin: 0 0 5px;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
   }
 
   .founder-title {
-    color: #D96C4E;
+    color: #EFB978;
     font-size: 18px;
-    margin: 8px 0 16px;
     font-weight: 500;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
   }
 
-  /* ===== STATS ===== */
-  .stats-row {
+  .founder-bio {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+
+  .founder-awards {
     display: flex;
-    justify-content: space-between;
-    background: linear-gradient(135deg, #EFB978 0%, #f3ca9c 100%);
-    border-radius: 60px;
-    padding: 56px 40px;
-    margin: 80px 0;
     flex-wrap: wrap;
-    gap: 30px;
-    color: #1E3A4A;
-    box-shadow: 0 30px 45px -18px #b28b5e;
+    gap: 8px;
   }
 
-  .stat-item {
-    text-align: center;
-    flex: 1 1 180px;
+  .award-badge {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 30px;
+    border: 1px solid rgba(239,185,120,0.5);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   }
 
-  .stat-number {
-    font-size: clamp(40px, 5vw, 52px);
-    font-weight: 800;
-    margin-bottom: 8px;
-    color: #1E3A4A;
-    display: block;
+  /* Responsive */
+  @media (max-width: 820px) {
+    .about-grid {
+      flex-direction: column;
+      padding: 32px;
+    }
+    .founder-card {
+      max-width: 400px;
+      margin: 0 auto;
+      width: 100%;
+    }
   }
 
-  .stat-label {
-    font-size: 16px;
-    font-weight: 500;
-    opacity: 0.9;
-    color: #1e3a4a;
+  @media (max-width: 480px) {
+    .founder-card {
+      min-width: auto;
+    }
   }
-
   /* ===== CAROUSEL ===== */
   .carousel-section {
     margin: 80px 0;
