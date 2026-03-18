@@ -446,9 +446,8 @@
 <!-- PERFECT BACK-TO-TOP BUTTON -->
 {#if showBackToTop}
   <button class="back-to-top" on:click={scrollToTop} aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
-    <span class="tooltip">Top</span>
-  </button>
+  <img src="/images/up-arrow.png" alt="Go to top" />
+</button>
 {/if}
 
 <!-- GLOBAL STYLES (scoped) -->
@@ -1468,7 +1467,7 @@
   }
 
   /* ===== BACK-TO-TOP (elegant) ===== */
-  .back-to-top {
+  /* .back-to-top {
     position: fixed;
     bottom: 40px;
     right: 40px;
@@ -1521,8 +1520,44 @@
     0% { transform: translateY(0px); }
     50% { transform: translateY(-8px); }
     100% { transform: translateY(0px); }
-  }
+  } */
+/* ===== PREMIUM BACK TO TOP BUTTON ===== */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 70px;
+  height: 70px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 999;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s ease;
+}
+
+/* Image styling */
+.back-to-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  transition: all 0.3s ease;
+}
+
+/* Hover animation */
+.back-to-top:hover img {
+  transform: translateY(-8px) scale(1.1);
+}
+
+/* Click effect */
+.back-to-top:active img {
+  transform: scale(0.9);
+}
   /* ===== RESPONSIVE (additional) ===== */
   @media (max-width: 1024px) {
     .slide-content { max-width: 90%; }
