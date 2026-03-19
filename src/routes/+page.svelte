@@ -134,16 +134,16 @@
 </script>
 
 <!-- ENHANCED HEADER with responsive sidebar -->
-<!-- <header class="header-fixed">
+<header class="header-fixed">
   <div class="header-container">
     <div class="navbar">
       <div class="logo-container">
         <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square" />
          <span class="logo-text">R Square <span class="logo-hr">HR Services</span></span> 
-      </div> -->
+      </div>
 
       <!-- Desktop navigation (hidden on mobile) -->
-      <!-- <nav class="nav-links desktop-only">
+      <nav class="nav-links desktop-only">
         <a href="#">Home</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
@@ -153,20 +153,20 @@
       <div class="header-buttons desktop-only">
         <button class="btn-header btn-register">Registration</button>
         <button class="btn-header btn-post">Post Job</button>
-      </div> -->
+      </div>
 
       <!-- Hamburger icon (visible only on mobile) -->
-      <!-- <button class="hamburger mobile-only" on:click={toggleMenu} aria-label="Menu">
+      <button class="hamburger mobile-only" on:click={toggleMenu} aria-label="Menu">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
     </div>
   </div>
-</header> -->
+</header>
 
 <!-- Mobile Sidebar (sider) -->
-<!-- {#if isMobile}
+{#if isMobile}
   <div class="sidebar-overlay" class:open={isMenuOpen} on:click={closeMenu}></div>
   <div class="sidebar" class:open={isMenuOpen}>
     <div class="sidebar-header">
@@ -185,7 +185,7 @@
       <button class="btn-header btn-post" on:click={closeMenu}>Post Job</button>
     </div>
   </div>
-{/if} -->
+{/if}
 
 <!-- MAIN CONTENT (everything below is exactly as in your original) -->
 <main class="site-container">
@@ -413,42 +413,7 @@
   </section>
 </main>
 
-<!-- FOOTER
-<footer>
-  <div class="footer">
-  <div class="footer-inner">
-    <div class="footer-col">
-      <div class="footer-logo">
-        <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square HR">
-        <span>R Square <span class="accent">HR</span></span>
-      </div>
-      <p>MSME company anchored on growth, professionalism, dignity & diversity.</p>
-    </div>
-    <div class="footer-links">
-      <div>
-        <h5>Services</h5>
-        <a href="#services">Recruitment</a>
-        <a href="#services">Training</a>
-        <a href="#services">Payroll</a>
-        <a href="#services">NAPS</a>
-      </div>
-      <div>
-        <h5>About</h5>
-        <a href="#about">Mission</a>
-        <a href="#about">Founder</a>
-        <a href="#about">Awards</a>
-      </div>
-      <div>
-        <h5>Connect</h5>
-        <a href="#contact">Contact</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">Email</a>
-      </div>
-    </div>
-    </div>
-  </div>
-  <div class="copyright">© 2025 R Square HR Services. All rights reserved.</div>
- </footer> --> 
+
 
 <!-- PERFECT BACK-TO-TOP BUTTON -->
 {#if showBackToTop}
@@ -614,22 +579,22 @@
 
   .btn-register:hover {
     background: white;
-    color: #1E3A4A;
+    color: white;
     border-color: white;
     box-shadow: 0 0 15px #EFB978;
     background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
   }
 
   .btn-post {
-    background: #EFB978;
-    border-color: #EFB978;
-    color: #1E3A4A;
+    border-color: white;
+    color: white;
   }
 
   .btn-post:hover {
-    background: #f3ca9c;
-    border-color: #f3ca9c;
+    background: white;
+    border-color: white;
     box-shadow: 0 0 15px #f3ca9c;
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
   }
 
   /* ----- Responsive helpers ----- */
@@ -966,7 +931,7 @@
     left: 0;
     width: 6px;
     height: 0%;
-    background: #D96C4E;
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
     transition: height 0.4s;
   }
 
@@ -1798,7 +1763,7 @@
     top: 0;
     width: 4px;
     height: 0%;
-    background: #D96C4E;
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
     transition: 0.4s;
   }
 
