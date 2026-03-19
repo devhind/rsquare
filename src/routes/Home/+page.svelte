@@ -134,16 +134,16 @@
 </script>
 
 <!-- ENHANCED HEADER with responsive sidebar -->
-<header class="header-fixed">
+<!-- <header class="header-fixed">
   <div class="header-container">
     <div class="navbar">
       <div class="logo-container">
         <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square" />
          <span class="logo-text">R Square <span class="logo-hr">HR Services</span></span> 
-      </div>
+      </div> -->
 
       <!-- Desktop navigation (hidden on mobile) -->
-      <nav class="nav-links desktop-only">
+      <!-- <nav class="nav-links desktop-only">
         <a href="#">Home</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
@@ -153,20 +153,20 @@
       <div class="header-buttons desktop-only">
         <button class="btn-header btn-register">Registration</button>
         <button class="btn-header btn-post">Post Job</button>
-      </div>
+      </div> -->
 
       <!-- Hamburger icon (visible only on mobile) -->
-      <button class="hamburger mobile-only" on:click={toggleMenu} aria-label="Menu">
+      <!-- <button class="hamburger mobile-only" on:click={toggleMenu} aria-label="Menu">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
     </div>
   </div>
-</header>
+</header> -->
 
 <!-- Mobile Sidebar (sider) -->
-{#if isMobile}
+<!-- {#if isMobile}
   <div class="sidebar-overlay" class:open={isMenuOpen} on:click={closeMenu}></div>
   <div class="sidebar" class:open={isMenuOpen}>
     <div class="sidebar-header">
@@ -185,7 +185,7 @@
       <button class="btn-header btn-post" on:click={closeMenu}>Post Job</button>
     </div>
   </div>
-{/if}
+{/if} -->
 
 <!-- MAIN CONTENT (everything below is exactly as in your original) -->
 <main class="site-container">
@@ -413,7 +413,7 @@
   </section>
 </main>
 
-<!-- FOOTER -->
+<!-- FOOTER
 <footer>
   <div class="footer">
   <div class="footer-inner">
@@ -447,8 +447,8 @@
     </div>
     </div>
   </div>
-  <!-- <div class="copyright">© 2025 R Square HR Services. All rights reserved.</div> -->
-</footer>
+  <div class="copyright">© 2025 R Square HR Services. All rights reserved.</div>
+ </footer> --> 
 
 <!-- PERFECT BACK-TO-TOP BUTTON -->
 {#if showBackToTop}
