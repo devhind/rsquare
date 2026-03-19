@@ -638,6 +638,7 @@
   display: none;
 }
 
+
 @media (max-width: 820px) {
   .hamburger {
     display: flex;
