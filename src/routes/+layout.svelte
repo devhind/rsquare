@@ -223,22 +223,25 @@ afterNavigate(() => {
 <style>
   /* ===== RESET & BASE ===== */
   :global(body) {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: #faf7f2;
-    color: #2e3b4e;
-    scroll-behavior: smooth;
-    padding-top: 90px;
-    overflow-x: hidden;
-  }
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #faf7f2;
+  color: #2e3b4e;
+  scroll-behavior: smooth;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-top: 90px;
+  overflow-x: hidden;
+}
 
-  .site-container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 32px;
-    width: 100%;
-  }
+.site-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+  width: 100%;
 
+  flex: 1;   /* 🔥 THIS FIXES EVERYTHING */
+}
   /* ===== ANIMATIONS ===== */
   .section-animate {
     opacity: 1;
@@ -539,6 +542,7 @@ afterNavigate(() => {
   .footer {
     background: linear-gradient(135deg, #6b0f9c 0%, #b91372 40%, #b91372 100%);
     width: 100%;
+	margin-top: auto;   /* 🔥 pushes footer down */
   }
 
   .footer-inner {
