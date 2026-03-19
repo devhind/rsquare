@@ -133,60 +133,6 @@
   }
 </script>
 
-<!-- ENHANCED HEADER with responsive sidebar -->
-<header class="header-fixed">
-  <div class="header-container">
-    <div class="navbar">
-      <div class="logo-container">
-        <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square" />
-         <span class="logo-text">R Square <span class="logo-hr">HR Services</span></span> 
-      </div>
-
-      <!-- Desktop navigation (hidden on mobile) -->
-      <nav class="nav-links desktop-only">
-        <a href="#">Home</a>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#mission">Mission & Vision</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="header-buttons desktop-only">
-        <button class="btn-header btn-register">Registration</button>
-        <button class="btn-header btn-post">Post Job</button>
-      </div>
-
-      <!-- Hamburger icon (visible only on mobile) -->
-      <button class="hamburger mobile-only" on:click={toggleMenu} aria-label="Menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-    </div>
-  </div>
-</header>
-
-<!-- Mobile Sidebar (sider) -->
-{#if isMobile}
-  <div class="sidebar-overlay" class:open={isMenuOpen} on:click={closeMenu}></div>
-  <div class="sidebar" class:open={isMenuOpen}>
-    <div class="sidebar-header">
-      <img class="sidebar-logo" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square" />
-      <button class="close-sidebar" on:click={closeMenu}>&times;</button>
-    </div>
-    <nav class="sidebar-nav">
-      <a href="#" on:click={closeMenu}>Home</a>
-      <a href="#services" on:click={closeMenu}>Services</a>
-      <a href="#about" on:click={closeMenu}>About</a>
-      <a href="#mission" on:click={closeMenu}>Mission & Vision</a>
-      <a href="#contact" on:click={closeMenu}>Contact</a>
-    </nav>
-    <div class="sidebar-buttons">
-      <button class="btn-header btn-register" on:click={closeMenu}>Registration</button>
-      <button class="btn-header btn-post" on:click={closeMenu}>Post Job</button>
-    </div>
-  </div>
-{/if}
-
 <!-- MAIN CONTENT (everything below is exactly as in your original) -->
 <main class="site-container">
   <!-- HERO -->
@@ -413,8 +359,6 @@
   </section>
 </main>
 
-
-
 <!-- PERFECT BACK-TO-TOP BUTTON -->
 {#if showBackToTop}
   <button class="back-to-top" on:click={scrollToTop} aria-label="Back to top">
@@ -637,7 +581,6 @@
   .hamburger {
   display: none;
 }
-
 
 @media (max-width: 820px) {
   .hamburger {
