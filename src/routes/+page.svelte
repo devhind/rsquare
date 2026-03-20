@@ -1297,7 +1297,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 18px;
-    margin-top: 40px;
+    margin-top: 18px;
   }
 
   .partner-item {
