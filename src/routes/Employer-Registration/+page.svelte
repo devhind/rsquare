@@ -3,6 +3,9 @@ import { onMount } from "svelte";
 import { Country, State, City } from "country-state-city";
 import intlTelInput from "intl-tel-input";
 import "intl-tel-input/build/css/intlTelInput.css";
+import Header from '$lib/components/Header.svelte';
+import Footer from '$lib/components/Footer.svelte';
+
 
 /* ---------------- FORM DATA ---------------- */
 let form = {
@@ -187,7 +190,6 @@ function clickOutside(node, callback) {
   };
 }
 </script>
-
 <div class="registration-container">
   <div class="form-card">
     <div class="form-header">
@@ -576,269 +578,425 @@ function clickOutside(node, callback) {
     </form>
   </div>
 </div>
-
 <style>
   /* GLOBAL RESET & FONTS */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
 
-  .registration-container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f8fafc;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    padding: 2rem 1rem;
-  }
+.registration-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 2rem 1rem;
+}
 
+.form-card {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px -10px rgba(0, 20, 30, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 1000px;
+  padding: 2.5rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.form-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #eef2f6;
+  padding-bottom: 1.5rem;
+}
+
+.form-header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #0a1e2f;
+  margin: 0 0 0.25rem 0;
+}
+
+.form-header p {
+  color: #5e6f88;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.form-section {
+  margin-bottom: 2.5rem;
+}
+
+.form-section h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #1e2f44;
+  margin: 0 0 1.25rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.input-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.input-group.disabled {
+  opacity: 0.6;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2d3f59;
+  letter-spacing: 0.01em;
+}
+
+.required {
+  color: #d14545;
+  margin-left: 2px;
+}
+
+input, select, textarea, .combobox-button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: 1.5px solid #e0e7ed;
+  border-radius: 12px;
+  background: white;
+  transition: all 0.15s ease;
+  color: #1a2b3e;
+}
+
+.combobox-button {
+  text-align: left;
+  cursor: pointer;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.combobox-button::after {
+  content: "▼";
+  font-size: 0.7rem;
+  color: #7e8b9c;
+  margin-left: 8px;
+}
+
+.combobox-button:disabled {
+  background-color: #f4f7fb;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.combobox-button.error {
+  border-color: #d14545;
+  background-color: #fff8f8;
+}
+
+.combobox {
+  position: relative;
+}
+
+.combobox-dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1.5px solid #e0e7ed;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.combobox-search {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-bottom: 1px solid #eef2f6;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.combobox-search:focus {
+  box-shadow: inset 0 -2px 0 #0066cc;
+}
+
+.combobox-options {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.combobox-option {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.combobox-option:hover {
+  background: #f0f4fa;
+}
+
+.combobox-option.selected {
+  background: #e6f0ff;
+  font-weight: 500;
+}
+
+.combobox-empty {
+  padding: 0.75rem 1rem;
+  color: #7e8b9c;
+  text-align: center;
+}
+
+.error-message {
+  font-size: 0.8rem;
+  color: #d14545;
+  margin-top: 0.2rem;
+}
+
+.address-preview {
+  padding: 1rem 1.25rem;
+  background-color: #f8fafd;
+  border-radius: 14px;
+  border: 1px solid #e4eaf1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #1a2b3e;
+  word-break: break-word;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: 0 10px 20px -10px rgba(185, 19, 114, 0.6);
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+/* Hover */
+.submit-button:hover {
+  transform: translateY(-3px) scale(1.01);
+  background: linear-gradient(135deg, #7c18b5 0%, #d81b80 40%, #d81b80 100%);
+  box-shadow: 0 18px 30px -12px rgba(185, 19, 114, 0.8);
+}
+
+/* Click */
+.submit-button:active {
+  transform: scale(0.97);
+}
+
+/* Shine effect */
+.submit-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.6s;
+}
+
+.submit-button:hover::before {
+  left: 100%;
+}
+
+/* intl-tel-input custom integration */
+:global(.iti) {
+  width: 100%;
+}
+
+:global(.iti__flag-container) {
+  border-radius: 12px 0 0 12px;
+}
+
+:global(.iti--separate-dial-code .iti__selected-flag) {
+  background-color: #f4f7fb;
+  border-radius: 12px 0 0 12px;
+  border-right: 1px solid #e0e7ed;
+}
+
+:global(.iti__country-list) {
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+
+/* Tablet (≤768px) */
+@media (max-width: 768px) {
   .form-card {
-    background: white;
-    border-radius: 24px;
-    box-shadow: 0 20px 40px -10px rgba(0, 20, 30, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05);
-    width: 100%;
-    max-width: 1000px;
-    padding: 2.5rem;
-    transition: box-shadow 0.2s ease;
-  }
-
-  .form-header {
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #eef2f6;
-    padding-bottom: 1.5rem;
+    padding: 2rem;
   }
 
   .form-header h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: #0a1e2f;
-    margin: 0 0 0.25rem 0;
-  }
-
-  .form-header p {
-    color: #5e6f88;
-    font-size: 0.95rem;
-    margin: 0;
-  }
-
-  .form-section {
-    margin-bottom: 2.5rem;
-  }
-
-  .form-section h2 {
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: #1e2f44;
-    margin: 0 0 1.25rem 0;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px dashed #e2e8f0;
+    font-size: 1.75rem;
   }
 
   .form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1.25rem;
+  }
+}
+
+/* Mobile (≤640px) */
+@media (max-width: 640px) {
+  .registration-container {
+    padding: 1rem;
+  }
+
+  .form-card {
+    padding: 1.5rem;
+  }
+
+  .form-header {
     margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .form-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .form-header p {
+    font-size: 0.85rem;
+  }
+
+  .form-section {
+    margin-bottom: 1.75rem;
+  }
+
+  .form-section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
 
   .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-
-  .input-group.full-width {
-    grid-column: 1 / -1;
-  }
-
-  .input-group.disabled {
-    opacity: 0.6;
+    gap: 0.25rem;
   }
 
   label {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #2d3f59;
-    letter-spacing: 0.01em;
-  }
-
-  .required {
-    color: #d14545;
-    margin-left: 2px;
+    font-size: 0.85rem;
   }
 
   input, select, textarea, .combobox-button {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 0.95rem;
-    font-family: inherit;
-    border: 1.5px solid #e0e7ed;
-    border-radius: 12px;
-    background: white;
-    transition: all 0.15s ease;
-    color: #1a2b3e;
-  }
-
-  .combobox-button {
-    text-align: left;
-    cursor: pointer;
-    background: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .combobox-button::after {
-    content: "▼";
-    font-size: 0.7rem;
-    color: #7e8b9c;
-    margin-left: 8px;
-  }
-
-  .combobox-button:disabled {
-    background-color: #f4f7fb;
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
-
-  .combobox-button.error {
-    border-color: #d14545;
-    background-color: #fff8f8;
-  }
-
-  .combobox {
-    position: relative;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
   }
 
   .combobox-dropdown {
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1.5px solid #e0e7ed;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-    z-index: 10;
-    overflow: hidden;
-  }
-
-  .combobox-search {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: none;
-    border-bottom: 1px solid #eef2f6;
-    outline: none;
-    font-size: 0.95rem;
-  }
-
-  .combobox-search:focus {
-    box-shadow: inset 0 -2px 0 #0066cc;
-  }
-
-  .combobox-options {
-    max-height: 200px;
-    overflow-y: auto;
+    max-height: 250px;
   }
 
   .combobox-option {
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-    transition: background 0.1s;
-  }
-
-  .combobox-option:hover {
-    background: #f0f4fa;
-  }
-
-  .combobox-option.selected {
-    background: #e6f0ff;
-    font-weight: 500;
-  }
-
-  .combobox-empty {
-    padding: 0.75rem 1rem;
-    color: #7e8b9c;
-    text-align: center;
-  }
-
-  .error-message {
-    font-size: 0.8rem;
-    color: #d14545;
-    margin-top: 0.2rem;
+    padding: 0.65rem 0.9rem;
   }
 
   .address-preview {
-    padding: 1rem 1.25rem;
-    background-color: #f8fafd;
-    border-radius: 14px;
-    border: 1px solid #e4eaf1;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #1a2b3e;
-    word-break: break-word;
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
   }
 
   .submit-button {
-    width: 100%;
-    padding: 1rem;
-    background: #0a1e2f;
-    color: white;
-    border: none;
-    border-radius: 40px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-    box-shadow: 0 8px 16px -6px rgba(10, 30, 47, 0.2);
-    letter-spacing: 0.3px;
-    margin-top: 1rem;
+    padding: 0.85rem;
+    font-size: 1rem;
+  }
+}
+
+/* Small mobile (≤480px) */
+@media (max-width: 480px) {
+  .form-card {
+    padding: 1.25rem;
   }
 
-  .submit-button:hover {
-    background: #143450;
-    box-shadow: 0 10px 20px -6px rgba(10, 30, 47, 0.3);
+  .form-header h1 {
+    font-size: 1.35rem;
   }
 
-  .submit-button:active {
-    transform: scale(0.98);
+  .form-header p {
+    font-size: 0.8rem;
   }
 
-  /* intl-tel-input custom integration */
-  :global(.iti) {
-    width: 100%;
+  .form-section h2 {
+    font-size: 1rem;
   }
 
-  :global(.iti__flag-container) {
-    border-radius: 12px 0 0 12px;
+  input, select, textarea, .combobox-button {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
   }
 
-  :global(.iti--separate-dial-code .iti__selected-flag) {
-    background-color: #f4f7fb;
-    border-radius: 12px 0 0 12px;
-    border-right: 1px solid #e0e7ed;
+  .combobox-button::after {
+    font-size: 0.6rem;
   }
 
+  .combobox-option {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .address-preview {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .submit-button {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  /* Adjust intl-tel-input on small screens */
   :global(.iti__country-list) {
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    max-width: 260px;
   }
+}
 
-  /* Responsive */
-  @media (max-width: 640px) {
-    .form-card {
-      padding: 1.5rem;
-    }
-    .form-grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-    .form-header h1 {
-      font-size: 1.75rem;
-    }
+/* Touch-friendly: increase tap target for combobox buttons */
+@media (hover: none) and (pointer: coarse) {
+  .combobox-button,
+  .combobox-option,
+  .submit-button {
+    cursor: pointer;
+    touch-action: manipulation;
   }
+}
 </style>

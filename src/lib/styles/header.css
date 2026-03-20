@@ -1,0 +1,377 @@
+/* ----- Base Header Styles ----- */
+.header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 25px rgba(0, 20, 30, 0.3);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(239, 185, 120, 0.3);
+}
+
+.header-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  gap: 20px;
+  flex-wrap: nowrap; /* prevents wrapping on desktop */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  flex-shrink: 0; /* keep logo from shrinking */
+}
+
+.logo-img {
+  width: 55px;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  /* removed negative right offset for proper alignment */
+}
+
+.logo-hr {
+  color: #EFB978;
+  font-weight: 600;
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 44px;
+  font-weight: 500;
+  flex-wrap: nowrap; /* keep links in a row on desktop */
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: rgba(255,255,255,0.9);
+  transition: all 0.3s ease;
+  position: relative;
+  font-size: 1.05rem;
+  padding: 5px 0;
+  white-space: nowrap; /* prevent link text wrapping */
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #EFB978, #D96C4E);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-links a:hover {
+  color: white;
+  text-shadow: 0 0 8px rgba(239,185,120,0.5);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: nowrap; /* keep buttons side by side on desktop */
+  flex-shrink: 0;
+}
+
+.btn-header {
+  padding: 10px 28px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.4px;
+  background: transparent;
+  color: white;
+  border-color: rgba(255,255,255,0.6);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  white-space: nowrap;
+}
+
+.btn-header:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px -8px rgba(0,0,0,0.3);
+}
+
+.btn-register {
+  border-color: white;
+  color: white;
+  background: rgba(239,185,120,0.05);
+}
+
+.btn-register:hover {
+  background: white;
+  color: white;
+  border-color: white;
+  box-shadow: 0 0 15px #EFB978;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+}
+
+.btn-post {
+  border-color: white;
+  color: white;
+}
+
+.btn-post:hover {
+  background: white;
+  border-color: white;
+  box-shadow: 0 0 15px #f3ca9c;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+}
+
+/* ----- Visibility Helpers (Desktop / Mobile) ----- */
+.desktop-only {
+  display: flex;
+}
+
+.mobile-only {
+  display: none;
+}
+
+/* ----- Hamburger Button (hidden on desktop) ----- */
+.hamburger {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  display: none; /* hidden by default */
+}
+
+.hamburger .bar {
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+/* ----- Sidebar Overlay & Drawer ----- */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -320px;
+  width: 280px;
+  height: 100%;
+  z-index: 1002;
+  padding: 24px 20px;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+  transition: left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.sidebar-logo {
+  width: 50px;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+.close-sidebar {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.sidebar-nav a {
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(239,185,120,0.2);
+  transition: 0.2s;
+}
+
+.sidebar-nav a:hover {
+  color: #EFB978;
+  padding-left: 8px;
+}
+
+.sidebar-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-buttons .btn-header {
+  width: 100%;
+  text-align: center;
+}
+
+/* ----- RESPONSIVE STYLES ----- */
+
+/* Tablet Landscape (≤1024px) – reduce gaps and container padding */
+@media (max-width: 1024px) {
+  .header-container {
+    padding: 0 24px;
+  }
+
+  .navbar {
+    gap: 16px;
+  }
+
+  .nav-links {
+    gap: 28px;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+  }
+
+  .btn-header {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Tablet Portrait & Mobile (≤820px) – switch to hamburger menu */
+@media (max-width: 820px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: flex !important;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar {
+    flex-wrap: wrap; /* allow wrapping if needed, but hamburger is primary */
+  }
+
+  .header-container {
+    padding: 0 20px;
+  }
+
+  .logo-text {
+    font-size: 22px;
+  }
+
+  .logo-img {
+    width: 48px;
+  }
+}
+
+/* Small Mobile (≤480px) – further reduce spacing and font sizes */
+@media (max-width: 480px) {
+  .header-container {
+    padding: 0 16px;
+  }
+
+  .navbar {
+    padding: 10px 0;
+  }
+
+  .logo-text {
+    font-size: 18px;
+  }
+
+  .logo-img {
+    width: 40px;
+  }
+
+  .logo-hr {
+    font-size: 16px;
+  }
+
+  .hamburger .bar {
+    width: 26px;
+    height: 2.5px;
+  }
+
+  .sidebar {
+    width: 260px;
+    padding: 20px 16px;
+  }
+
+  .sidebar-nav a {
+    font-size: 1rem;
+  }
+}
+
+/* Optional: Improve backdrop-filter performance on mobile (if needed) */
+@media (max-width: 820px) {
+  .header-fixed {
+    backdrop-filter: blur(4px); /* lighter blur for performance */
+  }
+}
+ 

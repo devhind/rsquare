@@ -1,32 +1,36 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
+  import { browser } from '$app/environment';
+  import Header from '$lib/components/Header.svelte';
+  import Footer from '$lib/components/Footer.svelte';
 
-  // ---------- Carousel logic (unchanged) ----------
+  /* ================= CAROUSEL ================= */
   let currentIndex = 0;
+
   const slides = [
     {
-      image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa',
       tag: 'Tourism & skill development',
       title: '132 Tourist Guides trained for Statue of Unity',
-      desc: 'R Square HR trained tribal youth as guides. Their performance was praised by Hon. Prime Minister Shri Narendra Modi in "Man ki baat".'
+      desc: 'R Square HR trained tribal youth as guides.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f',
       tag: 'HR consulting',
       title: 'HR Policy Manuals for IIM Ahmedabad & IIM Udaipur',
-      desc: 'Trusted by premier institutes to design comprehensive HR frameworks.'
+      desc: 'Trusted by premier institutes.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      tag: 'Large‑scale training',
-      title: 'PMKVY, DDU-GKY, DAY-NULM & ESDM programs',
-      desc: 'Delivered government‑sponsored skill development across Gujarat.'
+      image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655',
+      tag: 'Training',
+      title: 'PMKVY & DDU-GKY programs',
+      desc: 'Government skill programs.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      tag: 'Innovative staffing',
-      title: 'Aquatic Educators for Gujarat Council of Science City',
-      desc: 'Specialised guides for the science city, enhancing visitor experience.'
+      image: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624',
+      tag: 'Staffing',
+      title: 'Science City Educators',
+      desc: 'Specialised guides.'
     }
   ];
 
@@ -50,89 +54,57 @@
     if (autoInterval) clearInterval(autoInterval);
   }
 
-  // ---------- Back to top (unchanged) ----------
+  /* ================= BACK TO TOP ================= */
   let showBackToTop = false;
 
   function handleScroll() {
-    showBackToTop = window.scrollY > 300;
+    if (browser) {
+      showBackToTop = window.scrollY > 300;
+    }
   }
 
-  // ---------- Scroll reveal (unchanged but fallback kept) ----------
+  /* ================= SCROLL ANIMATION ================= */
+  let observer;
+
   onMount(() => {
-    // First, make all sections visible immediately to avoid white page
+    if (!browser) return; // 🔥 important
+
+    startAuto();
+
     const sections = document.querySelectorAll('.section-animate');
+
     sections.forEach(el => el.classList.add('section-visible'));
 
-    // Then set up intersection observer for smooth reveal on scroll
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('section-visible');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    sections.forEach((el) => {
-      observer.observe(el);
-    });
-
-    // Fallback: after 1 second, force any hidden sections to appear
-    const timeout = setTimeout(() => {
-      document.querySelectorAll('.section-animate:not(.section-visible)').forEach(el => {
-        el.classList.add('section-visible');
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('section-visible');
+        }
       });
-    }, 1000);
+    }, { threshold: 0.1 });
 
-    // --- Responsive header setup ---
-    const mediaQuery = window.matchMedia('(max-width: 820px)');
-    function handleMediaChange(e) {
-      isMobile = e.matches;
-      if (!isMobile) isMenuOpen = false; // close drawer when resizing to desktop
-    }
-    mediaQuery.addEventListener('change', handleMediaChange);
-    isMobile = mediaQuery.matches;
+    sections.forEach(el => observer.observe(el));
 
     window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      observer.disconnect();
-      clearTimeout(timeout);
-      mediaQuery.removeEventListener('change', handleMediaChange);
-      window.removeEventListener('scroll', handleScroll);
-    };
   });
 
   onDestroy(() => {
     stopAuto();
+
+    if (browser) {
+      window.removeEventListener('scroll', handleScroll);
+    }
+
+    if (observer) observer.disconnect();
   });
 
-  // ---------- Responsive header state ----------
-  let isMenuOpen = false;
-  let isMobile = false;
-
-  function toggleMenu() {
-    isMenuOpen = !isMenuOpen;
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+  /* ================= SCROLL TO TOP ================= */
+  function scrollToTop() {
+    if (browser) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
-
-  function closeMenu() {
-    isMenuOpen = false;
-    document.body.style.overflow = '';
-  }
-
-  // scrollToTop (unchanged)
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
 </script>
-
 <!-- MAIN CONTENT (everything below is exactly as in your original) -->
 <main class="site-container">
   <!-- HERO -->
@@ -358,7 +330,6 @@
     </div>
   </section>
 </main>
-
 <!-- PERFECT BACK-TO-TOP BUTTON -->
 {#if showBackToTop}
   <button class="back-to-top" on:click={scrollToTop} aria-label="Back to top">
@@ -368,6 +339,7 @@
 
 <!-- GLOBAL STYLES (scoped) -->
 <style>
+  /* ========== GLOBAL RESET & BASE ========== */
   /* ===== RESET & BASE (unchanged) ===== */
   :global(body) {
     margin: 0;
@@ -391,304 +363,6 @@
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-  }
-
-  /* ===== HEADER (enhanced) ===== */
- .header-fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 8px 25px rgba(0, 20, 30, 0.3);
-  z-index: 1000;
-  border-bottom: 1px solid rgba(239, 185, 120, 0.3);
-}
-  .header-container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 32px;
-    width: 100%;
-  }
-
-  .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 0;
-  gap: 20px;
-  flex-wrap: nowrap; /* important */
-}
-
-  .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: white;
-  }
-
-  .logo-img {
-    width: 55px;
-    height: auto;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-  }
-
-  .logo-text {
-    font-weight: 700;
-    font-size: 26px;
-    letter-spacing: -0.5px;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    position: relative;
-    right: 30px;
-  }
-
-  .logo-hr {
-    color: #EFB978;
-    font-weight: 600;
-    font-size: 20px;
-    margin-left: 5px;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 44px;
-    font-weight: 500;
-    flex-wrap: wrap;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: rgba(255,255,255,0.9);
-    transition: all 0.3s ease;
-    position: relative;
-    font-size: 1.05rem;
-    padding: 5px 0;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: linear-gradient(90deg, #EFB978, #D96C4E);
-    transition: width 0.3s ease;
-    border-radius: 2px;
-  }
-
-  .nav-links a:hover {
-    color: white;
-    text-shadow: 0 0 8px rgba(239,185,120,0.5);
-  }
-
-  .nav-links a:hover::after {
-    width: 100%;
-  }
-
-  .header-buttons {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    flex-wrap: wrap;
-
-  }
-
-  .btn-header {
-    padding: 10px 28px;
-    border-radius: 40px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    border: 1.5px solid transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    letter-spacing: 0.4px;
-    background: transparent;
-    color: white;
-    border-color: rgba(255,255,255,0.6);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-
-  .btn-header:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 20px -8px rgba(0,0,0,0.3);
-  }
-
-  .btn-register {
-    border-color: white;
-    color: white;
-    background: rgba(239,185,120,0.05);
-  }
-
-  .btn-register:hover {
-    background: white;
-    color: white;
-    border-color: white;
-    box-shadow: 0 0 15px #EFB978;
-    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
-  }
-
-  .btn-post {
-    border-color: white;
-    color: white;
-  }
-
-  .btn-post:hover {
-    background: white;
-    border-color: white;
-    box-shadow: 0 0 15px #f3ca9c;
-    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
-  }
-
-  /* ----- Responsive helpers ----- */
-  /* ===== DEFAULT (DESKTOP FIRST) ===== */
-.desktop-only {
-  display: flex;
-}
-
-.mobile-only {
-  display: none;
-}
-
-/* ===== MOBILE VIEW ===== */
-@media (max-width: 820px) {
-  .desktop-only {
-    display: none !important;
-  }
-
-  .mobile-only {
-    display: flex !important;
-  }
-}
-  /* Hamburger button */
-  .hamburger {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .hamburger .bar {
-    width: 30px;
-    height: 3px;
-    background-color: white;
-    border-radius: 10px;
-    transition: 0.3s; 
-  }
-  .hamburger {
-  display: none;
-}
-
-@media (max-width: 820px) {
-  .hamburger {
-    display: flex;
-  }
-}
-
-  /* Sidebar overlay */
-  .sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 1001;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-  .sidebar-overlay.open {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  /* Sidebar (drawer) */
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: -320px;
-    width: 280px;
-    height: 100%;
-    z-index: 1002;
-    padding: 24px 20px;
-    box-shadow: 4px 0 20px rgba(0,0,0,0.3);
-    transition: left 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
-  }
-  .sidebar.open {
-    left: 0;
-  }
-
-  .sidebar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 40px;
-  }
-  .sidebar-logo {
-    width: 50px;
-    height: auto;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-  }
-  .close-sidebar {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 40px;
-    line-height: 1;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-bottom: 40px;
-  }
-  .sidebar-nav a {
-    color: rgba(255,255,255,0.9);
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 500;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(239,185,120,0.2);
-    transition: 0.2s;
-  }
-  .sidebar-nav a:hover {
-    color: #EFB978;
-    padding-left: 8px;
-  }
-
-  .sidebar-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .sidebar-buttons .btn-header {
-    width: 100%;
-    text-align: center;
-  }
-
-  /* Hide desktop items on mobile, show hamburger */
-  @media (max-width: 820px) {
-    .desktop-only {
-      display: none !important;
-    }
-    .mobile-only {
-      display: flex !important;
-    }
-    .logo-text {
-      right: 0; /* adjust logo position on mobile */
-    }
   }
 
   /* ===== The rest of your original styles (unchanged) ===== */
@@ -744,30 +418,71 @@
     transition: all 0.25s;
   }
 
-  .btn-primary {
-    background: #1E3A4A;
-    color: white;
-    border: none;
-    box-shadow: 0 10px 18px -10px #1E3A4A;
-  }
+  /* ===== PRIMARY BUTTON (GRADIENT THEME) ===== */
+.btn-primary {
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  padding: 12px 28px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: 0 10px 20px -10px rgba(185, 19, 114, 0.6);
+  position: relative;
+  overflow: hidden;
+}
 
-  .btn-primary:hover {
-    background: #15303e;
-    transform: translateY(-3px);
-    box-shadow: 0 18px 25px -12px #1E3A4A;
-  }
+/* Hover */
+.btn-primary:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 30px -12px rgba(185, 19, 114, 0.8);
+  background: linear-gradient(135deg, #7c18b5 0%, #d81b80 40%, #d81b80 100%);
+}
 
-  .btn-outline {
-    background: transparent;
-    border: 1.5px solid #1E3A4A;
-    color: #1E3A4A;
-  }
+/* Shine effect */
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.6s;
+}
 
-  .btn-outline:hover {
-    background: #1E3A4A;
-    color: white;
-    transform: translateY(-3px);
-  }
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+
+/* ===== OUTLINE BUTTON (MATCH THEME) ===== */
+.btn-outline {
+  background: transparent;
+  border: 2px solid #B91372;
+  color: #B91372;
+  border-radius: 40px;
+  padding: 12px 28px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+/* Hover */
+.btn-outline:hover {
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+  color: white;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 25px -10px rgba(185, 19, 114, 0.6);
+}
 
   .hero-image {
     flex: 1 1 45%;
@@ -1420,96 +1135,7 @@
     background: linear-gradient(135deg, #1f1c2c 0%, #fcb045  40%, #fcb045 100%);
   } */
 
-  .footer {
-    /* max-width: 1440px;
-    margin: 0 auto;
-    padding: 56px 32px 32px; */
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 50px;
-    background: #1E3A4A;
-    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
-    width: 100%;
-  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
-  }
-
-  .footer-col p {
-    color: #b0c4de;
-    max-width: 280px;
-    margin-top: 20px;
-    font-size: 0.95rem;
-  }
-
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 26px;
-    font-weight: 700;
-    color: white;
-  }
-
-  .logo-img {
-    width: 70px;
-    height: auto;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-    position: relative;
-    right: 25px;
-  }
-
-  .accent {
-    color: #EFB978;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 80px;
-    flex-wrap: wrap;
-  }
-
-  .footer-links div h5 {
-    font-size: 1.1rem;
-    margin-bottom: 22px;
-    color: white;
-    font-weight: 600;
-  }
-
-  .footer-links div a {
-    display: block;
-    color: #b0c4de;
-    text-decoration: none;
-    margin-bottom: 14px;
-    font-size: 0.95rem;
-    transition: color 0.2s;
-  }
-
-  .footer-links div a:hover {
-    color: #EFB978;
-  }
-  .footer-inner {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 56px 32px 32px;
-
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 50px;
-}
-
-  .copyright {
-    max-width: 1440px;
-    height: 5px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 24px 32px;
-    color: #9bb5d4;
-    font-size: 14px;
-    /* border-top: 1px solid #254b6d; */
-    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
-  }
-
+ 
   /* ===== BACK-TO-TOP (elegant) ===== */
   /* .back-to-top {
     position: fixed;
