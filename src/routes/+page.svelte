@@ -512,7 +512,7 @@
     background: linear-gradient(145deg, #ffffff, #f9f4ed);
     border-radius: 48px;
     padding: 48px 40px;
-    margin: 40px 0 20px;
+    /* margin: 40px 0 20px; */
     box-shadow: 0 15px 35px -12px rgba(30,58,74,0.15);
     border: 1px solid #efe2d4;
   }
@@ -853,7 +853,7 @@
 }
   /* ===== CAROUSEL ===== */
   .carousel-section {
-    margin: 80px 0;
+    margin: 40px 0;
   }
 
   .section-subhead {
@@ -981,14 +981,14 @@
 
   /* ===== PARTNERS ===== */
   .partners {
-    margin: 80px 0;
+    margin: 20px 0;
   }
 
  .partner-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 20px;
-  margin-top: 40px;
+  margin-top: 18px;
 }
 
 /* GLASS CARD */
@@ -1069,8 +1069,8 @@
 
   /* ===== CONTACT ===== */
   .contact {
-    margin: 60px 0;
-  }
+    margin-bottom: 38px;
+  } 
 
   .contact-container {
     display: flex;
