@@ -1,4 +1,7 @@
 /* ----- Base Header Styles ----- */
+body{
+  padding-top: 95px;
+}
 .header-fixed {
   position: fixed;
   top: 0;

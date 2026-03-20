@@ -279,8 +279,12 @@
           </div>
         {/each}
       </div>
-      <button class="carousel-control prev" on:click={prev}><i class="fas fa-chevron-left"></i></button>
-      <button class="carousel-control next" on:click={next}><i class="fas fa-chevron-right"></i></button>
+      <button class="carousel-control prev" on:click={prev} aria-label="Previous slide">
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E" alt="Previous">
+</button>
+<button class="carousel-control next" on:click={next} aria-label="Next slide">
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E" alt="Next">
+</button>
       <div class="carousel-indicators">
         {#each slides as _, i}
           <span class="indicator {i === currentIndex ? 'active' : ''}" on:click={() => currentIndex = i}></span>
@@ -1383,5 +1387,98 @@
 #mission,
 #contact {
   scroll-margin-top: 110px;
+}
+/* ===== CAROUSEL CONTROL (GRADIENT PREMIUM) ===== */
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+  border: none;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  
+  box-shadow: 0 10px 25px -8px rgba(185, 19, 114, 0.6);
+  
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+  transition: all 0.35s ease;
+  position: absolute;
+  overflow: hidden;
+}
+
+/* ICON */
+.carousel-control img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* make icon white */
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+/* ===== HOVER EFFECT ===== */
+.carousel-control:hover {
+  transform: translateY(-50%) scale(1.12);
+  box-shadow: 0 18px 35px -10px rgba(185, 19, 114, 0.9);
+}
+
+/* ===== SHINE ANIMATION ===== */
+.carousel-control::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  transition: 0.6s;
+}
+
+.carousel-control:hover::before {
+  left: 100%;
+}
+
+/* ===== GLOW PULSE (SUBTLE ANIMATION) ===== */
+.carousel-control::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(185, 19, 114, 0.5);
+  animation: pulseGlow 2.5s infinite;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(185, 19, 114, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(185, 19, 114, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(185, 19, 114, 0);
+  }
+}
+
+/* ===== ICON MOVEMENT ===== */
+.carousel-control.prev:hover img {
+  transform: translateX(-5px) scale(1.1);
+}
+
+.carousel-control.next:hover img {
+  transform: translateX(5px) scale(1.1);
 }
 </style>
