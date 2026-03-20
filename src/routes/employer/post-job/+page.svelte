@@ -660,10 +660,10 @@ select:not([multiple]) {
   display: inline-block;
 }
 
-/* Primary submit button */
+/* ===== PRIMARY SUBMIT BUTTON (PREMIUM GRADIENT) ===== */
 button[type="submit"] {
   width: 100%;
-  background: #f59e0b;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
   border: none;
   padding: 1rem 1.5rem;
   border-radius: 40px;
@@ -671,27 +671,53 @@ button[type="submit"] {
   font-weight: 600;
   color: white;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  letter-spacing: 0.4px;
+  transition: all 0.35s ease;
   margin-top: 1.5rem;
-  box-shadow: 0 8px 20px -8px rgba(245, 158, 11, 0.5);
+  box-shadow: 0 10px 22px -10px rgba(185, 19, 114, 0.6);
+  position: relative;
+  overflow: hidden;
 }
 
+/* Hover */
 button[type="submit"]:hover {
-  background: #d97706;
-  transform: scale(1.02);
-  box-shadow: 0 12px 28px -8px rgba(245, 158, 11, 0.6);
+  transform: translateY(-3px) scale(1.02);
+  background: linear-gradient(135deg, #7c18b5 0%, #d81b80 40%, #d81b80 100%);
+  box-shadow: 0 18px 30px -10px rgba(185, 19, 114, 0.8);
 }
 
+/* Click */
 button[type="submit"]:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
+/* Shine animation */
+button[type="submit"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.6s;
+}
+
+button[type="submit"]:hover::before {
+  left: 100%;
+}
+
+/* ===== PLACEHOLDER ===== */
 ::placeholder {
   color: #9ca3af;
   opacity: 1;
 }
-
-/* Button groups for experience and hiring speed */
+/* ===== BUTTON GROUPS ===== */
 .exp-buttons,
 .hire-speed {
   display: flex;
@@ -700,36 +726,67 @@ button[type="submit"]:active {
   flex-wrap: wrap;
 }
 
+/* Default buttons */
 .exp-buttons button,
 .hire-speed button {
-  padding: 10px 18px;
-  border-radius: 6px;
-  border: 1px solid #080808;
-  background: #f8f8f8;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1.5px solid #d1d5db;
+  background: #ffffff;
   cursor: pointer;
-  color: #000;
+  color: #374151;
   font-weight: 500;
-  box-shadow: none;
-  width: auto;
-  margin: 0;
   font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
+/* Hover */
+.exp-buttons button:hover,
+.hire-speed button:hover {
+  border-color: #B91372;
+  color: #B91372;
+  transform: translateY(-2px);
+}
+
+/* Selected (ACTIVE STATE - GRADIENT) */
 .exp-buttons button.selected,
 .hire-speed button.selected {
-  background: #4f5db8;
-  color: #ffffff;
-  border-color: #4f5db8;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 8px 18px -6px rgba(185, 19, 114, 0.6);
 }
 
-/* Info box */
+/* Active click feel */
+.exp-buttons button:active,
+.hire-speed button:active {
+  transform: scale(0.96);
+}
+
 .info-box {
-  background: #5f6dbd;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
   color: white;
-  padding: 12px 16px;
-  border-radius: 6px;
+  padding: 14px 18px;
+  border-radius: 12px;
   margin: 15px 0;
   font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 8px 20px -8px rgba(185, 19, 114, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+.info-box::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: rgba(255, 255, 255, 0.6);
+}
+.info-box {
+  backdrop-filter: blur(6px);
 }
 
 /* Salary range inputs */

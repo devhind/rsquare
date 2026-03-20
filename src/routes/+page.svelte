@@ -418,30 +418,71 @@
     transition: all 0.25s;
   }
 
-  .btn-primary {
-    background: #1E3A4A;
-    color: white;
-    border: none;
-    box-shadow: 0 10px 18px -10px #1E3A4A;
-  }
+  /* ===== PRIMARY BUTTON (GRADIENT THEME) ===== */
+.btn-primary {
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  padding: 12px 28px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: 0 10px 20px -10px rgba(185, 19, 114, 0.6);
+  position: relative;
+  overflow: hidden;
+}
 
-  .btn-primary:hover {
-    background: #15303e;
-    transform: translateY(-3px);
-    box-shadow: 0 18px 25px -12px #1E3A4A;
-  }
+/* Hover */
+.btn-primary:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 30px -12px rgba(185, 19, 114, 0.8);
+  background: linear-gradient(135deg, #7c18b5 0%, #d81b80 40%, #d81b80 100%);
+}
 
-  .btn-outline {
-    background: transparent;
-    border: 1.5px solid #1E3A4A;
-    color: #1E3A4A;
-  }
+/* Shine effect */
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.6s;
+}
 
-  .btn-outline:hover {
-    background: #1E3A4A;
-    color: white;
-    transform: translateY(-3px);
-  }
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+
+/* ===== OUTLINE BUTTON (MATCH THEME) ===== */
+.btn-outline {
+  background: transparent;
+  border: 2px solid #B91372;
+  color: #B91372;
+  border-radius: 40px;
+  padding: 12px 28px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+/* Hover */
+.btn-outline:hover {
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+  color: white;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 25px -10px rgba(185, 19, 114, 0.6);
+}
 
   .hero-image {
     flex: 1 1 45%;

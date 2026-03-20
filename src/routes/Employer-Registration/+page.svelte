@@ -786,26 +786,52 @@ input, select, textarea, .combobox-button {
 .submit-button {
   width: 100%;
   padding: 1rem;
-  background: #0a1e2f;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
   color: white;
   border: none;
   border-radius: 40px;
   font-size: 1.1rem;
   font-weight: 600;
+  letter-spacing: 0.4px;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 8px 16px -6px rgba(10, 30, 47, 0.2);
-  letter-spacing: 0.3px;
+  transition: all 0.35s ease;
+  box-shadow: 0 10px 20px -10px rgba(185, 19, 114, 0.6);
+  position: relative;
+  overflow: hidden;
   margin-top: 1rem;
 }
 
+/* Hover */
 .submit-button:hover {
-  background: #143450;
-  box-shadow: 0 10px 20px -6px rgba(10, 30, 47, 0.3);
+  transform: translateY(-3px) scale(1.01);
+  background: linear-gradient(135deg, #7c18b5 0%, #d81b80 40%, #d81b80 100%);
+  box-shadow: 0 18px 30px -12px rgba(185, 19, 114, 0.8);
 }
 
+/* Click */
 .submit-button:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
+}
+
+/* Shine effect */
+.submit-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.6s;
+}
+
+.submit-button:hover::before {
+  left: 100%;
 }
 
 /* intl-tel-input custom integration */
