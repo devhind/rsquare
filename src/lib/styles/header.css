@@ -374,10 +374,4 @@
     backdrop-filter: blur(4px); /* lighter blur for performance */
   }
 }
- /* 🔥 IMPORTANT FIX: hide sidebar on desktop */
-  @media (min-width: 821px) {
-    .sidebar,
-    .sidebar-overlay {
-      display: none !important;
-    }
-  }
+ 
