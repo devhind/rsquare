@@ -1,157 +1,90 @@
-/* ===== FOOTER BASE ===== */
-.footer {
-  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
-  width: 100%;
-}
-
-/* ===== INNER CONTAINER ===== */
-.footer-inner {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 50px 24px 30px;
-  display: flex;
-  display: flex;
-justify-content: space-between;
-align-items: flex-start;
-flex-wrap: wrap;
-text-align: left;
-  gap: 40px;
-}
-
-/* ===== LEFT SIDE (now centered) ===== */
-.footer-col {
-  max-width: 500px;
-  flex: 1;
-min-width: 260px;
-}
-
-.footer-logo {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-  font-size: 26px;
-  font-weight: 700;
-  color: white;
-}
-
-.logo-img {
-  width: 60px;
-  height: auto;
-}
-
-.accent {
-  color: #EFB978;
-}
-
-.footer-col p {
-  color: rgba(255, 255, 255, 0.75);
-  max-width: 100%;
-  margin-top: 16px;
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-/* ===== RIGHT SIDE LINKS (centered row) ===== */
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  flex: 2;
-  gap: 60px;
-  width: 100%;
-}
-
-.footer-links div {
-  min-width: 120px;
-  text-align: left;
-}
-
-/* HEADINGS */
-.footer-links h5 {
-  font-size: 1rem;
-  margin-bottom: 16px;
-  color: white;
-  font-weight: 600;
-}
-
-/* LINKS */
-.footer-links a {
-  display: block;
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
-  transition: all 0.25s ease;
-}
-
-/* Hover */
-.footer-links a:hover {
-  color: #EFB978;
-  transform: translateX(4px);
-}
-
-/* Highlight active (Awards like image) */
-.footer-links a.highlight {
-  color: #EFB978;
-  font-weight: 500;
-}
-
-/* ===== COPYRIGHT ===== */
-.copyright {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 20px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 13px;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* ===== RESPONSIVE ADJUSTMENTS ===== */
-
-/* Tablet: reduce gaps, keep centered */
-@media (max-width: 768px) {
-  .footer-inner {
-    padding: 40px 20px 30px;
-    gap: 35px;
-  }
-
-  .footer-links {
-    gap: 40px;
-  }
-
-  .footer-links div {
-    min-width: 100px;
-  }
-}
-
-/* Mobile: stack links vertically */
-@media (max-width: 500px) {
-  .footer-links {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .footer-links div {
-    text-align: center;
+ .footer {
+    /* max-width: 1440px;
+    margin: 0 auto;
+    padding: 56px 32px 32px; */
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 50px;
+    background: #1E3A4A;
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
     width: 100%;
-  }
-
-  .footer-logo {
-    font-size: 22px;
-  }
-
-  .logo-img {
-    width: 50px;
+  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
   }
 
   .footer-col p {
-    font-size: 0.85rem;
+    color: #b0c4de;
+    max-width: 280px;
+    margin-top: 20px;
+    font-size: 0.95rem;
   }
 
-  .copyright {
-    font-size: 11px;
-    padding: 16px;
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 26px;
+    font-weight: 700;
+    color: white;
   }
+
+  .logo-img {
+    width: 70px;
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    position: relative;
+    right: 25px;
+  }
+
+  .accent {
+    color: #EFB978;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links div h5 {
+    font-size: 1.1rem;
+    margin-bottom: 22px;
+    color: white;
+    font-weight: 600;
+  }
+
+  .footer-links div a {
+    display: block;
+    color: #b0c4de;
+    text-decoration: none;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+
+  .footer-links div a:hover {
+    color: #EFB978;
+  }
+  .footer-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 56px 32px 32px;
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 50px;
 }
+
+  .copyright {
+    max-width: 1440px;
+    height: 5px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 24px 32px;
+    color: #9bb5d4;
+    font-size: 14px;
+    /* border-top: 1px solid #254b6d; */
+    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
+  }
+  
