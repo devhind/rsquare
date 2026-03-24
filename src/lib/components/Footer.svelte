@@ -5,7 +5,7 @@
     <div class="footer-col">
       <div class="footer-logo">
         <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square HR">
-        <span>R Square <span class="accent">HR</span></span>
+        <span>R SQUARE <span class="accent">HR</span></span>
       </div>
       <p>MSME company anchored on growth, professionalism, dignity & diversity.</p>
     </div>

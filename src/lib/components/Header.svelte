@@ -45,7 +45,7 @@
       <div class="logo-container">
         <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square" />
         <span class="logo-text">
-          R Square <span class="logo-hr">HR Services</span>
+          R SQUARE <span class="logo-hr">HR Services</span>
         </span>
       </div>
 
