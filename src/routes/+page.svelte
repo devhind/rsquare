@@ -424,7 +424,7 @@
 
   /* ===== PRIMARY BUTTON (GRADIENT THEME) ===== */
 .btn-primary {
-  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+  background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
   color: white;
   border: none;
   border-radius: 40px;
@@ -442,7 +442,7 @@
 .btn-primary:hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 20px 30px -12px rgba(185, 19, 114, 0.8);
-  background: linear-gradient(135deg, #7c18b5 0%, #d81b80 40%, #d81b80 100%);
+  background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
 }
 
 /* Shine effect */
@@ -469,9 +469,9 @@
 
 /* ===== OUTLINE BUTTON (MATCH THEME) ===== */
 .btn-outline {
-  background: transparent;
-  border: 2px solid #B91372;
-  color: #B91372;
+  background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
+  /* border: 2px solid #B91372; */
+  color: #FFFFFF;
   border-radius: 40px;
   padding: 12px 28px;
   font-weight: 600;
@@ -482,7 +482,7 @@
 
 /* Hover */
 .btn-outline:hover {
-  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+  background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
   color: white;
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 15px 25px -10px rgba(185, 19, 114, 0.6);
@@ -594,7 +594,7 @@
     left: 0;
     width: 6px;
     height: 0%;
-    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
+    background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
     transition: height 0.4s;
   }
 
@@ -1337,7 +1337,7 @@
     top: 0;
     width: 4px;
     height: 0%;
-    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
+    background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
     transition: 0.4s;
   }
 
@@ -1394,7 +1394,7 @@
   top: 50%;
   transform: translateY(-50%);
   
-  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+  background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
   border: none;
   width: 54px;
   height: 54px;
