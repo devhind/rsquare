@@ -6,9 +6,6 @@ import "flatpickr/dist/flatpickr.css";
 import intlTelInput from "intl-tel-input";
 import "intl-tel-input/build/css/intlTelInput.css";
 import { onMount } from "svelte";
-import Header from '$lib/components/Header.svelte';
-import Footer from '$lib/components/Footer.svelte';
-
 
 let phoneInput;
 

@@ -3,8 +3,7 @@ import { onMount } from "svelte";
 import { Country, State, City } from "country-state-city";
 import intlTelInput from "intl-tel-input";
 import "intl-tel-input/build/css/intlTelInput.css";
-import Header from '$lib/components/Header.svelte';
-import Footer from '$lib/components/Footer.svelte';
+
 
 
 /* ---------------- FORM DATA ---------------- */

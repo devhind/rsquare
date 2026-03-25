@@ -1,8 +1,6 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
-  import Header from '$lib/components/Header.svelte';
-  import Footer from '$lib/components/Footer.svelte';
 
   /* ================= CAROUSEL ================= */
   let currentIndex = 0;
@@ -33,6 +31,15 @@
       desc: 'Specialised guides.'
     }
   ];
+let currentHero = 0;
+let heroInterval;
+
+const heroSlides = [
+  { image: "/images/p1.jpg", alt: "HR service" },
+  { image: "/images/p2.jpg", alt: "Consulting" },
+  { image: "/images/p3.jpg", alt: "Compliance" },
+  // { image: "/images/training.png", alt: "Training" }
+];
 
   let autoInterval;
   const AUTO_INTERVAL = 5000;
@@ -64,46 +71,51 @@
   }
 
   /* ================= SCROLL ANIMATION ================= */
+  
   let observer;
 
-  onMount(() => {
-    if (!browser) return; // 🔥 important
+onMount(() => {
+  if (!browser) return;
 
-    startAuto();
+  startAuto();
 
-    const sections = document.querySelectorAll('.section-animate');
+  // ✅ DEFINE SECTIONS (YOU MISSED THIS)
+  const sections = document.querySelectorAll('.section-animate');
 
-    sections.forEach(el => el.classList.add('section-visible'));
+  sections.forEach(el => el.classList.add('section-visible'));
 
-    observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('section-visible');
-        }
-      });
-    }, { threshold: 0.1 });
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('section-visible');
+      }
+    });
+  }, { threshold: 0.1 });
 
-    sections.forEach(el => observer.observe(el));
+  sections.forEach(el => observer.observe(el));
 
-    window.addEventListener('scroll', handleScroll);
-  });
+  window.addEventListener('scroll', handleScroll);
+
+  // ✅ HERO SLIDER
+  heroInterval = setInterval(() => {
+    currentHero = (currentHero + 1) % heroSlides.length;
+  }, 4000);
+});
 
   onDestroy(() => {
-    stopAuto();
+  stopAuto();
 
-    if (browser) {
-      window.removeEventListener('scroll', handleScroll);
-    }
-
-    if (observer) observer.disconnect();
-  });
-
-  /* ================= SCROLL TO TOP ================= */
-  function scrollToTop() {
-    if (browser) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+  if (browser) {
+    window.removeEventListener('scroll', handleScroll);
   }
+
+  if (observer) observer.disconnect();
+
+  // ✅ CLEAR HERO INTERVAL
+  clearInterval(heroInterval);
+});
+
+  
 </script>
 <!-- MAIN CONTENT (everything below is exactly as in your original) -->
 <main class="site-container">
@@ -119,8 +131,14 @@
       </div>
     </div>
     <div class="hero-image">
-      <img class="hero-img" src="https://media.istockphoto.com/id/2083454645/photo/male-boss-discussing-online-project-with-employee-in-the-office.jpg?s=170667a&w=0&k=20&c=YAjWMxEJRSlaQeT0N7Ki3moDBi-hU3ky8s9IHEzXcs8=" alt="Boss and employee">
-    </div>
+  {#each heroSlides as slide, i}
+    <img
+      src={slide.image}
+      alt={slide.alt}
+      class="fade-img {i === currentHero ? 'active' : ''}"
+    />
+  {/each}
+</div>
   </section>
 
   <!-- MISSION & VISION -->
@@ -334,12 +352,7 @@
     </div>
   </section>
 </main>
-<!-- PERFECT BACK-TO-TOP BUTTON -->
-{#if showBackToTop}
-  <button class="back-to-top" on:click={scrollToTop} aria-label="Back to top">
-  <img src="/images/up-arrow.png" alt="Go to top" />
-</button>
-{/if}
+
 
 <!-- GLOBAL STYLES (scoped) -->
 <style>
@@ -499,13 +512,14 @@
   .hero-img {
     max-width: 100%;
     border-radius: 30px;
-    box-shadow: 0 25px 40px -14px rgba(30,58,74,0.25);
     transition: transform 0.4s;
     width: 100%;
     height: auto;
     object-fit: cover;
     aspect-ratio: 4/3;
+    box-shadow: 0 40px 70px -15px rgba(0,0,0,0.35);
   }
+ 
 
   .hero-image:hover .hero-img {
     transform: scale(1.01);
@@ -1140,98 +1154,7 @@
   } */
 
  
-  /* ===== BACK-TO-TOP (elegant) ===== */
-  /* .back-to-top {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    width: 65px;
-    height: 65px;
-    background: linear-gradient(145deg, #EFB978, #D96C4E);
-    color: #1E3A4A;
-    border: none;
-    border-radius: 50%;
-    font-size: 30px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 15px 25px -8px rgba(200, 120, 70, 0.6);
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    z-index: 999;
-    animation: float 3s ease-in-out infinite;
-  }
-
-  .back-to-top:hover {
-    transform: scale(1.15) translateY(-5px);
-    background: linear-gradient(145deg, #f3ca9c, #EFB978);
-    box-shadow: 0 25px 35px -10px #b28b5e;
-  }
-
-  .back-to-top .tooltip {
-    position: absolute;
-    top: -30px;
-    right: 50%;
-    transform: translateX(50%);
-    background: #1E3A4A;
-    color: #EFB978;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 20px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    white-space: nowrap;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  }
-
-  .back-to-top:hover .tooltip {
-    opacity: 1;
-  }
-
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0px); }
-  } */
-/* ===== PREMIUM BACK TO TOP BUTTON ===== */
-.back-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 70px;
-  height: 70px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  z-index: 999;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: all 0.3s ease;
-}
-
-/* Image styling */
-.back-to-top img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-
-  transition: all 0.3s ease;
-}
-
-/* Hover animation */
-.back-to-top:hover img {
-  transform: translateY(-8px) scale(1.1);
-}
-
-/* Click effect */
-.back-to-top:active img {
-  transform: scale(0.9);
-}
+  
   /* ===== RESPONSIVE (additional) ===== */
   @media (max-width: 1024px) {
     .slide-content { max-width: 90%; }
@@ -1480,5 +1403,26 @@
 
 .carousel-control.next:hover img {
   transform: translateX(5px) scale(1.1);
+}
+.hero-image {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.fade-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.fade-img.active {
+  opacity: 1;
 }
 </style>

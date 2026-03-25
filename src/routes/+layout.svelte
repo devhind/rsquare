@@ -4,13 +4,14 @@
 
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import BackToTop from '$lib/components/BackToTop.svelte'; // ✅ ADD THIS
 
 	import { afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
 
 	let { children } = $props();
 
-	// ✅ Smooth scroll after navigation (IMPORTANT)
+	// ✅ Smooth scroll after navigation
 	afterNavigate(() => {
 		if (browser && location.hash) {
 			const el = document.querySelector(location.hash);
@@ -25,13 +26,16 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<!-- ✅ HEADER -->
+<!-- HEADER -->
 <Header />
 
-<!-- ✅ MAIN CONTENT -->
+<!-- MAIN -->
 <main>
 	{@render children()}
 </main>
 
-<!-- ✅ FOOTER -->
+<!-- FOOTER -->
 <Footer />
+
+<!-- 🔥 GLOBAL BUTTON (VISIBLE ON ALL PAGES) -->
+<BackToTop />
