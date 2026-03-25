@@ -123,8 +123,20 @@ onMount(() => {
   <section class="hero section-animate">
     <div class="hero-content">
      <h1>R Square HR Services <span>– a company that cares</span></h1> 
-      <p class="hero-desc">We all know that Management of any organisation needs “7 Ms” like men, materials, machines, methods, morals, minutes and money to perform their functions and achieve their objectives and goals. R SQUARE HR SERVICES is known for contribution towards “men, methods, morals and minutes” ultimately saving machine time, money and enhancing service and profitability.</p>
-      <p class="hero-desc">R SQUARE HR Services (R SQUARE) is an MSME company founded by Shri S N Rao, Former Head-HR of Indian Institute of Management Ahmedabad and Former Chief General Manager, The Gujarat State Civil Supplies Corporation Limited, a public sector enterprise of the Government of Gujarat. During his tenure with GSCSC, Mr. S N Rao and his team were awarded with CSI-Nihilent Award for e-Governance: 2011-12, National Award for e-Governance: 2012-13, and CSI-Nihilent Award for Supply-Logistics using Information & Communication Technology: 2012-13 from the Government of India. R Square is an innovator in HR solutions with strategy consulting and analytics. R Square core focus is to support business operations of the clients to enhance their efficiency and effectiveness and in turn increase overall productivity and profit by providing all possible combinations of HR and IT solutions.</p>
+      <p class="hero-desc">We all know that Management of any organisation needs “7 Ms” like men, materials, machines, methods,
+morals, minutes and money to perform their functions and achieve their objectives and goals. R SQUARE
+HR SERVICES is known for contribution towards “men, methods, morals and minutes” ultimately saving
+machine time, money and enhancing service and profitability.</p>
+      <p class="hero-desc">R SQUARE HR Services (R SQUARE) is an MSME company founded by Shri S N Rao, Former Head-HR
+of Indian Institute of Management Ahmedabad and Former Chief General Manager, The
+Gujarat State Civil Supplies Corporation Limited, a public sector enterprise of the Government of
+Gujarat. During his tenure with GSCSC, Mr. S N Rao and his team were awarded with CSI-Nihilent
+Award for e-Governance: 2011-12, National Award for e-Governance: 2012-13, and CSI-
+Nihilent Award for Supply-Logistics using Information &amp; Communication Technology: 2012-
+13 from the Government of India. R Square is an innovator in HR solutions with strategy consulting
+and analytics. R Square core focus is to support business operations of the clients to enhance their
+efficiency and effectiveness and in turn increase overall productivity and profit by providing all possible
+combinations of HR and IT solutions.</p>
       <div class="hero-buttons">
         <button class="btn-primary btn-large">Explore services</button>
         <button class="btn-outline btn-large">Talk to our expert</button>
@@ -144,8 +156,12 @@ onMount(() => {
   <!-- MISSION & VISION -->
   <section id="mission" class="mission-vision section-animate">
     <h2 class="section-heading">Mission & Vision</h2>
-    <p class="mv-subhead">R SQUARE HR SERVICE’s vision is to emerge as one of the most respected HR services companies in the world anchored on the values of growth, professionalism, dignity and diversity.</p>
-    <p class="mv-subhead">R SQUARE HR promotes learning with humility, serving with dignity and growing with integrity. Members of R SQUARE HR care about customers deeply and deliver best-in-class solutions keeping the interest of all other stakeholders in mind. R SQUARE HR will combine the power of technology with the capability of its members to deliver value to its stakeholders through rigorous execution.</p>
+    <p class="mv-subhead">R SQUARE HR SERVICE’s vision is to emerge as one of the most respected HR services companies in the
+world anchored on the values of growth, professionalism, dignity and diversity.</p>
+    <p class="mv-subhead">R SQUARE HR promotes learning with humility, serving with dignity and growing with integrity. Members
+of R SQUARE HR care about customers deeply and deliver best-in-class solutions keeping the interest of
+all other stakeholders in mind. R SQUARE HR will combine the power of technology with the capability of
+its members to deliver value to its stakeholders through rigorous execution.</p>
     <!-- All other paragraphs from the original go here (keep them) -->
   </section>
 
