@@ -7,9 +7,9 @@
     flex-wrap: wrap;
     gap: 50px;
     background: #1E3A4A;
-    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
+    background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
     width: 100%;
-  background: linear-gradient(135deg, #6B0F9C 0%, #B91372 40%, #B91372 100%);
+    background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
   }
 
   .footer-col p {
@@ -37,7 +37,7 @@
   }
 
   .accent {
-    color: #EFB978;
+    color: #fef00b;
   }
 
   .footer-links {
@@ -85,6 +85,6 @@
     color: #9bb5d4;
     font-size: 14px;
     /* border-top: 1px solid #254b6d; */
-    background: linear-gradient(135deg, #6B0F9C 0%, #B91372  40%, #B91372 100%);
+    background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
   }
   
