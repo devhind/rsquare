@@ -13,9 +13,19 @@
   let mediaOpen = false;
   let moreOpen = false;
   let managementOpen = false;
-  let trainingOpen = false;           // 👈 new dropdown
+  let trainingOpen = false;
 
-  // Toggle functions – each closes the others when opened
+  // Mobile sidebar accordion states
+  let mobileAboutOpen = false;
+  let mobileManagementOpen = false;
+  let mobileServicesOpen = false;
+  let mobileEmployerOpen = false;
+  let mobileJobSeekerOpen = false;
+  let mobileUniversityOpen = false;
+  let mobileTrainingOpen = false;
+  let mobileMediaOpen = false;
+
+  // Toggle functions for desktop dropdowns
   function toggleAbout(e) {
     e.stopPropagation();
     aboutOpen = !aboutOpen;
@@ -100,6 +110,7 @@
     goto('/employer/post-job');
   }
 
+  // Mobile sidebar toggle
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
     document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
@@ -108,6 +119,16 @@
     isMenuOpen = false;
     document.body.style.overflow = 'auto';
   }
+
+  // Mobile accordion toggles
+  function toggleMobileAbout() { mobileAboutOpen = !mobileAboutOpen; }
+  function toggleMobileManagement() { mobileManagementOpen = !mobileManagementOpen; }
+  function toggleMobileServices() { mobileServicesOpen = !mobileServicesOpen; }
+  function toggleMobileEmployer() { mobileEmployerOpen = !mobileEmployerOpen; }
+  function toggleMobileJobSeeker() { mobileJobSeekerOpen = !mobileJobSeekerOpen; }
+  function toggleMobileUniversity() { mobileUniversityOpen = !mobileUniversityOpen; }
+  function toggleMobileTraining() { mobileTrainingOpen = !mobileTrainingOpen; }
+  function toggleMobileMedia() { mobileMediaOpen = !mobileMediaOpen; }
 
   onMount(() => {
     const handleClickOutside = (e) => {
@@ -243,18 +264,18 @@
           {/if}
         </div>
 
-        <!-- University Corner (mega) -->
+        <!-- University Corner -->
         <div class="dropdown-trigger" class:open={universityOpen}>
           <span class="nav-link" on:click={toggleUniversity}>University ▾</span>
           {#if universityOpen}
-             <div class="dropdown">
-              <a href="#">Registartion</a>
+            <div class="dropdown">
+              <a href="#">Registration</a>
               <a href="#">Institute Profile With Brochure Attachment</a>
             </div>
           {/if}
         </div>
 
-        <!-- TRAINING (new dropdown with faculty/student links, no headers) -->
+        <!-- TRAINING -->
         <div class="dropdown-trigger" class:open={trainingOpen}>
           <span class="nav-link" on:click={toggleTraining}>Training ▾</span>
           {#if trainingOpen}
@@ -265,8 +286,8 @@
               <a href="#">Student's Profile with CV</a>
               <a href="#">Registration For Webinar</a>
               <a href="#">Registration For Seminar</a>
-              <a href="#">Registartion For Online Courses</a>
-              <a href="#">Registartion For Offline Courses</a>
+              <a href="#">Registration For Online Courses</a>
+              <a href="#">Registration For Offline Courses</a>
             </div>
           {/if}
         </div>
@@ -323,7 +344,7 @@
   </div>
 </header>
 
-<!-- OVERLAY & SIDEBAR -->
+<!-- OVERLAY & SIDEBAR (with accordion) -->
 <div class="sidebar-overlay" class:open={isMenuOpen} on:click={closeMenu}></div>
 <div class="sidebar" class:open={isMenuOpen}>
   <div class="sidebar-header">
@@ -331,18 +352,173 @@
     <button class="close-sidebar" on:click={closeMenu}>×</button>
   </div>
   <div class="sidebar-nav">
-    <a href="/" on:click={closeMenu}>Home</a>
-    <a href="/about" on:click={closeMenu}>About Us</a>
-    <a href="#" on:click={closeMenu}>Management Team</a>
-    <a href="/services" on:click={closeMenu}>Services</a>
-    <a href="/employers" on:click={closeMenu}>Employer's Corner</a>
-    <a href="/job-seekers" on:click={closeMenu}>Job Seeker's Corner</a>
-    <a href="/university" on:click={closeMenu}>University</a>
-    <a href="#" on:click={closeMenu}>Training</a>              <!-- new mobile link -->
-    <a href="/clients" on:click={closeMenu}>Clients</a>
-    <a href="/media" on:click={closeMenu}>Media</a>
-    <a href="/#contact" on:click={closeMenu}>Contact</a>
+
+    <!-- About Us -->
+    <div class="sidebar-item">
+      <div class="sidebar-link" on:click={toggleMobileAbout}>
+        <span>About Us</span>
+        <span class="arrow">{mobileAboutOpen ? '▾' : '▸'}</span>
+      </div>
+      {#if mobileAboutOpen}
+        <div class="sidebar-sublinks">
+          <a href="/about/introduction" on:click={closeMenu}>Introduction</a>
+          <a href="/about/mission" on:click={closeMenu}>Mission</a>
+          <a href="/about/vision" on:click={closeMenu}>Vision</a>
+          <a href="/about/quality-policy" on:click={closeMenu}>Quality Policy</a>
+        </div>
+      {/if}
+    </div>
+
+    <!-- Management Team -->
+    <div class="sidebar-item">
+      <div class="sidebar-link" on:click={toggleMobileManagement}>
+        <span>Management Team</span>
+        <span class="arrow">{mobileManagementOpen ? '▾' : '▸'}</span>
+      </div>
+      {#if mobileManagementOpen}
+        <div class="sidebar-sublinks">
+          <a href="#" on:click={closeMenu}>S N Rao</a>
+          <a href="#" on:click={closeMenu}>Riddhish Rao</a>
+          <a href="#" on:click={closeMenu}>Resource Team</a>
+        </div>
+      {/if}
+    </div>
+
+    <!-- Services -->
+    <div class="sidebar-item">
+      <div class="sidebar-link" on:click={toggleMobileServices}>
+        <span>Services</span>
+        <span class="arrow">{mobileServicesOpen ? '▾' : '▸'}</span>
+      </div>
+      {#if mobileServicesOpen}
+        <div class="sidebar-sublinks">
+          <a href="#">Consultancy for HR Strategies, Policies & Services</a>
+          <a href="#">Psychometric Test Services</a>
+          <a href="#">Permanent Recruitment Services</a>
+          <a href="#">Recruitment Process Outsourcing</a>
+          <a href="#">Contract Staffing (Workforce Service on Outsourcing basis)</a>
+          <a href="#">National Apprenticeship Training Scheme (NATS)</a>
+          <a href="#">National Apprenticeship Promotion Scheme (NAPS)</a>
+          <a href="#">Functional HR Services on Outsourcing basis</a>
+          <a href="#">Payroll Outsourcing</a>
+          <a href="#">Legal Compliance (HR related)</a>
+          <a href="#">Third Party Auditor for HR Services</a>
+          <a href="#">Employment Background Verification</a>
+          <a href="#">Advisory Services on Business Reforms & Improvement</a>
+          <a href="#">Training & Development</a>
+          <a href="#">Training on RTI and Legal Services under RTI</a>
+          <a href="#">Training on PoSH</a>
+          <a href="#">Training on New Labour Laws</a>
+          <a href="#">Tourism Specific Solutions & Services</a>
+          <a href="#">Supporting CSR Activity</a>
+          <a href="#">Collaborating with various institutions</a>
+          <a href="#">Cultural Activities (musical programs, films, Gujarati serials, drama etc.)</a>
+          <a href="#">IT Consultancy & solutions</a>
+        </div>
+      {/if}
+    </div>
+
+    <!-- Employer's Corner -->
+    <div class="sidebar-item">
+      <div class="sidebar-link" on:click={toggleMobileEmployer}>
+        <span>Employers</span>
+        <span class="arrow">{mobileEmployerOpen ? '▾' : '▸'}</span>
+      </div>
+      {#if mobileEmployerOpen}
+        <div class="sidebar-sublinks">
+          <a href="#">Registration</a>
+          <a href="#">Company Profile</a>
+          <a href="#">Change Password</a>
+          <a href="#">Free Job Posting</a>
+          <a href="#">Resume Search</a>
+          <a href="#">Recruitment Packages for Employer</a>
+          <a href="#">Consultant Membership Plan</a>
+          <a href="#">Search Consultant</a>
+        </div>
+      {/if}
+    </div>
+
+    <!-- Job Seeker's Corner -->
+    <div class="sidebar-item">
+      <div class="sidebar-link" on:click={toggleMobileJobSeeker}>
+        <span>Job Seekers</span>
+        <span class="arrow">{mobileJobSeekerOpen ? '▾' : '▸'}</span>
+      </div>
+      {#if mobileJobSeekerOpen}
+        <div class="sidebar-sublinks">
+          <a href="#">Registration</a>
+          <a href="#">Job Seeker's Profile with CV Attachment</a>
+          <a href="#">My Profile (Registration with Mobile/Email – OTP)</a>
+          <a href="#">Jobs by Type</a>
+          <a href="#">Jobs by City</a>
+          <a href="#">Jobs by Department</a>
+          <a href="#">Jobs by Qualification</a>
+          <a href="#">Jobs by Role</a>
+          <a href="#">Jobs by Skill</a>
+          <a href="#">Jobs by Company</a>
+          <a href="#">Jobs by Employer Type (Direct/Consultant)</a>
+        </div>
+      {/if}
+    </div>
+
+    <!-- University -->
+    <div class="sidebar-item">
+      <div class="sidebar-link" on:click={toggleMobileUniversity}>
+        <span>University</span>
+        <span class="arrow">{mobileUniversityOpen ? '▾' : '▸'}</span>
+      </div>
+      {#if mobileUniversityOpen}
+        <div class="sidebar-sublinks">
+          <a href="#">Registration</a>
+          <a href="#">Institute Profile With Brochure Attachment</a>
+        </div>
+      {/if}
+    </div>
+
+    <!-- Training -->
+    <div class="sidebar-item">
+      <div class="sidebar-link" on:click={toggleMobileTraining}>
+        <span>Training</span>
+        <span class="arrow">{mobileTrainingOpen ? '▾' : '▸'}</span>
+      </div>
+      {#if mobileTrainingOpen}
+        <div class="sidebar-sublinks">
+          <a href="#">Faculty Registration</a>
+          <a href="#">Faculty's Profile with CV</a>
+          <a href="#">Student Registration</a>
+          <a href="#">Student's Profile with CV</a>
+          <a href="#">Registration For Webinar</a>
+          <a href="#">Registration For Seminar</a>
+          <a href="#">Registration For Online Courses</a>
+          <a href="#">Registration For Offline Courses</a>
+        </div>
+      {/if}
+    </div>
+
+    <!-- Clients -->
+    <a href="/clients" class="sidebar-link simple" on:click={closeMenu}>Clients</a>
+
+    <!-- Media -->
+    <div class="sidebar-item">
+      <div class="sidebar-link" on:click={toggleMobileMedia}>
+        <span>Media</span>
+        <span class="arrow">{mobileMediaOpen ? '▾' : '▸'}</span>
+      </div>
+      {#if mobileMediaOpen}
+        <div class="sidebar-sublinks">
+          <a href="#">Announcements</a>
+          <a href="#">News</a>
+          <a href="#">Photographs</a>
+          <a href="#">Videos</a>
+        </div>
+      {/if}
+    </div>
+
+    <!-- Contact -->
+    <a href="/#contact" class="sidebar-link simple" on:click={closeMenu}>Contact</a>
+
   </div>
+
   <div class="sidebar-buttons">
     <button class="btn-header btn-register" on:click={() => { goToRegistration(); closeMenu(); }}>Registration</button>
     <button class="btn-header btn-post" on:click={() => { goToPostJob(); closeMenu(); }}>Post Job</button>
