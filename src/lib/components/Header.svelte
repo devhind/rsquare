@@ -5,15 +5,13 @@
   // Menu and dropdown states
   let isMenuOpen = false;
   let showActions = false;
-  let aboutOpen = false;
-  let servicesOpen = false;
-  let employerOpen = false;
-  let jobSeekerOpen = false;
-  let universityOpen = false;
-  let mediaOpen = false;
-  let moreOpen = false;
-  let managementOpen = false;
-  let trainingOpen = false;
+
+  // Desktop dropdown – track which dropdown is currently open (or null)
+  let activeDropdown = null;
+
+  // Timeout variables for hover delays
+  let openTimeout = null;
+  let closeTimeout = null;
 
   // Mobile sidebar accordion states
   let mobileAboutOpen = false;
@@ -25,88 +23,75 @@
   let mobileTrainingOpen = false;
   let mobileMediaOpen = false;
 
-  // Toggle functions for desktop dropdowns
-  function toggleAbout(e) {
-    e.stopPropagation();
-    aboutOpen = !aboutOpen;
-    if (aboutOpen) {
-      servicesOpen = employerOpen = jobSeekerOpen = universityOpen = mediaOpen = moreOpen = managementOpen = trainingOpen = showActions = false;
+  // ----- Desktop hover logic -----
+  function setActiveWithDelay(dropdown) {
+    if (closeTimeout) clearTimeout(closeTimeout);
+    if (openTimeout) clearTimeout(openTimeout);
+    if (activeDropdown === dropdown) return;
+    openTimeout = setTimeout(() => {
+      activeDropdown = dropdown;
+      openTimeout = null;
+    }, 150); // 150ms delay before opening
+  }
+
+  function scheduleClose() {
+    if (openTimeout) clearTimeout(openTimeout);
+    if (closeTimeout) clearTimeout(closeTimeout);
+    closeTimeout = setTimeout(() => {
+      activeDropdown = null;
+      closeTimeout = null;
+    }, 200); // 200ms delay before closing
+  }
+
+  // Called when mouse enters the dropdown content – cancel close, and if still in open delay, open immediately
+  function cancelCloseAndOpenImmediately(dropdown) {
+    if (closeTimeout) clearTimeout(closeTimeout);
+    if (openTimeout) {
+      clearTimeout(openTimeout);
+      activeDropdown = dropdown;
+      openTimeout = null;
     }
   }
-  function toggleServices(e) {
-    e.stopPropagation();
-    servicesOpen = !servicesOpen;
-    if (servicesOpen) {
-      aboutOpen = employerOpen = jobSeekerOpen = universityOpen = mediaOpen = moreOpen = managementOpen = trainingOpen = showActions = false;
-    }
+
+  // Called when mouse leaves the dropdown content – schedule close
+  function onDropdownLeave() {
+    scheduleClose();
   }
-  function toggleEmployer(e) {
-    e.stopPropagation();
-    employerOpen = !employerOpen;
-    if (employerOpen) {
-      aboutOpen = servicesOpen = jobSeekerOpen = universityOpen = mediaOpen = moreOpen = managementOpen = trainingOpen = showActions = false;
-    }
+
+  // Called when mouse leaves the trigger – schedule close
+  function onTriggerLeave() {
+    scheduleClose();
   }
-  function toggleJobSeeker(e) {
-    e.stopPropagation();
-    jobSeekerOpen = !jobSeekerOpen;
-    if (jobSeekerOpen) {
-      aboutOpen = servicesOpen = employerOpen = universityOpen = mediaOpen = moreOpen = managementOpen = trainingOpen = showActions = false;
-    }
+
+  // Called when mouse enters the trigger – open with delay
+  function onTriggerEnter(dropdown) {
+    setActiveWithDelay(dropdown);
   }
-  function toggleUniversity(e) {
-    e.stopPropagation();
-    universityOpen = !universityOpen;
-    if (universityOpen) {
-      aboutOpen = servicesOpen = employerOpen = jobSeekerOpen = mediaOpen = moreOpen = managementOpen = trainingOpen = showActions = false;
-    }
+
+  // Helper to close all desktop dropdowns immediately
+  function closeAll() {
+    if (openTimeout) clearTimeout(openTimeout);
+    if (closeTimeout) clearTimeout(closeTimeout);
+    activeDropdown = null;
+    showActions = false;
   }
-  function toggleMedia(e) {
-    e.stopPropagation();
-    mediaOpen = !mediaOpen;
-    if (mediaOpen) {
-      aboutOpen = servicesOpen = employerOpen = jobSeekerOpen = universityOpen = moreOpen = managementOpen = trainingOpen = showActions = false;
-    }
-  }
-  function toggleMore(e) {
-    e.stopPropagation();
-    moreOpen = !moreOpen;
-    if (moreOpen) {
-      aboutOpen = servicesOpen = employerOpen = jobSeekerOpen = universityOpen = mediaOpen = managementOpen = trainingOpen = showActions = false;
-    }
-  }
-  function toggleManagement(e) {
-    e.stopPropagation();
-    managementOpen = !managementOpen;
-    if (managementOpen) {
-      aboutOpen = servicesOpen = employerOpen = jobSeekerOpen = universityOpen = mediaOpen = moreOpen = trainingOpen = showActions = false;
-    }
-  }
-  function toggleTraining(e) {
-    e.stopPropagation();
-    trainingOpen = !trainingOpen;
-    if (trainingOpen) {
-      aboutOpen = servicesOpen = employerOpen = jobSeekerOpen = universityOpen = mediaOpen = moreOpen = managementOpen = showActions = false;
-    }
-  }
+
+  // Action button (click toggles)
   function toggleActions(e) {
     e.stopPropagation();
     showActions = !showActions;
     if (showActions) {
-      aboutOpen = servicesOpen = employerOpen = jobSeekerOpen = universityOpen = mediaOpen = moreOpen = managementOpen = trainingOpen = false;
+      activeDropdown = null; // close any open nav dropdown
     }
   }
 
-  function closeAll() {
-    aboutOpen = servicesOpen = employerOpen = jobSeekerOpen = universityOpen = mediaOpen = moreOpen = managementOpen = trainingOpen = showActions = false;
-  }
-
+  // Navigation functions
   function goToRegistration(e) {
-    e.stopPropagation();
+    e?.stopPropagation();
     goto('/Employer-Registration');
   }
   function goToPostJob(e) {
-    e.stopPropagation();
+    e?.stopPropagation();
     goto('/employer/post-job');
   }
 
@@ -130,12 +115,27 @@
   function toggleMobileTraining() { mobileTrainingOpen = !mobileTrainingOpen; }
   function toggleMobileMedia() { mobileMediaOpen = !mobileMediaOpen; }
 
+  // Close on Escape key
+  function handleKeydown(e) {
+    if (e.key === 'Escape') {
+      closeAll();
+      if (isMenuOpen) closeMenu();
+    }
+  }
+
+  // Click outside to close dropdowns
   onMount(() => {
     const handleClickOutside = (e) => {
-      if (!e.target.closest('.dropdown-trigger')) closeAll();
+      if (!e.target.closest('.dropdown-trigger') && !e.target.closest('.action-wrapper')) {
+        closeAll();
+      }
     };
     document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    document.addEventListener('keydown', handleKeydown);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('keydown', handleKeydown);
+    };
   });
 </script>
 
@@ -144,7 +144,7 @@
     <div class="navbar">
 
       <!-- LOGO -->
-      <div class="logo-container" on:click={() => goto('/')}>
+      <div class="logo-container" on:click={() => { closeAll(); goto('/'); }}>
         <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square HR" />
         <span class="logo-text">R SQUARE <span class="logo-hr">HR Services</span></span>
       </div>
@@ -153,10 +153,18 @@
       <nav class="nav-links desktop-only">
 
         <!-- About Us -->
-        <div class="dropdown-trigger" class:open={aboutOpen}>
-          <span class="nav-link" on:click={toggleAbout}>About Us ▾</span>
-          {#if aboutOpen}
-            <div class="dropdown">
+        <div
+          class="dropdown-trigger"
+          on:mouseenter={() => onTriggerEnter('about')}
+          on:mouseleave={onTriggerLeave}
+        >
+          <span class="nav-link">About Us ▾</span>
+          {#if activeDropdown === 'about'}
+            <div
+              class="dropdown"
+              on:mouseenter={() => cancelCloseAndOpenImmediately('about')}
+              on:mouseleave={onDropdownLeave}
+            >
               <a href="/about/introduction">Introduction</a>
               <a href="/about/mission">Mission</a>
               <a href="/about/vision">Vision</a>
@@ -166,10 +174,18 @@
         </div>
 
         <!-- MANAGEMENT TEAM -->
-        <div class="dropdown-trigger" class:open={managementOpen}>
-          <span class="nav-link" on:click={toggleManagement}>Management Team ▾</span>
-          {#if managementOpen}
-            <div class="dropdown">
+        <div
+          class="dropdown-trigger"
+          on:mouseenter={() => onTriggerEnter('management')}
+          on:mouseleave={onTriggerLeave}
+        >
+          <span class="nav-link">Management Team ▾</span>
+          {#if activeDropdown === 'management'}
+            <div
+              class="dropdown"
+              on:mouseenter={() => cancelCloseAndOpenImmediately('management')}
+              on:mouseleave={onDropdownLeave}
+            >
               <a href="#">S N Rao</a>
               <a href="#">Riddhish Rao</a>
               <a href="#">Resource Team</a>
@@ -178,10 +194,18 @@
         </div>
 
         <!-- Services (mega dropdown) -->
-        <div class="dropdown-trigger" class:open={servicesOpen}>
-          <span class="nav-link" on:click={toggleServices}>Services ▾</span>
-          {#if servicesOpen}
-            <div class="dropdown mega-dropdown">
+        <div
+          class="dropdown-trigger"
+          on:mouseenter={() => onTriggerEnter('services')}
+          on:mouseleave={onTriggerLeave}
+        >
+          <span class="nav-link">Services ▾</span>
+          {#if activeDropdown === 'services'}
+            <div
+              class="dropdown mega-dropdown"
+              on:mouseenter={() => cancelCloseAndOpenImmediately('services')}
+              on:mouseleave={onDropdownLeave}
+            >
               <div class="mega-columns">
                 <div class="mega-column">
                   <h4>Core HR</h4>
@@ -220,10 +244,18 @@
         </div>
 
         <!-- Employer's Corner -->
-        <div class="dropdown-trigger" class:open={employerOpen}>
-          <span class="nav-link" on:click={toggleEmployer}>Employers ▾</span>
-          {#if employerOpen}
-            <div class="dropdown">
+        <div
+          class="dropdown-trigger"
+          on:mouseenter={() => onTriggerEnter('employer')}
+          on:mouseleave={onTriggerLeave}
+        >
+          <span class="nav-link">Employers ▾</span>
+          {#if activeDropdown === 'employer'}
+            <div
+              class="dropdown"
+              on:mouseenter={() => cancelCloseAndOpenImmediately('employer')}
+              on:mouseleave={onDropdownLeave}
+            >
               <a href="#">Registration</a>
               <a href="#">Company Profile</a>
               <a href="#">Change Password</a>
@@ -237,10 +269,18 @@
         </div>
 
         <!-- Job Seeker's Corner (mega) -->
-        <div class="dropdown-trigger" class:open={jobSeekerOpen}>
-          <span class="nav-link" on:click={toggleJobSeeker}>Job Seekers ▾</span>
-          {#if jobSeekerOpen}
-            <div class="dropdown mega-dropdown">
+        <div
+          class="dropdown-trigger"
+          on:mouseenter={() => onTriggerEnter('jobSeeker')}
+          on:mouseleave={onTriggerLeave}
+        >
+          <span class="nav-link">Job Seekers ▾</span>
+          {#if activeDropdown === 'jobSeeker'}
+            <div
+              class="dropdown mega-dropdown"
+              on:mouseenter={() => cancelCloseAndOpenImmediately('jobSeeker')}
+              on:mouseleave={onDropdownLeave}
+            >
               <div class="mega-columns">
                 <div class="mega-column">
                   <h4>Registration</h4>
@@ -265,10 +305,18 @@
         </div>
 
         <!-- University Corner -->
-        <div class="dropdown-trigger" class:open={universityOpen}>
-          <span class="nav-link" on:click={toggleUniversity}>University ▾</span>
-          {#if universityOpen}
-            <div class="dropdown">
+        <div
+          class="dropdown-trigger"
+          on:mouseenter={() => onTriggerEnter('university')}
+          on:mouseleave={onTriggerLeave}
+        >
+          <span class="nav-link">University ▾</span>
+          {#if activeDropdown === 'university'}
+            <div
+              class="dropdown"
+              on:mouseenter={() => cancelCloseAndOpenImmediately('university')}
+              on:mouseleave={onDropdownLeave}
+            >
               <a href="#">Registration</a>
               <a href="#">Institute Profile With Brochure Attachment</a>
             </div>
@@ -276,10 +324,18 @@
         </div>
 
         <!-- TRAINING -->
-        <div class="dropdown-trigger" class:open={trainingOpen}>
-          <span class="nav-link" on:click={toggleTraining}>Training ▾</span>
-          {#if trainingOpen}
-            <div class="dropdown">
+        <div
+          class="dropdown-trigger"
+          on:mouseenter={() => onTriggerEnter('training')}
+          on:mouseleave={onTriggerLeave}
+        >
+          <span class="nav-link">Training ▾</span>
+          {#if activeDropdown === 'training'}
+            <div
+              class="dropdown"
+              on:mouseenter={() => cancelCloseAndOpenImmediately('training')}
+              on:mouseleave={onDropdownLeave}
+            >
               <a href="#">Faculty Registration</a>
               <a href="#">Faculty's Profile with CV</a>
               <a href="#">Student Registration</a>
@@ -293,13 +349,21 @@
         </div>
 
         <!-- Clients (simple link) -->
-        <a href="/clients" class="nav-link">Clients</a>
+        <a href="/clients" class="nav-link" on:click={closeAll}>Clients</a>
 
         <!-- Media dropdown -->
-        <div class="dropdown-trigger" class:open={mediaOpen}>
-          <span class="nav-link" on:click={toggleMedia}>Media ▾</span>
-          {#if mediaOpen}
-            <div class="dropdown">
+        <div
+          class="dropdown-trigger"
+          on:mouseenter={() => onTriggerEnter('media')}
+          on:mouseleave={onTriggerLeave}
+        >
+          <span class="nav-link">Media ▾</span>
+          {#if activeDropdown === 'media'}
+            <div
+              class="dropdown"
+              on:mouseenter={() => cancelCloseAndOpenImmediately('media')}
+              on:mouseleave={onDropdownLeave}
+            >
               <a href="#">Announcements</a>
               <a href="#">News</a>
               <a href="#">Photographs</a>
@@ -309,11 +373,11 @@
         </div>
 
         <!-- Contact (simple link) -->
-        <a href="/#contact" class="nav-link">Contact</a>
+        <a href="/#contact" class="nav-link" on:click={closeAll}>Contact</a>
 
       </nav>
 
-      <!-- ACTION ICON (Registration / Post Job) -->
+      <!-- ACTION ICON (Registration / Post Job) – click only -->
       <div class="header-buttons desktop-only">
         <div class="action-wrapper">
           <div class="icon-trigger" on:click={toggleActions}>
@@ -344,7 +408,7 @@
   </div>
 </header>
 
-<!-- OVERLAY & SIDEBAR (with accordion) -->
+<!-- OVERLAY & SIDEBAR (unchanged) -->
 <div class="sidebar-overlay" class:open={isMenuOpen} on:click={closeMenu}></div>
 <div class="sidebar" class:open={isMenuOpen}>
   <div class="sidebar-header">
