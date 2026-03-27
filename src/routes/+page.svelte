@@ -120,7 +120,7 @@ onMount(() => {
 <!-- MAIN CONTENT (everything below is exactly as in your original) -->
 <main class="site-container">
   <!-- HERO -->
-  <section class="hero section-animate">
+  <section id="introduction" class="hero section-animate">
     <div class="hero-content">
      <h1>R Square HR Services <span>– a company that cares</span></h1> 
       <p class="hero-desc">We all know that Management of any organisation needs “7 Ms” like men, materials, machines, methods,

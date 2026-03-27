@@ -137,6 +137,19 @@
       document.removeEventListener('keydown', handleKeydown);
     };
   });
+  function scrollToSection(id) {
+  goto('/').then(() => {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        const yOffset = -120; // adjust this
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }, 100);
+  });
+}
 </script>
 
 <header class="header-fixed">
@@ -165,10 +178,10 @@
               on:mouseenter={() => cancelCloseAndOpenImmediately('about')}
               on:mouseleave={onDropdownLeave}
             >
-              <a href="#">Introduction</a>
-              <a href="#">Mission</a>
-              <a href="#">Vision</a>
-              <a href="#">Quality Policy</a>
+              <a href="/#introduction">Introduction</a>
+              <a href="/#mission">Mission</a>
+              <a href="/#mission">Vision</a>
+              <a href="/#quality">Quality Policy</a>
             </div>
           {/if}
         </div>
@@ -186,9 +199,11 @@
               on:mouseenter={() => cancelCloseAndOpenImmediately('management')}
               on:mouseleave={onDropdownLeave}
             >
-              <a href="#">S N Rao</a>
-              <a href="#">Riddhish Rao</a>
-              <a href="#">Resource Team</a>
+              <a href="/Navigation_link_pages/Management_Team#sn-rao">S N Rao</a>
+
+<a href="/Navigation_link_pages/Management_Team#riddhish-rao">Riddhish Rao</a>
+
+<a href="/Navigation_link_pages/Management_Team#resource-team">Resource Team</a>
             </div>
           {/if}
         </div>
@@ -209,34 +224,53 @@
               <div class="mega-columns">
                 <div class="mega-column">
                   <h4>Core HR</h4>
-                  <a href="#">Consultancy for HR Strategies, Policies & Services</a>
-                  <a href="#">Psychometric Test Services</a>
-                  <a href="#">Permanent Recruitment Services</a>
-                  <a href="#">Recruitment Process Outsourcing</a>
-                  <a href="#">Contract Staffing (Workforce Service on Outsourcing basis)</a>
-                  <a href="#">National Apprenticeship Training Scheme (NATS)</a>
-                  <a href="#">National Apprenticeship Promotion Scheme (NAPS)</a>
-                  <a href="#">Functional HR Services on Outsourcing basis</a>
-                  <a href="#">Payroll Outsourcing</a>
-                  <a href="#">Legal Compliance (HR related)</a>
+                  <a href="/Navigation_link_pages/Services#hr-advisory">Consultancy for HR Strategies, Policies & Services</a>
+
+<a href="/Navigation_link_pages/Services#psychometric">Psychometric Test Services </a>
+
+<a href="/Navigation_link_pages/Services#permanent-recruitment">Permanent Recruitment Services</a>
+
+<a href="/Navigation_link_pages/Services#rpo">Recruitment Process Outsourcing</a>
+
+<a href="/Navigation_link_pages/Services#contract-staffing">Contract Staffing (Workforce Service on Outsourcing basis)</a>
+
+<a href="/Navigation_link_pages/Services#nats">National Apprenticeship Training Scheme (NATS) </a>
+
+<a href="/Navigation_link_pages/Services#naps">National Apprenticeship Promotion Scheme (NAPS) </a>
+
+<a href="/Navigation_link_pages/Services#functional-hr">Functional HR Services on Outsourcing basis </a>
+
+<a href="/Navigation_link_pages/Services#payroll">Payroll Outsourcing</a>
+
+<a href="/Navigation_link_pages/Services#legal-compliance">Legal Compliance</a>
                 </div>
                 <div class="mega-column">
                   <h4>Advisory & Training</h4>
-                  <a href="#">Third Party Auditor for HR Services</a>
-                  <a href="#">Employment Background Verification</a>
-                  <a href="#">Advisory Services on Business Reforms & Improvement</a>
-                  <a href="#">Training & Development</a>
-                  <a href="#">Training on RTI and Legal Services under RTI</a>
-                  <a href="#">Training on PoSH</a>
-                  <a href="#">Training on New Labour Laws</a>
+                 <a href="/Navigation_link_pages/Services#third-party-auditor">Third Party Auditor for HR Services</a>
+
+<a href="/Navigation_link_pages/Services#background-verification">Employment Background Verification</a>
+
+<a href="/Navigation_link_pages/Services#business-reforms">Advisory Services on Business Reforms & Improvement</a>
+
+<a href="/Navigation_link_pages/Services#training">Training & Development</a>
+
+<a href="/Navigation_link_pages/Services#rti">Training on RTI and Legal Services under RTI</a>
+
+<a href="/Navigation_link_pages/Services#posh">Training on Prevention of Sexual Harassment (PoSH) Act</a>
+
+<a href="/Navigation_link_pages/Services#labour-codes">Training on New Labour Codes</a>
                 </div>
                 <div class="mega-column">
                   <h4>Specialized</h4>
-                  <a href="#">Tourism Specific Solutions & Services</a>
-                  <a href="#">Supporting CSR Activity</a>
-                  <a href="#">Collaborating with various institutions</a>
-                  <a href="#">Cultural Activities (musical programs, films, Gujarati serials, drama etc.)</a>
-                  <a href="#">IT Consultancy & solutions</a>
+                  <a href="/Navigation_link_pages/Services#tourism">Tourism Specific Solutions & Services</a>
+
+<a href="/Navigation_link_pages/Services#csr">Supporting CSR Activity</a>
+
+<a href="/Navigation_link_pages/Services#collaborations">Collaborating with various institutions</a>
+
+<a href="/Navigation_link_pages/Services#cultural">Cultural Activities (musical programs, films, Gujarati serials, drama etc.)</a>
+
+<a href="/Navigation_link_pages/Services#it-consultancy">IT Consultancy & solutions</a>
                 </div>
               </div>
             </div>

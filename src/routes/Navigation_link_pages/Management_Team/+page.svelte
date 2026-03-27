@@ -50,7 +50,8 @@
   </div>
 
   <!-- S N RAO -->
-  <div class="profile-card tilt-card reveal">
+  <!-- S N RAO -->
+<div id="sn-rao" class="profile-card tilt-card reveal">
     <div class="profile-header">
       <div class="avatar">
         <img src="/images/sn-rao.jpg" alt="S N Rao" on:error={(e) => e.target.style.display = 'none'} />
@@ -123,8 +124,8 @@
     </button>
   </div>
 
-  <!-- RIDDHISH RAO -->
-  <div class="profile-card tilt-card reveal">
+<!-- RIDDHISH -->
+<div id="riddhish-rao" class="profile-card tilt-card reveal">
     <div class="profile-header">
       <div class="avatar">
         <img src="/images/riddhish-rao.jpg" alt="Riddhish Rao" on:error={(e) => e.target.style.display = 'none'} />
@@ -176,7 +177,8 @@
   </div>
 
   <!-- RESOURCE TEAM -->
-  <div class="team-section reveal">
+ <!-- RESOURCE TEAM -->
+<div id="resource-team" class="team-section reveal">
     <h2>Our Resource Team</h2>
     <p>Dedicated professionals across diverse domains ensuring excellence.</p>
     <div class="team-grid">
