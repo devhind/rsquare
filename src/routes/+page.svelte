@@ -164,6 +164,15 @@ all other stakeholders in mind. R SQUARE HR will combine the power of technology
 its members to deliver value to its stakeholders through rigorous execution.</p>
     <!-- All other paragraphs from the original go here (keep them) -->
   </section>
+  <!-- QUALITY POLICY -->
+<section id="quality" class="quality-policy section-animate">
+  <div class="policy-card">
+    <h2 class="section-heading">Quality Policy</h2>
+    <p class="policy-text">
+      We at R SQUARE HR SERVICES are committed to partner with our customers in providing reliable recruitment and staffing services and enhancing customer satisfaction of all stakeholders (clients, candidates, deputees, partners, members) in the business through continual improvement in our Quality Management System.
+    </p>
+  </div>
+</section>
 
   <!-- SERVICES -->
   <section id="services" class="services section-animate">
@@ -1440,5 +1449,109 @@ its members to deliver value to its stakeholders through rigorous execution.</p>
 
 .fade-img.active {
   opacity: 1;
+}
+/* ===== QUALITY POLICY (FIXED) ===== */
+.quality-policy {
+  margin: 60px 0;
+}
+
+.policy-card {
+  position: relative;
+  background: linear-gradient(145deg, #ffffff, #f9f4ed);
+  border-radius: 48px;
+  padding: 48px 56px;
+  transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  border: 1px solid rgba(239, 185, 120, 0.3);
+  box-shadow: 0 20px 40px -12px rgba(30, 58, 74, 0.15);
+  overflow: hidden;
+}
+
+/* Animated gradient border on hover */
+.policy-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 48px;
+  padding: 2px;
+  background: linear-gradient(135deg, #0066ff, #EFB978, #D96C4E);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.policy-card:hover::before {
+  opacity: 1;
+}
+
+.policy-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 50px -15px rgba(30, 58, 74, 0.25);
+  border-color: rgba(239, 185, 120, 0.6);
+}
+
+/* The heading is already .section-heading, but we can add extra polish */
+.policy-card .section-heading {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 28px;
+}
+
+/* Optional: add a small icon before heading (uncomment if you want it) */
+/* .policy-card .section-heading::before {
+  content: "⭐";
+  position: absolute;
+  left: -40px;
+  top: 8px;
+  font-size: 1.2rem;
+  color: #EFB978;
+} */
+
+.policy-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a5a6b;
+  text-align: justify;
+  margin: 24px 0 0;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+}
+
+/* Scroll animation (reuses .section-animate) */
+.quality-policy.section-visible .policy-card {
+  animation: qualitySlideUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+@keyframes qualitySlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 820px) {
+  .policy-card {
+    padding: 36px 32px;
+  }
+  .policy-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .policy-card {
+    padding: 28px 20px;
+    border-radius: 32px;
+  }
+  .policy-text {
+    font-size: 0.95rem;
+  }
 }
 </style>

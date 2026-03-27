@@ -165,10 +165,10 @@
               on:mouseenter={() => cancelCloseAndOpenImmediately('about')}
               on:mouseleave={onDropdownLeave}
             >
-              <a href="/about/introduction">Introduction</a>
-              <a href="/about/mission">Mission</a>
-              <a href="/about/vision">Vision</a>
-              <a href="/about/quality-policy">Quality Policy</a>
+              <a href="#">Introduction</a>
+              <a href="#">Mission</a>
+              <a href="#">Vision</a>
+              <a href="#">Quality Policy</a>
             </div>
           {/if}
         </div>
