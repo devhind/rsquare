@@ -155,12 +155,12 @@
     <div class="navbar">
       <!-- LOGO -->
       <div class="logo-container" on:click={() => { closeAll(); goto('/'); }}>
-        <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square HR" />
-        <div class="logo-text">R SQUARE
-          <div class="logo-hr">HR Services</div>
-        </div>
+        <img class="logo-img" src="/images/LOGO.jpg" alt="R Square HR" />        
       </div>
-
+      <div class="logo-text">R&nbsp;SQUARE
+          <div class="logo-hr">HR&nbsp; Services</div>
+      </div>
+      
       <!-- DESKTOP NAVIGATION -->
       <nav class="nav-links desktop-only">
 
