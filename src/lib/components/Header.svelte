@@ -265,7 +265,7 @@
           on:mouseenter={() => onTriggerEnter('management')}
           on:mouseleave={onTriggerLeave}
         >
-          <span class="nav-link">Management Team ▾</span>
+          <span class="nav-link">Team ▾</span>
           {#if activeDropdown === 'management'}
             <div
               class="dropdown"

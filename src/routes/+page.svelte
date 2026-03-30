@@ -307,7 +307,7 @@ its members to deliver value to its stakeholders through rigorous execution.</p>
 </section>
 
   <!-- CAROUSEL -->
-  <section class="carousel-section section-animate">
+  <!-- <section class="carousel-section section-animate">
     <h2 class="section-heading">Success stories in action</h2>
     <p class="section-subhead">Real impact – from tourist guides to large‑scale training programs.</p>
     <div class="carousel-container" on:mouseenter={stopAuto} on:mouseleave={startAuto}>
@@ -334,7 +334,7 @@ its members to deliver value to its stakeholders through rigorous execution.</p>
         {/each}
       </div>
     </div>
-    </section>
+    </section> -->
   
   <!-- PARTNERS -->
   <section class="partners section-animate">

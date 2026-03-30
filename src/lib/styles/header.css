@@ -1,5 +1,10 @@
 /* ===================== BASE HEADER STYLES ===================== */
 
+body{
+
+    margin:0px;
+
+}
 
 .header-fixed {
   position: fixed;
@@ -12,6 +17,7 @@
   z-index: 1000;
   border-bottom: 1px solid rgba(239, 185, 120, 0.3);
   transition: box-shadow 0.3s ease;
+  height: 95px;
 }
 
 .header-fixed:hover {
@@ -65,8 +71,9 @@
   color: white;
   letter-spacing: -0.5px;
   text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  position: relative;
+  right: 37px;
 }
-
 .logo-hr {
   color: #EFB978;
   font-weight: 600;
@@ -86,6 +93,8 @@
   font-weight: 500;
   flex-wrap: nowrap;
   align-items: center;
+  position: relative;
+  right: 34px;
 }
 
 .dropdown-trigger {
@@ -564,6 +573,7 @@
   }
   .header-fixed {
     backdrop-filter: blur(4px);
+
   }
 }
 
