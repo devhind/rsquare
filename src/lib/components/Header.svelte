@@ -144,18 +144,15 @@
       if (el) {
         const yOffset = -120; // adjust this
         const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
     }, 100);
   });
 }
 </script>
-
 <header class="header-fixed">
   <div class="header-container">
     <div class="navbar">
-
       <!-- LOGO -->
       <div class="logo-container" on:click={() => { closeAll(); goto('/'); }}>
         <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square HR" />
@@ -171,8 +168,8 @@
         <div
           class="dropdown-trigger"
           on:mouseenter={() => onTriggerEnter('about')}
-          on:mouseleave={onTriggerLeave}
-        >
+          on:mouseleave={onTriggerLeave}>
+
           <span class="nav-link">About Us ▾</span>
           {#if activeDropdown === 'about'}
             <div
