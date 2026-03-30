@@ -518,7 +518,7 @@
 <!-- OVERLAY & SIDEBAR (unchanged) -->
 <div class="sidebar" class:open={isMenuOpen}>
   <div class="sidebar-header">
-    <img src="/images/LOGO_PDF_invertedColor_page-0001.jpg" class="sidebar-logo" alt="R Square HR" />
+    <img src="/images/LOGO.jpg" class="sidebar-logo" alt="R Square HR" />
     <button class="close-sidebar" on:click={closeMenu}>×</button>
   </div>
   <div class="sidebar-nav">
