@@ -159,7 +159,9 @@
       <!-- LOGO -->
       <div class="logo-container" on:click={() => { closeAll(); goto('/'); }}>
         <img class="logo-img" src="/images/LOGO_PDF_invertedColor_page-0001.jpg" alt="R Square HR" />
-        <span class="logo-text">R SQUARE <span class="logo-hr">HR Services</span></span>
+        <div class="logo-text">R SQUARE
+          <div class="logo-hr">HR Services</div>
+        </div>
       </div>
 
       <!-- DESKTOP NAVIGATION -->
