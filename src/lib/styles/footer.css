@@ -5,20 +5,19 @@
   margin-top: 60px;
 }
 
-/* Center the entire footer content horizontally */
+/* Default (desktop) – centered layout */
 .footer-inner {
-  max-width: 1200px;          /* or 1440px – adjust as needed */
-  margin: 0 auto;             /* centers the block */
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 56px 32px 32px;
   display: flex;
-  justify-content: center;    /* centers children horizontally */
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 80px;                  /* space between logo and links */
+  gap: 80px;
 }
 
-/* Left column – logo + description */
 .footer-col {
-  flex: 0 1 auto;            /* no stretching, takes content width */
+  flex: 0 1 auto;
   min-width: 240px;
 }
 
@@ -64,12 +63,11 @@
   margin: 0;
 }
 
-/* Right column – links (hover effects enabled) */
 .footer-links {
   display: flex;
-  gap: 60px;
+  /* gap: 60px; */
   flex-wrap: wrap;
-  flex: 0 1 auto;            /* takes content width */
+  flex: 0 1 auto;
 }
 
 .footer-links div {
@@ -111,7 +109,6 @@
   transform: translateX(4px);
 }
 
-/* No hover effects on logo */
 .footer-logo:hover {
   transform: none;
 }
@@ -119,7 +116,6 @@
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
-/* Copyright – centered */
 .copyright {
   max-width: 1200px;
   margin: 0 auto;
@@ -130,75 +126,120 @@
   border-top: 1px solid rgba(239, 185, 120, 0.3);
 }
 
-/* ===================== RESPONSIVE ===================== */
+/* ===================== MOBILE (everything in one horizontal line, no scroll) ===================== */
 @media (max-width: 820px) {
   .footer-inner {
-    flex-direction: column;
-    align-items: center;      /* centers columns vertically when stacked */
-    gap: 40px;
-    padding: 40px 24px 24px;
+    display: flex;
+    flex-direction: row;           /* horizontal layout */
+    flex-wrap: nowrap;             /* force single line */
+    justify-content: space-between; /* spread evenly */
+    align-items: flex-start;
+    gap: 8px;                      /* minimal gap between blocks */
+    padding: 30px 16px;
+    overflow-x: visible;           /* no scrollbar */
+    width: 100%;
+  }
+
+  /* Each block takes equal width and shrinks */
+  .footer-col,
+  .footer-links div {
+    flex: 1 1 0;                   /* equal width, allow shrinking */
+    min-width: 0;                  /* allow content to shrink below min-width */
     text-align: center;
   }
 
-  .footer-links {
-    justify-content: center;
-    gap: 40px;
-  }
-
+  /* Hide description paragraph on mobile to save space */
   .footer-col p {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    display: none;
   }
 
+  /* Logo block adjustments */
   .footer-logo {
-    justify-content: center;
+    flex-direction: column;        /* image above text */
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 0;
   }
-
-  .footer-logo-text {
-    font-size: 22px;
-  }
-
-  .footer-logo-hr {
-    font-size: 18px;
-  }
-
   .footer-logo-img {
-    width: 48px;
+    width: 35px;                   /* smaller logo */
+  }
+  .footer-logo-text {
+    font-size: 12px;               /* smaller text */
+    white-space: nowrap;
+  }
+  .footer-logo-hr {
+    font-size: 10px;
+    white-space: nowrap;
   }
 
+  /* Link blocks */
+  .footer-links {
+    display: contents;             /* remove extra wrapper, let children be direct */
+  }
+  /* Actually we need to restructure: but since .footer-links wraps the three divs,
+     we set .footer-links to display: flex; flex-direction: row; gap: 8px; flex: 1; */
+  .footer-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 8px;
+    flex: 1;
+  }
+  .footer-links div {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .footer-links h5 {
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+    white-space: nowrap;
+  }
   .footer-links h5::after {
+    width: 20px;
+    bottom: -4px;
     left: 50%;
     transform: translateX(-50%);
   }
+  .footer-links a {
+    font-size: 0.65rem;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Remove hover translate on mobile */
+  .footer-links a:hover {
+    transform: none;
+  }
+
+  /* Copyright stays below, centered */
+  .copyright {
+    padding: 16px;
+    font-size: 0.7rem;
+  }
 }
 
+/* Extra small devices – further reduce */
 @media (max-width: 480px) {
   .footer-inner {
-    padding: 32px 20px 20px;
+    gap: 4px;
+    padding: 20px 12px;
   }
-
-  .footer-links {
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
-    text-align: center;
+  .footer-logo-img {
+    width: 28px;
   }
-
-  .footer-links div {
-    min-width: auto;
-  }
-
-  .copyright {
-    padding: 20px;
-    font-size: 0.75rem;
-  }
-
   .footer-logo-text {
-    font-size: 20px;
+    font-size: 10px;
   }
-
   .footer-logo-hr {
-    font-size: 16px;
+    font-size: 8px;
+  }
+  .footer-links h5 {
+    font-size: 0.6rem;
+  }
+  .footer-links a {
+    font-size: 0.55rem;
   }
 }
