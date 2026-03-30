@@ -252,8 +252,8 @@
               on:mouseleave={onDropdownLeave}
             >
               <a href="/#introduction">Introduction</a>
-              <a href="/#mission">Mission</a>
-              <a href="/#mission">Vision</a>
+              <a href="/#mission">Mission & Vision</a>
+              <!-- <a href="/#mission">Vision</a> -->
               <a href="/#quality">Quality Policy</a>
             </div>
           {/if}
@@ -301,11 +301,11 @@
 
 <a href="/Navigation_link_pages/Services#psychometric">Psychometric Test Services </a>
 
-<a href="/Navigation_link_pages/Services#permanent-recruitment">Permanent Recruitment Services</a>
+<a href="/Navigation_link_pages/Services#permanent-recruitment">Permanent Recruitment Services</a>
 
 <a href="/Navigation_link_pages/Services#rpo">Recruitment Process Outsourcing</a>
 
-<a href="/Navigation_link_pages/Services#contract-staffing">Contract Staffing (Workforce Service on Outsourcing basis)</a>
+<a href="/Navigation_link_pages/Services#contract-staffing">Contract Staffing (Workforce Service on Outsourcing basis)</a>
 
 <a href="/Navigation_link_pages/Services#nats">National Apprenticeship Training Scheme (NATS) </a>
 
@@ -329,13 +329,13 @@
 
 <a href="/Navigation_link_pages/Services#rti">Training on RTI and Legal Services under RTI</a>
 
-<a href="/Navigation_link_pages/Services#posh">Training on Prevention of Sexual Harassment (PoSH) Act</a>
+<a href="/Navigation_link_pages/Services#posh">Training on Prevention of Sexual Harassment (PoSH) Act</a>
 
 <a href="/Navigation_link_pages/Services#labour-codes">Training on New Labour Codes</a>
                 </div>
                 <div class="mega-column">
                   <h4>Specialized</h4>
-                  <a href="/Navigation_link_pages/Services#tourism">Tourism Specific Solutions & Services</a>
+                  <a href="/Navigation_link_pages/Services#tourism">Tourism Specific Solutions & Services</a>
 
 <a href="/Navigation_link_pages/Services#csr">Supporting CSR Activity</a>
 
@@ -532,8 +532,8 @@
       {#if mobileAboutOpen}
         <div class="sidebar-sublinks">
           <a href="/#introduction" on:click={closeMenu}>Introduction</a>
-          <a href="/#mission" on:click={closeMenu}>Mission</a>
-          <a href="/#mission" on:click={closeMenu}>Vision</a>
+          <a href="/#mission" on:click={closeMenu}>Mission & Vision </a>
+          <!-- <a href="/#mission" on:click={closeMenu}>Vision</a> -->
           <a href="/#quality" on:click={closeMenu}>Quality Policy</a>
         </div>
       {/if}
