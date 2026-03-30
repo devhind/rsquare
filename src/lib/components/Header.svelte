@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { goto } from '$app/navigation';
+  import { goto, afterNavigate } from '$app/navigation';
 
   // Menu and dropdown states
   let isMenuOpen = false;
@@ -23,7 +23,65 @@
   let mobileTrainingOpen = false;
   let mobileMediaOpen = false;
 
-  // ----- Desktop hover logic -----
+  // ----- DYNAMIC HEADER OFFSET -----
+  let headerHeight = 0;
+
+  function updateHeaderHeight() {
+    const header = document.querySelector('.header-fixed');
+    if (header) headerHeight = header.offsetHeight;
+  }
+
+  // ----- SCROLL TO ELEMENT WITH OFFSET -----
+  function scrollToElementWithOffset(element) {
+    if (!element) return;
+    const elementTop = element.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = elementTop - headerHeight - 10; // 10px extra breathing space
+    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+  }
+
+  // ----- SCROLL TO SECTION BY ID (handles cross-page) -----
+  async function scrollToSection(id, targetPath = '/') {
+    const currentPath = window.location.pathname;
+    if (currentPath !== targetPath) {
+      await goto(targetPath);
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) scrollToElementWithOffset(element);
+      }, 200);
+    } else {
+      const element = document.getElementById(id);
+      if (element) scrollToElementWithOffset(element);
+    }
+  }
+
+  // ----- INTERCEPT HASH LINKS -----
+  function handleHashClick(event) {
+    const anchor = event.target.closest('a');
+    if (!anchor) return;
+    const href = anchor.getAttribute('href');
+    if (!href) return;
+
+    if (href.startsWith('/#') || href.startsWith('#')) {
+      event.preventDefault();
+      let hash = href.split('#')[1];
+      if (!hash) return;
+      if (href.startsWith('/#')) hash = href.slice(2);
+      scrollToSection(hash, '/');
+    }
+    else if (href.includes('#') && !href.startsWith('http')) {
+      event.preventDefault();
+      const [path, hash] = href.split('#');
+      if (!hash) return;
+      goto(path).then(() => {
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) scrollToElementWithOffset(element);
+        }, 200);
+      });
+    }
+  }
+
+  // ----- ORIGINAL DROPDOWN HOVER LOGIC (fully restored) -----
   function setActiveWithDelay(dropdown) {
     if (closeTimeout) clearTimeout(closeTimeout);
     if (openTimeout) clearTimeout(openTimeout);
@@ -31,7 +89,7 @@
     openTimeout = setTimeout(() => {
       activeDropdown = dropdown;
       openTimeout = null;
-    }, 150); // 150ms delay before opening
+    }, 150);
   }
 
   function scheduleClose() {
@@ -40,10 +98,9 @@
     closeTimeout = setTimeout(() => {
       activeDropdown = null;
       closeTimeout = null;
-    }, 200); // 200ms delay before closing
+    }, 200);
   }
 
-  // Called when mouse enters the dropdown content – cancel close, and if still in open delay, open immediately
   function cancelCloseAndOpenImmediately(dropdown) {
     if (closeTimeout) clearTimeout(closeTimeout);
     if (openTimeout) {
@@ -53,22 +110,18 @@
     }
   }
 
-  // Called when mouse leaves the dropdown content – schedule close
   function onDropdownLeave() {
     scheduleClose();
   }
 
-  // Called when mouse leaves the trigger – schedule close
   function onTriggerLeave() {
     scheduleClose();
   }
 
-  // Called when mouse enters the trigger – open with delay
   function onTriggerEnter(dropdown) {
     setActiveWithDelay(dropdown);
   }
 
-  // Helper to close all desktop dropdowns immediately
   function closeAll() {
     if (openTimeout) clearTimeout(openTimeout);
     if (closeTimeout) clearTimeout(closeTimeout);
@@ -76,13 +129,11 @@
     showActions = false;
   }
 
-  // Action button (click toggles)
+  // Action button toggle
   function toggleActions(e) {
     e.stopPropagation();
     showActions = !showActions;
-    if (showActions) {
-      activeDropdown = null; // close any open nav dropdown
-    }
+    if (showActions) activeDropdown = null;
   }
 
   // Navigation functions
@@ -95,7 +146,7 @@
     goto('/employer/post-job');
   }
 
-  // Mobile sidebar toggle
+  // Mobile sidebar
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
     document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
@@ -115,7 +166,6 @@
   function toggleMobileTraining() { mobileTrainingOpen = !mobileTrainingOpen; }
   function toggleMobileMedia() { mobileMediaOpen = !mobileMediaOpen; }
 
-  // Close on Escape key
   function handleKeydown(e) {
     if (e.key === 'Escape') {
       closeAll();
@@ -123,8 +173,11 @@
     }
   }
 
-  // Click outside to close dropdowns
   onMount(() => {
+    updateHeaderHeight();
+    window.addEventListener('resize', updateHeaderHeight);
+    window.addEventListener('scroll', updateHeaderHeight);
+
     const handleClickOutside = (e) => {
       if (!e.target.closest('.dropdown-trigger') && !e.target.closest('.action-wrapper')) {
         closeAll();
@@ -132,23 +185,41 @@
     };
     document.addEventListener('click', handleClickOutside);
     document.addEventListener('keydown', handleKeydown);
+
+    const headerElement = document.querySelector('header');
+    if (headerElement) {
+      headerElement.addEventListener('click', handleHashClick);
+    }
+
+    // Initial hash handling
+    const initialHash = window.location.hash.slice(1);
+    if (initialHash) {
+      setTimeout(() => {
+        const element = document.getElementById(initialHash);
+        if (element) scrollToElementWithOffset(element);
+      }, 200);
+    }
+
     return () => {
+      window.removeEventListener('resize', updateHeaderHeight);
+      window.removeEventListener('scroll', updateHeaderHeight);
       document.removeEventListener('click', handleClickOutside);
       document.removeEventListener('keydown', handleKeydown);
+      if (headerElement) {
+        headerElement.removeEventListener('click', handleHashClick);
+      }
     };
   });
-  function scrollToSection(id) {
-  goto('/').then(() => {
-    setTimeout(() => {
-      const el = document.getElementById(id);
-      if (el) {
-        const yOffset = -120; // adjust this
-        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    }, 100);
+
+  afterNavigate(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) scrollToElementWithOffset(element);
+      }, 200);
+    }
   });
-}
 </script>
 <header class="header-fixed">
   <div class="header-container">
