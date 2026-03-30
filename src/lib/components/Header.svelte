@@ -186,10 +186,12 @@
     document.addEventListener('click', handleClickOutside);
     document.addEventListener('keydown', handleKeydown);
 
-    const headerElement = document.querySelector('header');
-    if (headerElement) {
-      headerElement.addEventListener('click', handleHashClick);
-    }
+    // const headerElement = document.querySelector('header');
+    // if (headerElement) {
+    //   headerElement.addEventListener('click', handleHashClick);
+    // }
+
+    document.addEventListener('click', handleHashClick);
 
     // Initial hash handling
     const initialHash = window.location.hash.slice(1);
@@ -200,11 +202,12 @@
       }, 200);
     }
 
-    return () => {
-      window.removeEventListener('resize', updateHeaderHeight);
-      window.removeEventListener('scroll', updateHeaderHeight);
-      document.removeEventListener('click', handleClickOutside);
-      document.removeEventListener('keydown', handleKeydown);
+   return () => {
+  window.removeEventListener('resize', updateHeaderHeight);
+  window.removeEventListener('scroll', updateHeaderHeight);
+  document.removeEventListener('click', handleClickOutside);
+  document.removeEventListener('keydown', handleKeydown);
+  document.removeEventListener('click', handleHashClick);  // <-- changed
       if (headerElement) {
         headerElement.removeEventListener('click', handleHashClick);
       }
@@ -513,7 +516,6 @@
 </header>
 
 <!-- OVERLAY & SIDEBAR (unchanged) -->
-<div class="sidebar-overlay" class:open={isMenuOpen} on:click={closeMenu}></div>
 <div class="sidebar" class:open={isMenuOpen}>
   <div class="sidebar-header">
     <img src="/images/LOGO_PDF_invertedColor_page-0001.jpg" class="sidebar-logo" alt="R Square HR" />
@@ -529,10 +531,10 @@
       </div>
       {#if mobileAboutOpen}
         <div class="sidebar-sublinks">
-          <a href="/about/introduction" on:click={closeMenu}>Introduction</a>
-          <a href="/about/mission" on:click={closeMenu}>Mission</a>
-          <a href="/about/vision" on:click={closeMenu}>Vision</a>
-          <a href="/about/quality-policy" on:click={closeMenu}>Quality Policy</a>
+          <a href="/#introduction" on:click={closeMenu}>Introduction</a>
+          <a href="/#mission" on:click={closeMenu}>Mission</a>
+          <a href="/#mission" on:click={closeMenu}>Vision</a>
+          <a href="/#quality" on:click={closeMenu}>Quality Policy</a>
         </div>
       {/if}
     </div>
@@ -545,14 +547,14 @@
       </div>
       {#if mobileManagementOpen}
         <div class="sidebar-sublinks">
-          <a href="#" on:click={closeMenu}>S N Rao</a>
-          <a href="#" on:click={closeMenu}>Riddhish Rao</a>
-          <a href="#" on:click={closeMenu}>Resource Team</a>
+          <a href="/Navigation_link_pages/Management_Team#sn-rao" on:click={closeMenu}>S N Rao</a>
+          <a href="/Navigation_link_pages/Management_Team#riddhish-rao" on:click={closeMenu}>Riddhish Rao</a>
+          <a href="/Navigation_link_pages/Management_Team#resource-team" on:click={closeMenu}>Resource Team</a>
         </div>
       {/if}
     </div>
 
-    <!-- Services -->
+    <!-- Services (full list from desktop mega dropdown) -->
     <div class="sidebar-item">
       <div class="sidebar-link" on:click={toggleMobileServices}>
         <span>Services</span>
@@ -560,33 +562,33 @@
       </div>
       {#if mobileServicesOpen}
         <div class="sidebar-sublinks">
-          <a href="#">Consultancy for HR Strategies, Policies & Services</a>
-          <a href="#">Psychometric Test Services</a>
-          <a href="#">Permanent Recruitment Services</a>
-          <a href="#">Recruitment Process Outsourcing</a>
-          <a href="#">Contract Staffing (Workforce Service on Outsourcing basis)</a>
-          <a href="#">National Apprenticeship Training Scheme (NATS)</a>
-          <a href="#">National Apprenticeship Promotion Scheme (NAPS)</a>
-          <a href="#">Functional HR Services on Outsourcing basis</a>
-          <a href="#">Payroll Outsourcing</a>
-          <a href="#">Legal Compliance (HR related)</a>
-          <a href="#">Third Party Auditor for HR Services</a>
-          <a href="#">Employment Background Verification</a>
-          <a href="#">Advisory Services on Business Reforms & Improvement</a>
-          <a href="#">Training & Development</a>
-          <a href="#">Training on RTI and Legal Services under RTI</a>
-          <a href="#">Training on PoSH</a>
-          <a href="#">Training on New Labour Laws</a>
-          <a href="#">Tourism Specific Solutions & Services</a>
-          <a href="#">Supporting CSR Activity</a>
-          <a href="#">Collaborating with various institutions</a>
-          <a href="#">Cultural Activities (musical programs, films, Gujarati serials, drama etc.)</a>
-          <a href="#">IT Consultancy & solutions</a>
+          <a href="/Navigation_link_pages/Services#hr-advisory" on:click={closeMenu}>Consultancy for HR Strategies, Policies & Services</a>
+          <a href="/Navigation_link_pages/Services#psychometric" on:click={closeMenu}>Psychometric Test Services</a>
+          <a href="/Navigation_link_pages/Services#permanent-recruitment" on:click={closeMenu}>Permanent Recruitment Services</a>
+          <a href="/Navigation_link_pages/Services#rpo" on:click={closeMenu}>Recruitment Process Outsourcing</a>
+          <a href="/Navigation_link_pages/Services#contract-staffing" on:click={closeMenu}>Contract Staffing (Workforce Service on Outsourcing basis)</a>
+          <a href="/Navigation_link_pages/Services#nats" on:click={closeMenu}>National Apprenticeship Training Scheme (NATS)</a>
+          <a href="/Navigation_link_pages/Services#naps" on:click={closeMenu}>National Apprenticeship Promotion Scheme (NAPS)</a>
+          <a href="/Navigation_link_pages/Services#functional-hr" on:click={closeMenu}>Functional HR Services on Outsourcing basis</a>
+          <a href="/Navigation_link_pages/Services#payroll" on:click={closeMenu}>Payroll Outsourcing</a>
+          <a href="/Navigation_link_pages/Services#legal-compliance" on:click={closeMenu}>Legal Compliance</a>
+          <a href="/Navigation_link_pages/Services#third-party-auditor" on:click={closeMenu}>Third Party Auditor for HR Services</a>
+          <a href="/Navigation_link_pages/Services#background-verification" on:click={closeMenu}>Employment Background Verification</a>
+          <a href="/Navigation_link_pages/Services#business-reforms" on:click={closeMenu}>Advisory Services on Business Reforms & Improvement</a>
+          <a href="/Navigation_link_pages/Services#training" on:click={closeMenu}>Training & Development</a>
+          <a href="/Navigation_link_pages/Services#rti" on:click={closeMenu}>Training on RTI and Legal Services under RTI</a>
+          <a href="/Navigation_link_pages/Services#posh" on:click={closeMenu}>Training on Prevention of Sexual Harassment (PoSH) Act</a>
+          <a href="/Navigation_link_pages/Services#labour-codes" on:click={closeMenu}>Training on New Labour Codes</a>
+          <a href="/Navigation_link_pages/Services#tourism" on:click={closeMenu}>Tourism Specific Solutions & Services</a>
+          <a href="/Navigation_link_pages/Services#csr" on:click={closeMenu}>Supporting CSR Activity</a>
+          <a href="/Navigation_link_pages/Services#collaborations" on:click={closeMenu}>Collaborating with various institutions</a>
+          <a href="/Navigation_link_pages/Services#cultural" on:click={closeMenu}>Cultural Activities (musical programs, films, Gujarati serials, drama etc.)</a>
+          <a href="/Navigation_link_pages/Services#it-consultancy" on:click={closeMenu}>IT Consultancy & solutions</a>
         </div>
       {/if}
     </div>
 
-    <!-- Employer's Corner -->
+    <!-- Employer's Corner (same as desktop) -->
     <div class="sidebar-item">
       <div class="sidebar-link" on:click={toggleMobileEmployer}>
         <span>Employers</span>
@@ -594,19 +596,19 @@
       </div>
       {#if mobileEmployerOpen}
         <div class="sidebar-sublinks">
-          <a href="#">Registration</a>
-          <a href="#">Company Profile</a>
-          <a href="#">Change Password</a>
-          <a href="#">Free Job Posting</a>
-          <a href="#">Resume Search</a>
-          <a href="#">Recruitment Packages for Employer</a>
-          <a href="#">Consultant Membership Plan</a>
-          <a href="#">Search Consultant</a>
+          <a href="#" on:click={closeMenu}>Registration</a>
+          <a href="#" on:click={closeMenu}>Company Profile</a>
+          <a href="#" on:click={closeMenu}>Change Password</a>
+          <a href="#" on:click={closeMenu}>Free Job Posting</a>
+          <a href="#" on:click={closeMenu}>Resume Search</a>
+          <a href="#" on:click={closeMenu}>Recruitment Packages for Employer</a>
+          <a href="#" on:click={closeMenu}>Consultant Membership Plan</a>
+          <a href="#" on:click={closeMenu}>Search Consultant</a>
         </div>
       {/if}
     </div>
 
-    <!-- Job Seeker's Corner -->
+    <!-- Job Seeker's Corner (same as desktop) -->
     <div class="sidebar-item">
       <div class="sidebar-link" on:click={toggleMobileJobSeeker}>
         <span>Job Seekers</span>
@@ -614,22 +616,22 @@
       </div>
       {#if mobileJobSeekerOpen}
         <div class="sidebar-sublinks">
-          <a href="#">Registration</a>
-          <a href="#">Job Seeker's Profile with CV Attachment</a>
-          <a href="#">My Profile (Registration with Mobile/Email – OTP)</a>
-          <a href="#">Jobs by Type</a>
-          <a href="#">Jobs by City</a>
-          <a href="#">Jobs by Department</a>
-          <a href="#">Jobs by Qualification</a>
-          <a href="#">Jobs by Role</a>
-          <a href="#">Jobs by Skill</a>
-          <a href="#">Jobs by Company</a>
-          <a href="#">Jobs by Employer Type (Direct/Consultant)</a>
+          <a href="#" on:click={closeMenu}>Registration</a>
+          <a href="#" on:click={closeMenu}>Job Seeker's Profile with CV Attachment</a>
+          <a href="#" on:click={closeMenu}>My Profile (Registration with Mobile/Email – OTP)</a>
+          <a href="#" on:click={closeMenu}>Jobs by Type</a>
+          <a href="#" on:click={closeMenu}>Jobs by City</a>
+          <a href="#" on:click={closeMenu}>Jobs by Department</a>
+          <a href="#" on:click={closeMenu}>Jobs by Qualification</a>
+          <a href="#" on:click={closeMenu}>Jobs by Role</a>
+          <a href="#" on:click={closeMenu}>Jobs by Skill</a>
+          <a href="#" on:click={closeMenu}>Jobs by Company</a>
+          <a href="#" on:click={closeMenu}>Jobs by Employer Type (Direct/Consultant)</a>
         </div>
       {/if}
     </div>
 
-    <!-- University -->
+    <!-- University Corner -->
     <div class="sidebar-item">
       <div class="sidebar-link" on:click={toggleMobileUniversity}>
         <span>University</span>
@@ -637,8 +639,8 @@
       </div>
       {#if mobileUniversityOpen}
         <div class="sidebar-sublinks">
-          <a href="#">Registration</a>
-          <a href="#">Institute Profile With Brochure Attachment</a>
+          <a href="#" on:click={closeMenu}>Registration</a>
+          <a href="#" on:click={closeMenu}>Institute Profile With Brochure Attachment</a>
         </div>
       {/if}
     </div>
@@ -651,14 +653,14 @@
       </div>
       {#if mobileTrainingOpen}
         <div class="sidebar-sublinks">
-          <a href="#">Faculty Registration</a>
-          <a href="#">Faculty's Profile with CV</a>
-          <a href="#">Student Registration</a>
-          <a href="#">Student's Profile with CV</a>
-          <a href="#">Registration For Webinar</a>
-          <a href="#">Registration For Seminar</a>
-          <a href="#">Registration For Online Courses</a>
-          <a href="#">Registration For Offline Courses</a>
+          <a href="#" on:click={closeMenu}>Faculty Registration</a>
+          <a href="#" on:click={closeMenu}>Faculty's Profile with CV</a>
+          <a href="#" on:click={closeMenu}>Student Registration</a>
+          <a href="#" on:click={closeMenu}>Student's Profile with CV</a>
+          <a href="#" on:click={closeMenu}>Registration For Webinar</a>
+          <a href="#" on:click={closeMenu}>Registration For Seminar</a>
+          <a href="#" on:click={closeMenu}>Registration For Online Courses</a>
+          <a href="#" on:click={closeMenu}>Registration For Offline Courses</a>
         </div>
       {/if}
     </div>
@@ -674,10 +676,10 @@
       </div>
       {#if mobileMediaOpen}
         <div class="sidebar-sublinks">
-          <a href="#">Announcements</a>
-          <a href="#">News</a>
-          <a href="#">Photographs</a>
-          <a href="#">Videos</a>
+          <a href="#" on:click={closeMenu}>Announcements</a>
+          <a href="#" on:click={closeMenu}>News</a>
+          <a href="#" on:click={closeMenu}>Photographs</a>
+          <a href="#" on:click={closeMenu}>Videos</a>
         </div>
       {/if}
     </div>
