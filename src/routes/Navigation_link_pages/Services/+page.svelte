@@ -396,37 +396,77 @@
     margin-bottom: 60px;
   }
   .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-light);
-    border-radius: 24px;
-    padding: 18px 12px;
-    text-align: center;
-    cursor: pointer;
-    transition: var(--transition);
-    font-family: inherit;
-    width: 100%;
-    backdrop-filter: blur(2px);
-    box-shadow: var(--shadow-sm);
-  }
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 28px;
+
+  padding: 20px 14px;
+  text-align: center;
+
+  cursor: pointer;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
+  box-shadow: 0 8px 18px -8px rgba(0,0,0,0.05);
+
+  backdrop-filter: blur(4px);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 5px;
+  height: 0%;
+  background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
+  transition: height 0.4s ease;
+}
   .card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(44,110,158,0.3);
-    box-shadow: 0 16px 24px -8px rgba(0, 0, 0, 0.08);
-  }
-  .icon {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
-    transition: transform 0.2s;
-  }
+  transform: translateY(-10px) scale(1.03);
+  border-color: rgba(44,110,158,0.3);
+  box-shadow: 0 25px 40px -12px rgba(0,0,0,0.15);
+}
+
+.card:hover::before {
+  height: 100%;
+}
+ .icon {
+  font-size: 1.9rem;
+  margin-bottom: 10px;
+
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+
+  background: #f5f7fa;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  transition: all 0.3s ease;
+}
+
+.card:hover .icon {
+  background: linear-gradient(135deg, #2c6e9e, #d97a4a);
+  color: white;
+  transform: scale(1.15) rotate(6deg);
+}
   .card:hover .icon {
     transform: scale(1.1);
   }
-  .card h3 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin: 0;
-    color: var(--text-dark);
-  }
+ .card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a2c3e;
+  margin: 0;
+}
 
   /* Sections */
   .sections-container {

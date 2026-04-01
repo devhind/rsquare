@@ -517,4 +517,40 @@
       gap: 20px;
     }
   }
+  .team-card {
+  background: #ffffff;
+  border: 1px solid #efe2d4;
+  border-radius: 36px;
+  padding: 24px 20px;
+
+  transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+  box-shadow: 0 8px 18px -8px rgba(0,0,0,0.05);
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* LEFT BORDER ANIMATION (same as service cards) */
+.team-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 0%;
+  background: linear-gradient(135deg, #0066ff 0%, #0044cc 40%, #0066ff 100%);
+  transition: height 0.4s;
+}
+
+/* HOVER EFFECT */
+.team-card:hover {
+  transform: translateY(-12px);
+  border-color: #EFB978;
+  box-shadow: 0 30px 45px -15px rgba(30,58,74,0.25);
+}
+
+/* BORDER GROW ON HOVER */
+.team-card:hover::before {
+  height: 100%;
+}
 </style>

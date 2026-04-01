@@ -170,7 +170,8 @@ body{
 
 /* Mega dropdown – centered under trigger */
 .mega-dropdown {
-  min-width: 760px;
+  width: fit-content;        /* 🔥 auto fit content */
+  min-width: unset;   
   max-width: 90vw;
   padding: 16px;
   left: 50%;
@@ -182,7 +183,7 @@ body{
 .mega-columns {
   display: flex;
   gap: 24px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;   
 }
 
 .mega-column {
@@ -634,3 +635,23 @@ body{
 .mobile-only {
   display: none;
 }
+ /* Style for dropdown headings (simple and mega-columns) */
+  .dropdown h4,
+  .mega-dropdown .mega-column h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0.75rem 1rem 0.5rem 1rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: #1e3a8a; /* adjust to your brand color */
+  }
+
+  .dropdown h4:first-child {
+    margin-top: 0.5rem;
+  }
+
+  .mega-dropdown .mega-column h4 {
+    margin-top: 0;
+  }
+
+  
