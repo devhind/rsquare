@@ -137,10 +137,15 @@ Nihilent Award for Supply-Logistics using Information &amp; Communication Techno
 and analytics. R Square core focus is to support business operations of the clients to enhance their
 efficiency and effectiveness and in turn increase overall productivity and profit by providing all possible
 combinations of HR and IT solutions.</p>
-      <div class="hero-buttons">
-        <button class="btn-primary btn-large">Explore services</button>
-        <button class="btn-outline btn-large">Talk to our expert</button>
-      </div>
+     <div class="hero-buttons">
+  <a href="/Navigation_link_pages/Services" class="btn-primary btn-large">
+    Explore services
+  </a>
+
+  <a href="/#contact" class="btn-outline btn-large">
+    Talk to our expert
+  </a>
+</div>
     </div>
     <div class="hero-image">
   {#each heroSlides as slide, i}

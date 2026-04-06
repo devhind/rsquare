@@ -440,9 +440,9 @@
               <div class="mega-columns">
                 <div class="mega-column">
                   <h4>Registration</h4>
-                  <a href="#">Registration</a>
-                  <a href="#">Job Seeker's Profile with CV Attachment</a>
-                  <a href="#"
+                  <a href="/job-seekers/registration">Registration</a>
+                  <a href="/job-seekers/profile">Job Seeker's Profile with CV Attachment</a>
+                  <a href="/job-seekers/otp"
                     >My Profile (Registration with Mobile/Email – OTP)</a
                   >
                 </div>
@@ -772,11 +772,11 @@
       </div>
       {#if mobileJobSeekerOpen}
         <div class="sidebar-sublinks">
-          <a href="#" on:click={closeMenu}>Registration</a>
-          <a href="#" on:click={closeMenu}
+          <a href="/job-seekers/registration" on:click={closeMenu}>Registration</a>
+          <a href="/job-seekers/profile" on:click={closeMenu}
             >Job Seeker's Profile with CV Attachment</a
           >
-          <a href="#" on:click={closeMenu}
+          <a href="/job-seekers/otp" on:click={closeMenu}
             >My Profile (Registration with Mobile/Email – OTP)</a
           >
           <a href="#" on:click={closeMenu}>Jobs by Type</a>
