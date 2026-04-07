@@ -752,7 +752,7 @@
       </div>
       {#if mobileEmployerOpen}
         <div class="sidebar-sublinks">
-          <a href="#" on:click={closeMenu}>Registration</a>
+          <a href="Employers/Registration" on:click={closeMenu}>Registration</a>
           <a href="#" on:click={closeMenu}>Company Profile</a>
           <a href="#" on:click={closeMenu}>Change Password</a>
           <a href="#" on:click={closeMenu}>Free Job Posting</a>
