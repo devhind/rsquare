@@ -254,7 +254,7 @@
     }
   }
 
-  // ========== LANGUAGES FUNCTIONS (existing checkboxes) ==========
+  // ========== LANGUAGES FUNCTIONS ==========
   function loadCustomLanguages() {
     const stored = localStorage.getItem("job_custom_languages");
     customLanguages = stored ? JSON.parse(stored) : [];
@@ -413,7 +413,6 @@
   // ========== TOGGLE FUNCTIONS FOR OTHER DROPDOWNS ==========
   function toggleCertDropdown() {
     showCertDropdown = !showCertDropdown;
-    if (showCertDropdown) certSearchTerm = ""; // optional reset
   }
   function toggleSkillsDropdown() {
     showSkillsDropdown = !showSkillsDropdown;
@@ -422,7 +421,7 @@
     showFacilityDropdown = !showFacilityDropdown;
   }
 
-  // ========== OUTSIDE CLICK HANDLERS FOR DROPDOWNS ==========
+  // ========== OUTSIDE CLICK HANDLERS ==========
   function handleClickOutside(event) {
     const facility = document.querySelector(".facility-multi-select");
     if (facility && !facility.contains(event.target)) showFacilityDropdown = false;
@@ -723,17 +722,14 @@
           {/if}
         </div>
 
-        <!-- Certificates Dropdown Multi-Select with toggle button -->
+        <!-- Certificates Dropdown Multi-Select -->
         <div class="field">
           <label>Certificates / Courses</label>
           <div class="multi-select cert-multi-select">
             <div class="select-box" on:click={() => showCertDropdown = true}>
               <div class="tags">
                 {#each selectedCertificates as item}
-                  <span class="tag">
-                    {item}
-                    <span class="remove" on:click|stopPropagation={() => toggleCertificate(item)}>×</span>
-                  </span>
+                  <span class="tag">{item}<span class="remove" on:click|stopPropagation={() => toggleCertificate(item)}>×</span></span>
                 {/each}
                 <input type="text" placeholder="Search or add certificate..." bind:value={certSearchTerm}
                        on:focus={() => showCertDropdown = true}
@@ -749,34 +745,26 @@
                   {#each filteredCertificates as item, i}
                     <div class="dropdown-item {certHighlightedIndex === i ? 'active' : ''}"
                          on:mousedown={() => toggleCertificate(item)}>
-                      <input type="checkbox" checked={selectedCertificates.includes(item)} readonly />
-                      {item}
+                      <input type="checkbox" checked={selectedCertificates.includes(item)} readonly /> {item}
                     </div>
                   {/each}
-                {:else}
-                  <div class="no-data">No match found</div>
-                {/if}
+                {:else}<div class="no-data">No match found</div>{/if}
                 {#if certSearchTerm && !allCertificates.includes(certSearchTerm)}
-                  <div class="add-new" on:mousedown={() => addCertificate(certSearchTerm)}>
-                    ➕ Add "{certSearchTerm}"
-                  </div>
+                  <div class="add-new" on:mousedown={() => addCertificate(certSearchTerm)}>➕ Add "{certSearchTerm}"</div>
                 {/if}
               </div>
             {/if}
           </div>
         </div>
 
-        <!-- Skills Dropdown Multi-Select with toggle button -->
+        <!-- Skills Dropdown Multi-Select -->
         <div class="field">
           <label>Skills Required</label>
           <div class="multi-select skills-multi-select">
             <div class="select-box" on:click={() => showSkillsDropdown = true}>
               <div class="tags">
                 {#each selectedSkillsList as item}
-                  <span class="tag">
-                    {item}
-                    <span class="remove" on:click|stopPropagation={() => toggleSkill(item)}>×</span>
-                  </span>
+                  <span class="tag">{item}<span class="remove" on:click|stopPropagation={() => toggleSkill(item)}>×</span></span>
                 {/each}
                 <input type="text" placeholder="Search or add skill..." bind:value={skillsSearchTerm}
                        on:focus={() => showSkillsDropdown = true}
@@ -792,17 +780,12 @@
                   {#each filteredSkills as item, i}
                     <div class="dropdown-item {skillsHighlightedIndex === i ? 'active' : ''}"
                          on:mousedown={() => toggleSkill(item)}>
-                      <input type="checkbox" checked={selectedSkillsList.includes(item)} readonly />
-                      {item}
+                      <input type="checkbox" checked={selectedSkillsList.includes(item)} readonly /> {item}
                     </div>
                   {/each}
-                {:else}
-                  <div class="no-data">No match found</div>
-                {/if}
+                {:else}<div class="no-data">No match found</div>{/if}
                 {#if skillsSearchTerm && !allSkills.includes(skillsSearchTerm)}
-                  <div class="add-new" on:mousedown={() => addSkill(skillsSearchTerm)}>
-                    ➕ Add "{skillsSearchTerm}"
-                  </div>
+                  <div class="add-new" on:mousedown={() => addSkill(skillsSearchTerm)}>➕ Add "{skillsSearchTerm}"</div>
                 {/if}
               </div>
             {/if}
@@ -820,17 +803,10 @@
           <div class="checkbox-group">
             <div class="checkbox-row">
               {#each defaultLanguages as lang}
-                <label class="checkbox-option">
-                  <input type="checkbox" value={lang} bind:group={selectedLanguages} />
-                  <span>{lang}</span>
-                </label>
+                <label class="checkbox-option"><input type="checkbox" value={lang} bind:group={selectedLanguages} /><span>{lang}</span></label>
               {/each}
               {#each customLanguages as lang}
-                <label class="checkbox-option custom-option">
-                  <input type="checkbox" value={lang} bind:group={selectedLanguages} />
-                  <span>{lang}</span>
-                  <button type="button" class="remove-option" on:click={() => removeCustomLanguage(lang)}>×</button>
-                </label>
+                <label class="checkbox-option custom-option"><input type="checkbox" value={lang} bind:group={selectedLanguages} /><span>{lang}</span><button type="button" class="remove-option" on:click={() => removeCustomLanguage(lang)}>×</button></label>
               {/each}
               <button type="button" class="add-option-btn" on:click={() => showNewLanguageInput = !showNewLanguageInput}>+ Add Other</button>
             </div>
@@ -866,14 +842,8 @@
       <fieldset>
         <legend>Age Criteria</legend>
         <div class="grid">
-          <div class="field">
-            <label>Minimum Age</label>
-            <input type="number" bind:value={form.minAge} min="18" />
-          </div>
-          <div class="field">
-            <label>Maximum Age</label>
-            <input type="number" bind:value={form.maxAge} />
-          </div>
+          <div class="field"><label>Minimum Age</label><input type="number" bind:value={form.minAge} min="18" /></div>
+          <div class="field"><label>Maximum Age</label><input type="number" bind:value={form.maxAge} /></div>
         </div>
       </fieldset>
 
@@ -886,10 +856,7 @@
             <div class="select-box" on:click={() => showFacilityDropdown = true}>
               <div class="tags">
                 {#each selectedFacilities as item}
-                  <span class="tag">
-                    {item}
-                    <span class="remove" on:click|stopPropagation={() => toggleFacility(item)}>×</span>
-                  </span>
+                  <span class="tag">{item}<span class="remove" on:click|stopPropagation={() => toggleFacility(item)}>×</span></span>
                 {/each}
                 <input type="text" placeholder="Search or add..." bind:value={facilitySearchTerm}
                        on:focus={() => showFacilityDropdown = true}
@@ -905,17 +872,12 @@
                   {#each filteredFacilities as item, i}
                     <div class="dropdown-item {facilityHighlightedIndex === i ? 'active' : ''}"
                          on:mousedown={() => toggleFacility(item)}>
-                      <input type="checkbox" checked={selectedFacilities.includes(item)} readonly />
-                      {item}
+                      <input type="checkbox" checked={selectedFacilities.includes(item)} readonly /> {item}
                     </div>
                   {/each}
-                {:else}
-                  <div class="no-data">No match found</div>
-                {/if}
+                {:else}<div class="no-data">No match found</div>{/if}
                 {#if facilitySearchTerm && !allFacilities.includes(facilitySearchTerm)}
-                  <div class="add-new" on:mousedown={() => addFacility(facilitySearchTerm)}>
-                    ➕ Add "{facilitySearchTerm}"
-                  </div>
+                  <div class="add-new" on:mousedown={() => addFacility(facilitySearchTerm)}>➕ Add "{facilitySearchTerm}"</div>
                 {/if}
               </div>
             {/if}
@@ -947,15 +909,9 @@
               </div>
             </div>
             {#if form.transportType && form.transportType !== "none"}
-              <div class="field">
-                <label>Transportation Route</label>
-                <input type="text" bind:value={form.transportRoute} placeholder="e.g. City → Office" />
-              </div>
+              <div class="field"><label>Transportation Route</label><input type="text" bind:value={form.transportRoute} placeholder="e.g. City → Office" /></div>
             {/if}
-            <div class="field full-width">
-              <label>Other Transport Details</label>
-              <input type="text" bind:value={form.transportOther} placeholder="Any other transport information" />
-            </div>
+            <div class="field full-width"><label>Other Transport Details</label><input type="text" bind:value={form.transportOther} placeholder="Any other transport information" /></div>
           </div>
         </div>
       </fieldset>
@@ -964,14 +920,8 @@
       <fieldset>
         <legend>Hiring Timeline</legend>
         <div class="grid">
-          <div class="field">
-            <label>Application Deadline</label>
-            <input id="deadline" type="text" bind:value={form.deadline} placeholder="DD/MM/YYYY" />
-          </div>
-          <div class="field">
-            <label>Expected Joining Date</label>
-            <input id="joiningDate" type="text" bind:value={form.joiningDate} placeholder="DD/MM/YYYY" />
-          </div>
+          <div class="field"><label>Application Deadline</label><input id="deadline" type="text" bind:value={form.deadline} placeholder="DD/MM/YYYY" /></div>
+          <div class="field"><label>Expected Joining Date</label><input id="joiningDate" type="text" bind:value={form.joiningDate} placeholder="DD/MM/YYYY" /></div>
         </div>
       </fieldset>
 
@@ -981,312 +931,592 @@
 </section>
 
 <style>
- /* ================= GLOBAL RESET ================= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  /* ================= GLOBAL RESET ================= */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-body {
-  font-family: "Poppins", sans-serif;
-  background: #f1f5f9;
-  overflow-x: hidden;
-}
+  body {
+    font-family: "Poppins", sans-serif;
+    background: #f1f5f9;
+    overflow-x: hidden;
+  }
 
-/* ================= MAIN CONTAINER ================= */
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-
-  /* 🔥 Header space handled cleanly */
-  padding: 20px 10px 20px;
-}
-
-/* ================= FORM CARD ================= */
-.form-card {
-  width: 100%;
-  max-width: 1000px;
-
-  background: #ffffff;
-  border-radius: 18px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-}
-
-/* ================= HEADER ================= */
-.form-header {
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
-  padding: 24px 28px;
-  color: white;
-}
-
-.form-header h1 {
-  font-size: 1.6rem;
-  font-weight: 600;
-}
-
-.form-header p {
-  font-size: 0.9rem;
-  opacity: 0.9;
-  margin-top: 4px;
-}
-
-/* ================= FORM ================= */
-form {
-  padding: 28px;
-}
-
-/* ================= FIELDSET ================= */
-fieldset {
-  border: none;
-  margin-bottom: 28px;
-}
-
-legend {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #1e3a8a;
-  margin-bottom: 16px;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 6px;
-}
-
-/* ================= GRID ================= */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-}
-
-.triple-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-}
-
-/* ================= FIELD ================= */
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.full-width {
-  grid-column: 1 / -1;
-}
-
-label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #334155;
-}
-
-.required {
-  color: red;
-}
-
-/* ================= INPUT ================= */
-input:not([type="checkbox"]):not([type="radio"]),
-select,
-textarea {
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #cbd5e1;
-  font-size: 0.85rem;
-  transition: 0.2s;
-  width: 100%;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
-}
-
-/* ================= ERROR ================= */
-.error {
-  font-size: 0.75rem;
-  color: red;
-}
-
-.error-input {
-  border-color: red;
-}
-
-/* ================= BUTTON GROUP ================= */
-.button-group {
-  display: flex;
-  gap: 8px;
-}
-
-.button-group button {
-  flex: 1;
-  padding: 8px;
-  border-radius: 20px;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-  cursor: pointer;
-  font-size: 0.8rem;
-  transition: 0.2s;
-}
-
-.button-group button.selected {
-  background: #2563eb;
-  color: white;
-  border: none;
-}
-
-/* ================= MULTI SELECT ================= */
-.multi-select {
-  position: relative;
-}
-
-.select-box {
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  padding: 6px;
-  min-height: 38px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  background: white;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  width: 100%;
-}
-
-.tags input {
-  border: none;
-  outline: none;
-  flex: 1;
-  font-size: 0.8rem;
-}
-
-/* TAG */
-.tag {
-  background: #2563eb;
-  color: white;
-  padding: 3px 8px;
-  border-radius: 14px;
-  font-size: 0.7rem;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.tag .remove {
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* DROPDOWN */
-.dropdown-box {
-  position: absolute;
-  top: 105%;
-  width: 260px;
-  max-height: 180px;
-  overflow-y: auto;
-
-  background: white;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  z-index: 50;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  font-size: 0.8rem;
-  cursor: pointer;
-}
-
-.dropdown-item:hover,
-.dropdown-item.active {
-  background: #eff6ff;
-}
-
-/* FIX CHECKBOX */
-.dropdown-item input[type="checkbox"] {
-  width: 14px !important;
-  height: 14px;
-}
-
-/* ================= RADIO ================= */
-.radio-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-}
-
-/* ================= INFO BOX ================= */
-.info-box {
-  background: #eff6ff;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  margin-bottom: 10px;
-}
-
-/* ================= SUBMIT BUTTON ================= */
-.submit-btn {
-  display: block;
-  margin: 30px auto 0;
-  width: 60%;
-  max-width: 400px;
-
-  padding: 12px;
-  border-radius: 30px;
-  border: none;
-
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 500;
-
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-}
-
-/* ================= RESPONSIVE ================= */
-@media (max-width: 768px) {
+  /* ================= MAIN CONTAINER ================= */
   .container {
-    padding: 100px 12px 30px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 90px 1rem 40px;
+    background: #f1f5f9;
   }
 
+  /* ================= FORM CARD ================= */
   .form-card {
-    border-radius: 12px;
+    width: 100%;
+    max-width: 1000px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
   }
 
+  /* ================= HEADER ================= */
+  .form-header {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    padding: 24px 28px;
+    color: white;
+  }
+
+  .form-header h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .form-header p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 4px;
+  }
+
+  /* ================= FORM ================= */
   form {
-    padding: 20px;
+    padding: 28px;
   }
 
-  .submit-btn {
+  /* ================= FIELDSET ================= */
+  fieldset {
+    border: none;
+    margin-bottom: 28px;
+  }
+
+  legend {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 6px;
+  }
+
+  .sub-section {
+    margin-bottom: 1.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eef2ff;
+  }
+  .sub-section:last-child {
+    border-bottom: none;
+  }
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2563eb;
+    margin-bottom: 1rem;
+  }
+
+  /* ================= GRID ================= */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .triple-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  /* ================= FIELD ================= */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .full-width {
+    grid-column: 1 / -1;
+  }
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #334155;
+  }
+
+  .required {
+    color: red;
+  }
+
+  /* ================= INPUT ================= */
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    font-size: 0.85rem;
+    transition: 0.2s;
     width: 100%;
   }
-}
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+  }
+
+  .error-input {
+    border-color: red;
+  }
+  .error {
+    font-size: 0.75rem;
+    color: red;
+  }
+
+  /* ================= BUTTON GROUP ================= */
+  .button-group {
+    display: flex;
+    gap: 8px;
+  }
+  .button-group button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.2s;
+  }
+  .button-group button.selected {
+    background: #2563eb;
+    color: white;
+    border: none;
+  }
+
+  .toggle-group {
+    display: flex;
+    gap: 8px;
+  }
+  .toggle-group button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+  .toggle-group button.selected {
+    background: #2563eb;
+    color: white;
+    border: none;
+  }
+
+  /* ================= DROPDOWN TOGGLE BUTTON ================= */
+  .dropdown-input-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .dropdown-input-group input {
+    flex: 1;
+  }
+  .dropdown-toggle-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #1e40af;
+    transition: 0.2s;
+  }
+  .dropdown-toggle-btn:hover {
+    background: #e2e8f0;
+    border-color: #3b82f6;
+  }
+
+  /* ================= RADIO & CHECKBOX ================= */
+  .radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #3b82f6;
+  }
+
+  .checkbox-group {
+    background: #f8fafc;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    padding: 8px;
+  }
+  .checkbox-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .checkbox-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    background: white;
+    padding: 4px 12px;
+    border-radius: 30px;
+    border: 1px solid #cbd5e1;
+    transition: 0.2s;
+  }
+  .checkbox-option:hover {
+    border-color: #3b82f6;
+    background: #eff6ff;
+  }
+  .checkbox-option input {
+    width: 14px;
+    height: 14px;
+    accent-color: #3b82f6;
+  }
+  .custom-option {
+    background: #eef2ff;
+    border-color: #bfdbfe;
+  }
+  .remove-option {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 4px;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .remove-option:hover {
+    background: #fee2e2;
+  }
+  .add-option-btn {
+    background: #eef2ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 30px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #1e40af;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .add-option-btn:hover {
+    background: #e0edff;
+  }
+
+  /* ================= SUBJECT SELECT ================= */
+  .subject-select-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .subject-select-wrapper select {
+    flex: 1;
+  }
+  .add-btn {
+    background: #eef2ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 40px;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #1e40af;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .add-btn:hover {
+    background: #e0edff;
+  }
+  .inline-add {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    align-items: center;
+  }
+  .inline-add input {
+    flex: 1;
+  }
+  .inline-add button {
+    padding: 6px 12px;
+    border-radius: 30px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+    font-size: 0.75rem;
+  }
+  .inline-add button:last-child {
+    background: #e2e8f0;
+    color: #1e293b;
+  }
+
+  /* ================= DEPARTMENT DROPDOWN ================= */
+  .department-wrapper {
+    position: relative;
+  }
+  .dropdown-container {
+    position: relative;
+  }
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    margin-top: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 20;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  .dropdown-item {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .dropdown-item:hover {
+    background: #eff6ff;
+  }
+  .dropdown-item.add {
+    color: #2563eb;
+    font-weight: 600;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  /* ================= MULTI-SELECT DROPDOWNS ================= */
+  .multi-select {
+    position: relative;
+  }
+  .select-box {
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    min-height: 42px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    background: white;
+  }
+  .select-box:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+  }
+  .tags input {
+    border: none;
+    outline: none;
+    flex: 1;
+    min-width: 120px;
+    font-size: 0.85rem;
+    padding: 4px 0;
+    background: transparent;
+  }
+  .tag {
+    background: #2563eb;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tag .remove {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .dropdown-box {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    z-index: 100;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+  }
+  .dropdown-item {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .dropdown-item:hover, .dropdown-item.active {
+    background: #eff6ff;
+  }
+  .dropdown-item input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: #3b82f6;
+    pointer-events: none;
+  }
+  .add-new {
+    padding: 8px 12px;
+    text-align: center;
+    color: #2563eb;
+    font-weight: 600;
+    cursor: pointer;
+    border-top: 1px solid #e2e8f0;
+    background: #f8fafc;
+  }
+  .add-new:hover {
+    background: #eff6ff;
+  }
+  .no-data {
+    padding: 12px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.8rem;
+  }
+
+  /* ================= INFO BOX ================= */
+  .info-box {
+    background: #eff6ff;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+
+  /* ================= COMPENSATION SECTION ================= */
+  .compensation-section {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  /* ================= PHONE INPUT ================= */
+  .iti {
+    width: 100%;
+  }
+  .iti__flag-container {
+    z-index: 2;
+  }
+  .iti--separate-dial-code .iti__selected-flag {
+    background-color: #f1f5f9;
+    border-radius: 10px 0 0 10px;
+  }
+
+  /* ================= SUBMIT BUTTON ================= */
+  .submit-btn {
+    display: block;
+    margin: 30px auto 0;
+    width: 60%;
+    max-width: 400px;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+  }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 768px) {
+    .container {
+      padding: 100px 12px 30px;
+    }
+    .form-card {
+      border-radius: 12px;
+    }
+    form {
+      padding: 20px;
+    }
+    .grid, .triple-row {
+      grid-template-columns: 1fr;
+    }
+    .full-width {
+      grid-column: auto;
+    }
+    .dropdown-input-group {
+      flex-direction: column;
+    }
+    .dropdown-input-group input {
+      width: 100%;
+    }
+    .dropdown-toggle-btn {
+      width: 100%;
+    }
+    .submit-btn {
+      width: 100%;
+    }
+    .checkbox-row {
+      gap: 6px;
+    }
+    .checkbox-option {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    form {
+      padding: 16px;
+    }
+    legend {
+      font-size: 1rem;
+    }
+    .button-group button {
+      width: 100%;
+    }
+    .subject-select-wrapper {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .add-btn {
+      text-align: center;
+    }
+  }
 </style>
