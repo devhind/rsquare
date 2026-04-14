@@ -5,6 +5,8 @@
   let emailError = "";
   let isSubmitted = false;
   let isLoading = false;
+  let resendCountdown = 0;
+  let resendInterval;
 
   function validateEmail() {
     const emailRegex = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
@@ -12,31 +14,72 @@
       emailError = "Email is required";
       return false;
     } else if (!emailRegex.test(email.trim())) {
-      emailError = "Enter a valid email address";
+      emailError = "Enter a valid email address (e.g., name@domain.com)";
       return false;
     }
     emailError = "";
     return true;
   }
 
-  async function handleResetPassword() {
+  // Clear error on typing
+  function handleEmailInput() {
+    if (emailError) emailError = "";
+  }
+
+  async function sendResetLink() {
     if (!validateEmail()) return;
 
     isLoading = true;
 
-    // Simulate API call (replace with actual reset endpoint)
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-    // Success – show message and optionally redirect
-    isSubmitted = true;
-    isLoading = false;
-
-    // Log for debugging
-    console.log("Password reset requested for:", email);
-
-    // You could also redirect to login after a delay:
-    // setTimeout(() => goto('/login'), 3000);
+    // Simulate API call – replace with your actual endpoint
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      console.log("Password reset requested for:", email);
+      isSubmitted = true;
+    } catch (error) {
+      emailError = "Something went wrong. Please try again.";
+    } finally {
+      isLoading = false;
+    }
   }
+
+  async function handleResend() {
+    if (resendCountdown > 0) return;
+    isLoading = true;
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log("Reset link resent to:", email);
+      startResendCooldown();
+    } catch (error) {
+      emailError = "Failed to resend. Please try again.";
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  function startResendCooldown() {
+    resendCountdown = 30;
+    if (resendInterval) clearInterval(resendInterval);
+    resendInterval = setInterval(() => {
+      if (resendCountdown <= 1) {
+        clearInterval(resendInterval);
+        resendCountdown = 0;
+      } else {
+        resendCountdown--;
+      }
+    }, 1000);
+  }
+
+  function handleResetPassword(e) {
+    e.preventDefault();
+    sendResetLink();
+  }
+
+  // Cleanup interval on component destroy
+  import { onDestroy } from 'svelte';
+  onDestroy(() => {
+    if (resendInterval) clearInterval(resendInterval);
+  });
 </script>
 
 <svelte:head>
@@ -66,9 +109,12 @@
             bind:value={email}
             class:error={emailError}
             disabled={isLoading}
+            on:input={handleEmailInput}
+            aria-invalid={!!emailError}
+            aria-describedby="email-error"
           />
           {#if emailError}
-            <span class="error-text">{emailError}</span>
+            <span id="email-error" class="error-text">{emailError}</span>
           {/if}
         </div>
 
@@ -86,9 +132,22 @@
         <i class="fas fa-check-circle"></i>
         <h3>Check your email</h3>
         <p>We've sent a password reset link to <strong>{email}</strong></p>
-        <button class="back-to-login" on:click={() => goto('/login')}>
-          Back to Login
-        </button>
+        <div class="success-actions">
+          <button class="back-to-login" on:click={() => goto('/login')}>
+            <i class="fas fa-sign-in-alt"></i> Back to Login
+          </button>
+          <button
+            class="resend-link"
+            on:click={handleResend}
+            disabled={resendCountdown > 0 || isLoading}
+          >
+            {#if resendCountdown > 0}
+              <i class="fas fa-clock"></i> Resend in {resendCountdown}s
+            {:else}
+              <i class="fas fa-redo-alt"></i> Resend Link
+            {/if}
+          </button>
+        </div>
       </div>
     {/if}
 
@@ -99,31 +158,32 @@
 </div>
 
 <style>
-  /* Scoped styles – matches login page perfectly */
   .forgot-page {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 100%);
-    padding: 4rem 1.5rem;
+    padding: 2rem 1.5rem;
     width: 100%;
-    min-height: 0;
+    min-height: 100vh;
   }
 
   .forgot-card {
     max-width: 440px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(16px);
     border-radius: 2rem;
     padding: 2rem 2rem 2.2rem;
     box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.5);
-    transition: transform 0.2s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
   }
 
   .forgot-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
+    box-shadow: 0 30px 50px -16px rgba(0, 0, 0, 0.3);
   }
 
   .header {
@@ -140,7 +200,12 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto 1rem;
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+    transition: transform 0.2s;
+  }
+
+  .forgot-card:hover .icon-circle {
+    transform: scale(1.02);
   }
 
   .icon-circle i {
@@ -156,6 +221,7 @@
     -webkit-background-clip: text;
     color: transparent;
     margin-bottom: 0.3rem;
+    letter-spacing: -0.3px;
   }
 
   .header p {
@@ -176,17 +242,18 @@
     color: #94a3b8;
     font-size: 1rem;
     pointer-events: none;
+    z-index: 1;
   }
 
   input {
     width: 100%;
     padding: 0.9rem 1rem 0.9rem 2.8rem;
     border-radius: 1rem;
-    border: 1px solid #e2e8f0;
+    border: 1.5px solid #e2e8f0;
     background: white;
     font-family: inherit;
     font-size: 0.95rem;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
     outline: none;
   }
 
@@ -197,14 +264,22 @@
 
   input.error {
     border-color: #e11d48;
+    background-color: #fff5f7;
+  }
+
+  input:disabled {
+    background-color: #f8fafc;
+    cursor: not-allowed;
+    opacity: 0.7;
   }
 
   .error-text {
     font-size: 0.7rem;
     color: #e11d48;
-    margin-top: 0.3rem;
+    margin-top: 0.35rem;
     display: block;
     margin-left: 0.5rem;
+    font-weight: 500;
   }
 
   .reset-btn {
@@ -217,7 +292,7 @@
     font-size: 1rem;
     color: white;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
     display: flex;
     align-items: center;
@@ -226,14 +301,19 @@
   }
 
   .reset-btn:hover:not(:disabled) {
-    transform: scale(1.02);
+    transform: translateY(-2px);
     background: linear-gradient(105deg, #4f46e5, #2563eb);
     box-shadow: 0 12px 22px -10px #6366f1;
+  }
+
+  .reset-btn:active:not(:disabled) {
+    transform: translateY(1px);
   }
 
   .reset-btn:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+    transform: none;
   }
 
   .success-message {
@@ -245,6 +325,7 @@
     font-size: 3.5rem;
     color: #10b981;
     margin-bottom: 1rem;
+    animation: popIn 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
   }
 
   .success-message h3 {
@@ -255,24 +336,55 @@
 
   .success-message p {
     color: #475569;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
     word-break: break-word;
   }
 
-  .back-to-login {
-    background: transparent;
-    border: 1px solid #6366f1;
-    color: #6366f1;
+  .success-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .back-to-login, .resend-link {
     padding: 0.7rem 1.5rem;
     border-radius: 2rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .back-to-login {
+    background: linear-gradient(105deg, #6366f1, #3b82f6);
+    border: none;
+    color: white;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
   }
 
   .back-to-login:hover {
-    background: #6366f1;
-    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(99, 102, 241, 0.4);
+  }
+
+  .resend-link {
+    background: transparent;
+    border: 1.5px solid #6366f1;
+    color: #6366f1;
+  }
+
+  .resend-link:hover:not(:disabled) {
+    background: rgba(99, 102, 241, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .resend-link:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   .login-link {
@@ -286,16 +398,44 @@
     color: #6366f1;
     font-weight: 600;
     text-decoration: none;
+    transition: color 0.2s;
   }
 
   .login-link a:hover {
     text-decoration: underline;
+    color: #4f46e5;
+  }
+
+  /* Animations */
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes popIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    80% {
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   /* Responsive */
   @media (max-width: 550px) {
     .forgot-page {
-      padding: 2rem 1rem;
+      padding: 1rem;
     }
     .forgot-card {
       padding: 1.5rem;
@@ -310,12 +450,18 @@
     .icon-circle i {
       font-size: 1.5rem;
     }
+    .success-actions {
+      flex-direction: column;
+    }
+    .back-to-login, .resend-link {
+      justify-content: center;
+    }
   }
 
-  @media (max-height: 550px) {
+  @media (max-height: 600px) {
     .forgot-page {
       align-items: flex-start;
-      padding: 2rem 0;
+      padding-top: 3rem;
     }
   }
 </style>

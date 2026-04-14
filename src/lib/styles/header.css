@@ -1,10 +1,10 @@
 /* ===================== BASE HEADER STYLES ===================== */
 
 body{
-
-    margin:0px;
-
+  margin: 0;
+  padding-top: 95px; /* SAME as header height */
 }
+
 
 .header-fixed {
   position: fixed;

@@ -6,6 +6,7 @@
   let showPassword = false;
   let emailError = "";
   let passwordError = "";
+  let isLoading = false;
 
   function validateForm() {
     emailError = "";
@@ -32,12 +33,30 @@
     return isValid;
   }
 
-  function handleLogin() {
-    if (validateForm()) {
+  async function handleLogin() {
+    if (!validateForm()) return;
+    
+    isLoading = true;
+    
+    // Simulate API call (replace with actual authentication)
+    try {
+      await new Promise(resolve => setTimeout(resolve, 800));
+      console.log("Login attempt:", { email, password });
       alert("✅ Login Successful 🚀");
-      console.log({ email, password });
       goto('/');
+    } catch (error) {
+      alert("Login failed. Please try again.");
+    } finally {
+      isLoading = false;
     }
+  }
+
+  // Clear error on input
+  function handleEmailInput() {
+    if (emailError) emailError = "";
+  }
+  function handlePasswordInput() {
+    if (passwordError) passwordError = "";
   }
 </script>
 
@@ -66,9 +85,13 @@
           placeholder="Email address"
           bind:value={email}
           class:error={emailError}
+          on:input={handleEmailInput}
+          aria-invalid={!!emailError}
+          aria-describedby="email-error"
+          disabled={isLoading}
         />
         {#if emailError}
-          <span class="error-text">{emailError}</span>
+          <span id="email-error" class="error-text">{emailError}</span>
         {/if}
       </div>
 
@@ -79,26 +102,40 @@
           placeholder="Password"
           bind:value={password}
           class:error={passwordError}
+          on:input={handlePasswordInput}
+          aria-invalid={!!passwordError}
+          aria-describedby="password-error"
+          disabled={isLoading}
         />
-        <button type="button" class="password-toggle" on:click={() => showPassword = !showPassword}>
+        <button
+          type="button"
+          class="password-toggle"
+          on:click={() => showPassword = !showPassword}
+          aria-label={showPassword ? "Hide password" : "Show password"}
+        >
           <i class={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
         </button>
         {#if passwordError}
-          <span class="error-text">{passwordError}</span>
+          <span id="password-error" class="error-text">{passwordError}</span>
         {/if}
       </div>
 
       <div class="options">
         <label class="checkbox-label">
-          <input type="checkbox" />
+          <input type="checkbox" disabled={isLoading} />
           <span>Remember me</span>
         </label>
-        <a href="#" class="forgot-link">Forgot password?</a>
+        <a href="/job-seekers/forgot-password" class="forgot-link">Forgot password?</a>
       </div>
 
-      <button type="submit" class="login-btn">
-        <span>Login</span>
-        <i class="fas fa-arrow-right"></i>
+      <button type="submit" class="login-btn" disabled={isLoading}>
+        {#if isLoading}
+          <i class="fas fa-spinner fa-pulse"></i>
+          <span>Logging in...</span>
+        {:else}
+          <span>Login</span>
+          <i class="fas fa-arrow-right"></i>
+        {/if}
       </button>
     </form>
 
@@ -109,33 +146,31 @@
 </div>
 
 <style>
-  /* Scoped styles – no global leakage */
   .login-page {
-    flex: 1;                     /* fills remaining space between header & footer */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 100%);
-    padding: 2rem 1.5rem;
-    width: 100%;
-    min-height: 0;
-                   /* allows flex child to shrink */
-  }
+  min-height: calc(100vh - 95px); /* full screen minus header */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 100%);
+   padding: 10px;
+}
 
   .login-card {
     max-width: 440px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(16px);
     border-radius: 2rem;
     padding: 2rem 2rem 2.2rem;
     box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.5);
-    transition: transform 0.2s ease;
-    margin-top: 80px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .login-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
+    box-shadow: 0 30px 50px -16px rgba(0, 0, 0, 0.3);
   }
 
   .header {
@@ -152,7 +187,12 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto 1rem;
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+    transition: transform 0.2s;
+  }
+
+  .login-card:hover .icon-circle {
+    transform: scale(1.02);
   }
 
   .icon-circle i {
@@ -168,6 +208,7 @@
     -webkit-background-clip: text;
     color: transparent;
     margin-bottom: 0.3rem;
+    letter-spacing: -0.3px;
   }
 
   .header p {
@@ -188,17 +229,18 @@
     color: #94a3b8;
     font-size: 1rem;
     pointer-events: none;
+    z-index: 1;
   }
 
   input {
     width: 100%;
     padding: 0.9rem 1rem 0.9rem 2.8rem;
     border-radius: 1rem;
-    border: 1px solid #e2e8f0;
+    border: 1.5px solid #e2e8f0;
     background: white;
     font-family: inherit;
     font-size: 0.95rem;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
     outline: none;
   }
 
@@ -209,6 +251,13 @@
 
   input.error {
     border-color: #e11d48;
+    background-color: #fff5f7;
+  }
+
+  input:disabled {
+    background-color: #f8fafc;
+    cursor: not-allowed;
+    opacity: 0.7;
   }
 
   .password-toggle {
@@ -224,6 +273,7 @@
     padding: 0;
     display: flex;
     align-items: center;
+    transition: color 0.2s;
   }
 
   .password-toggle:hover {
@@ -233,9 +283,10 @@
   .error-text {
     font-size: 0.7rem;
     color: #e11d48;
-    margin-top: 0.3rem;
+    margin-top: 0.35rem;
     display: block;
     margin-left: 0.5rem;
+    font-weight: 500;
   }
 
   .options {
@@ -252,23 +303,31 @@
     gap: 0.5rem;
     cursor: pointer;
     color: #334155;
+    user-select: none;
   }
 
   .checkbox-label input {
     width: 1rem;
     height: 1rem;
+    margin: 0;
     cursor: pointer;
     accent-color: #6366f1;
+  }
+
+  .checkbox-label span {
+    line-height: 1;
   }
 
   .forgot-link {
     color: #6366f1;
     text-decoration: none;
     font-weight: 500;
+    transition: color 0.2s;
   }
 
   .forgot-link:hover {
     text-decoration: underline;
+    color: #4f46e5;
   }
 
   .login-btn {
@@ -281,7 +340,7 @@
     font-size: 1rem;
     color: white;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
     display: flex;
     align-items: center;
@@ -289,10 +348,20 @@
     gap: 0.6rem;
   }
 
-  .login-btn:hover {
-    transform: scale(1.02);
+  .login-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
     background: linear-gradient(105deg, #4f46e5, #2563eb);
     box-shadow: 0 12px 22px -10px #6366f1;
+  }
+
+  .login-btn:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  .login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
   }
 
   .signup {
@@ -306,10 +375,12 @@
     color: #6366f1;
     font-weight: 600;
     text-decoration: none;
+    transition: color 0.2s;
   }
 
   .signup a:hover {
     text-decoration: underline;
+    color: #4f46e5;
   }
 
   /* Responsive */
@@ -335,13 +406,34 @@
       gap: 0.8rem;
       align-items: flex-start;
     }
+    input {
+      padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+    }
   }
 
-  /* Very short screens – allow scrolling */
-  @media (max-height: 550px) {
-    .login-page {
-      align-items: flex-start;
-      padding: 1rem 0;
+  /* Extra small devices */
+  @media (max-width: 380px) {
+    .login-card {
+      padding: 1.2rem;
     }
+    .login-btn {
+      padding: 0.8rem;
+    }
+  }
+
+  /* Animation */
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .login-card {
+    animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
   }
 </style>

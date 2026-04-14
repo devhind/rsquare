@@ -1,4 +1,3 @@
-
 <script>
   // --- Reactive state ---
   let form = {
@@ -333,9 +332,9 @@
     </form>
 
     <p class="login">
-  Already have an account? 
-  <a href="/job-seekers/otp">Log in</a>
-</p>
+      Already have an account?
+      <a href="/job-seekers/otp">Log in</a>
+    </p>
   </div>
 </section>
 
@@ -344,7 +343,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
   }
 
   body {
@@ -352,7 +350,6 @@
     background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 100%);
     min-height: 100vh;
     overflow-x: hidden;
-    
   }
 
   /* animated background blobs */
@@ -398,7 +395,6 @@
     gap: 2rem;
     max-width: 1400px;
     margin: 0 auto;
-    margin-top: 96px;
   }
 
   /* LEFT SECTION */
@@ -661,14 +657,14 @@
     color: #334155;
   }
 
-  .login span {
+  .login a {
     color: #2563eb;
     font-weight: 600;
-    cursor: pointer;
+    text-decoration: none;
     transition: 0.2s;
   }
 
-  .login span:hover {
+  .login a:hover {
     text-decoration: underline;
   }
 
