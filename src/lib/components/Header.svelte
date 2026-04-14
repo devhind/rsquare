@@ -412,7 +412,7 @@
               on:mouseleave={onDropdownLeave}
             >
               <h4>Employers</h4>
-              <a href="#">Registration</a>
+              <a href="Employers/Registration">Registration</a>
               <a href="#">Company Profile</a>
               <a href="#">Change Password</a>
               <a href="#">Free Job Posting</a>
@@ -752,7 +752,7 @@
       </div>
       {#if mobileEmployerOpen}
         <div class="sidebar-sublinks">
-          <a href="#" on:click={closeMenu}>Registration</a>
+          <a href="Employers/Registration" on:click={closeMenu}>Registration</a>
           <a href="#" on:click={closeMenu}>Company Profile</a>
           <a href="#" on:click={closeMenu}>Change Password</a>
           <a href="#" on:click={closeMenu}>Free Job Posting</a>
