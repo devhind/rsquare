@@ -413,9 +413,9 @@
             >
               <h4>Employers</h4>
               <a href="Employers/Registration">Registration</a>
-              <a href="#">Company Profile</a>
-              <a href="#">Change Password</a>
-              <a href="#">Free Job Posting</a>
+              <a href="Employers\Registration\company-profile">Company Profile</a>
+              <a href="Employers\Registration\change-password">Change Password</a>
+              <a href="Employers\Registration\free-posting">Free Job Posting</a>
               <a href="#">Resume Search</a>
               <a href="#">Recruitment Packages for Employer</a>
               <a href="#">Consultant Membership Plan</a>
@@ -753,9 +753,9 @@
       {#if mobileEmployerOpen}
         <div class="sidebar-sublinks">
           <a href="Employers/Registration" on:click={closeMenu}>Registration</a>
-          <a href="#" on:click={closeMenu}>Company Profile</a>
-          <a href="#" on:click={closeMenu}>Change Password</a>
-          <a href="#" on:click={closeMenu}>Free Job Posting</a>
+          <a href="Employers/Registration/comapany profile" on:click={closeMenu}>Company Profile</a>
+          <a href="Employers\Registration\change-password" on:click={closeMenu}>Change Password</a>
+          <a href="Employers\Registration\free-posting" on:click={closeMenu}>Free Job Posting</a>
           <a href="#" on:click={closeMenu}>Resume Search</a>
           <a href="#" on:click={closeMenu}>Recruitment Packages for Employer</a>
           <a href="#" on:click={closeMenu}>Consultant Membership Plan</a>
