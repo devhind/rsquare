@@ -1478,4 +1478,5 @@
     .inline-add-row { flex-wrap: wrap; }
     .inline-add-row input { min-width: 100%; }
   }
+  
 </style>
