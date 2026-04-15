@@ -83,7 +83,6 @@
   let facilitySearchTerm = "";
   let facilityHighlightedIndex = -1;
 
-  // ========== LOAD & SAVE FUNCTIONS ==========
   function loadFacilities() {
     const stored = localStorage.getItem("job_facilities");
     if (stored) customFacilities = JSON.parse(stored);
@@ -120,24 +119,14 @@
 
   function handleFacilityKey(e) {
     if (!showFacilityDropdown) return;
-    if (e.key === "ArrowDown") {
+    if (e.key === "ArrowDown") { e.preventDefault(); facilityHighlightedIndex = (facilityHighlightedIndex + 1) % filteredFacilities.length; }
+    else if (e.key === "ArrowUp") { e.preventDefault(); facilityHighlightedIndex = (facilityHighlightedIndex - 1 + filteredFacilities.length) % filteredFacilities.length; }
+    else if (e.key === "Enter") {
       e.preventDefault();
-      facilityHighlightedIndex = (facilityHighlightedIndex + 1) % filteredFacilities.length;
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      facilityHighlightedIndex = (facilityHighlightedIndex - 1 + filteredFacilities.length) % filteredFacilities.length;
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-      if (facilityHighlightedIndex >= 0) {
-        toggleFacility(filteredFacilities[facilityHighlightedIndex]);
-      } else if (facilitySearchTerm.trim()) {
-        addFacility(facilitySearchTerm);
-      }
-      facilitySearchTerm = "";
-      showFacilityDropdown = false;
-    } else if (e.key === "Escape") {
-      showFacilityDropdown = false;
-    }
+      if (facilityHighlightedIndex >= 0) toggleFacility(filteredFacilities[facilityHighlightedIndex]);
+      else if (facilitySearchTerm.trim()) addFacility(facilitySearchTerm);
+      facilitySearchTerm = ""; showFacilityDropdown = false;
+    } else if (e.key === "Escape") { showFacilityDropdown = false; }
   }
 
   // ========== CERTIFICATES FUNCTIONS ==========
@@ -156,45 +145,27 @@
   function addCertificate(name) {
     const value = name.trim();
     if (!value) return;
-    if (!allCertificates.includes(value)) {
-      customCertificates = [...customCertificates, value];
-      saveCustomCertificates();
-    }
-    if (!selectedCertificates.includes(value)) {
-      selectedCertificates = [...selectedCertificates, value];
-    }
-    certSearchTerm = "";
-    showCertDropdown = false;
+    if (!allCertificates.includes(value)) { customCertificates = [...customCertificates, value]; saveCustomCertificates(); }
+    if (!selectedCertificates.includes(value)) selectedCertificates = [...selectedCertificates, value];
+    certSearchTerm = ""; showCertDropdown = false;
   }
 
   function toggleCertificate(item) {
-    if (selectedCertificates.includes(item)) {
-      selectedCertificates = selectedCertificates.filter(i => i !== item);
-    } else {
-      selectedCertificates = [...selectedCertificates, item];
-    }
+    selectedCertificates = selectedCertificates.includes(item)
+      ? selectedCertificates.filter(i => i !== item)
+      : [...selectedCertificates, item];
   }
 
   function handleCertKey(e) {
     if (!showCertDropdown) return;
-    if (e.key === "ArrowDown") {
+    if (e.key === "ArrowDown") { e.preventDefault(); certHighlightedIndex = (certHighlightedIndex + 1) % filteredCertificates.length; }
+    else if (e.key === "ArrowUp") { e.preventDefault(); certHighlightedIndex = (certHighlightedIndex - 1 + filteredCertificates.length) % filteredCertificates.length; }
+    else if (e.key === "Enter") {
       e.preventDefault();
-      certHighlightedIndex = (certHighlightedIndex + 1) % filteredCertificates.length;
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      certHighlightedIndex = (certHighlightedIndex - 1 + filteredCertificates.length) % filteredCertificates.length;
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-      if (certHighlightedIndex >= 0) {
-        toggleCertificate(filteredCertificates[certHighlightedIndex]);
-      } else if (certSearchTerm.trim()) {
-        addCertificate(certSearchTerm);
-      }
-      certSearchTerm = "";
-      showCertDropdown = false;
-    } else if (e.key === "Escape") {
-      showCertDropdown = false;
-    }
+      if (certHighlightedIndex >= 0) toggleCertificate(filteredCertificates[certHighlightedIndex]);
+      else if (certSearchTerm.trim()) addCertificate(certSearchTerm);
+      certSearchTerm = ""; showCertDropdown = false;
+    } else if (e.key === "Escape") { showCertDropdown = false; }
   }
 
   // ========== SKILLS FUNCTIONS ==========
@@ -213,45 +184,27 @@
   function addSkill(name) {
     const value = name.trim();
     if (!value) return;
-    if (!allSkills.includes(value)) {
-      customSkillsList = [...customSkillsList, value];
-      saveCustomSkillsList();
-    }
-    if (!selectedSkillsList.includes(value)) {
-      selectedSkillsList = [...selectedSkillsList, value];
-    }
-    skillsSearchTerm = "";
-    showSkillsDropdown = false;
+    if (!allSkills.includes(value)) { customSkillsList = [...customSkillsList, value]; saveCustomSkillsList(); }
+    if (!selectedSkillsList.includes(value)) selectedSkillsList = [...selectedSkillsList, value];
+    skillsSearchTerm = ""; showSkillsDropdown = false;
   }
 
   function toggleSkill(item) {
-    if (selectedSkillsList.includes(item)) {
-      selectedSkillsList = selectedSkillsList.filter(i => i !== item);
-    } else {
-      selectedSkillsList = [...selectedSkillsList, item];
-    }
+    selectedSkillsList = selectedSkillsList.includes(item)
+      ? selectedSkillsList.filter(i => i !== item)
+      : [...selectedSkillsList, item];
   }
 
   function handleSkillsKey(e) {
     if (!showSkillsDropdown) return;
-    if (e.key === "ArrowDown") {
+    if (e.key === "ArrowDown") { e.preventDefault(); skillsHighlightedIndex = (skillsHighlightedIndex + 1) % filteredSkills.length; }
+    else if (e.key === "ArrowUp") { e.preventDefault(); skillsHighlightedIndex = (skillsHighlightedIndex - 1 + filteredSkills.length) % filteredSkills.length; }
+    else if (e.key === "Enter") {
       e.preventDefault();
-      skillsHighlightedIndex = (skillsHighlightedIndex + 1) % filteredSkills.length;
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      skillsHighlightedIndex = (skillsHighlightedIndex - 1 + filteredSkills.length) % filteredSkills.length;
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-      if (skillsHighlightedIndex >= 0) {
-        toggleSkill(filteredSkills[skillsHighlightedIndex]);
-      } else if (skillsSearchTerm.trim()) {
-        addSkill(skillsSearchTerm);
-      }
-      skillsSearchTerm = "";
-      showSkillsDropdown = false;
-    } else if (e.key === "Escape") {
-      showSkillsDropdown = false;
-    }
+      if (skillsHighlightedIndex >= 0) toggleSkill(filteredSkills[skillsHighlightedIndex]);
+      else if (skillsSearchTerm.trim()) addSkill(skillsSearchTerm);
+      skillsSearchTerm = ""; showSkillsDropdown = false;
+    } else if (e.key === "Escape") { showSkillsDropdown = false; }
   }
 
   // ========== LANGUAGES FUNCTIONS ==========
@@ -269,8 +222,7 @@
       saveCustomLanguages();
       selectedLanguages = [...selectedLanguages, name];
     }
-    newLanguageInput = "";
-    showNewLanguageInput = false;
+    newLanguageInput = ""; showNewLanguageInput = false;
   }
   function removeCustomLanguage(lang) {
     if (confirm(`Remove "${lang}" from language list?`)) {
@@ -317,22 +269,17 @@
       selectedMainSubject = name;
       selectedSubSubject = "";
     }
-    newMainSubjectInput = "";
-    showNewMainSubjectInput = false;
+    newMainSubjectInput = ""; showNewMainSubjectInput = false;
   }
   function addNewSubSubject() {
-    if (!selectedMainSubject) {
-      alert("Please select a main subject first");
-      return;
-    }
+    if (!selectedMainSubject) { alert("Please select a main subject first"); return; }
     const name = newSubSubjectInput.trim();
     if (name && !subSubjectsMap[selectedMainSubject].includes(name)) {
       subSubjectsMap[selectedMainSubject] = [...subSubjectsMap[selectedMainSubject], name];
       saveSubjectData();
       selectedSubSubject = name;
     }
-    newSubSubjectInput = "";
-    showNewSubSubjectInput = false;
+    newSubSubjectInput = ""; showNewSubSubjectInput = false;
   }
   function onMainSubjectChange(value) {
     selectedMainSubject = value;
@@ -345,7 +292,7 @@
     if (!form.company.trim()) newErrors.company = "Company name is required";
     if (!form.contact.trim()) newErrors.contact = "Contact person is required";
     if (!form.email.trim()) newErrors.email = "Email is required";
-    else if (!/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/.test(form.email)) newErrors.email = "Valid email is required";
+    else if (!/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/.test(form.email)) newErrors.email = "Valid email required";
     if (!form.phone) newErrors.phone = "Phone number is required";
     if (!form.jobTitle.trim()) newErrors.jobTitle = "Job title is required";
     if (!form.location.trim()) newErrors.location = "Job location is required";
@@ -369,7 +316,7 @@
     if (phoneInput) form.phone = phoneInput.getNumber();
     if (!validateForm()) {
       alert("Please fill all required fields correctly.");
-      const firstError = document.querySelector(".error");
+      const firstError = document.querySelector(".error-msg");
       if (firstError) firstError.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
@@ -385,10 +332,8 @@
     showDepartmentDropdown = true;
   }
   function selectDepartment(dept) {
-    form.department = dept;
-    departmentSearch = dept;
-    showDepartmentDropdown = false;
-    clearTimeout(closeTimeout);
+    form.department = dept; departmentSearch = dept;
+    showDepartmentDropdown = false; clearTimeout(closeTimeout);
   }
   function addNewDepartment() {
     const newDept = departmentSearch.trim();
@@ -397,28 +342,13 @@
       departments = [...departments, newDept];
       localStorage.setItem("departments", JSON.stringify(departments));
     }
-    form.department = newDept;
-    departmentSearch = newDept;
-    showDepartmentDropdown = false;
-    clearTimeout(closeTimeout);
+    form.department = newDept; departmentSearch = newDept;
+    showDepartmentDropdown = false; clearTimeout(closeTimeout);
   }
-  function closeDropdownDelayed() {
-    closeTimeout = setTimeout(() => { showDepartmentDropdown = false; }, 200);
-  }
+  function closeDropdownDelayed() { closeTimeout = setTimeout(() => { showDepartmentDropdown = false; }, 200); }
   function toggleDepartmentDropdown() {
     showDepartmentDropdown = !showDepartmentDropdown;
     if (showDepartmentDropdown) searchDepartment();
-  }
-
-  // ========== TOGGLE FUNCTIONS FOR OTHER DROPDOWNS ==========
-  function toggleCertDropdown() {
-    showCertDropdown = !showCertDropdown;
-  }
-  function toggleSkillsDropdown() {
-    showSkillsDropdown = !showSkillsDropdown;
-  }
-  function toggleFacilityDropdown() {
-    showFacilityDropdown = !showFacilityDropdown;
   }
 
   // ========== OUTSIDE CLICK HANDLERS ==========
@@ -429,7 +359,7 @@
     if (cert && !cert.contains(event.target)) showCertDropdown = false;
     const skill = document.querySelector(".skills-multi-select");
     if (skill && !skill.contains(event.target)) showSkillsDropdown = false;
-    const dept = document.querySelector(".department-wrapper");
+    const dept = document.querySelector(".dept-wrapper");
     if (dept && !dept.contains(event.target)) showDepartmentDropdown = false;
   }
 
@@ -437,11 +367,8 @@
   onMount(() => {
     const storedDepartments = localStorage.getItem("departments");
     if (storedDepartments) departments = JSON.parse(storedDepartments);
-    loadSubjectData();
-    loadCustomLanguages();
-    loadCustomCertificates();
-    loadCustomSkillsList();
-    loadFacilities();
+    loadSubjectData(); loadCustomLanguages(); loadCustomCertificates();
+    loadCustomSkillsList(); loadFacilities();
 
     flatpickr("#deadline", { dateFormat: "d/m/Y", minDate: "today", allowInput: true });
     flatpickr("#joiningDate", { dateFormat: "d/m/Y", minDate: "today", allowInput: true });
@@ -455,1068 +382,1100 @@
         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js"
       });
     }
-
     document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
+    return () => document.removeEventListener("click", handleClickOutside);
   });
 </script>
 
-<section class="container">
-  <div class="form-card">
+<div class="page-bg">
+  <div class="page-wrapper">
+
+    <!-- Header Banner -->
     <div class="form-header">
-      <h1>Post a New Job Opening</h1>
-      <p>Fill in the details below to find the perfect candidate</p>
+      <div class="header-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+          <line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Post a New Job Opening</h1>
+        <p>Fill in the details below to find the perfect candidate</p>
+      </div>
     </div>
 
-    <form on:submit|preventDefault={submitForm}>
-      <!-- 1. COMPANY INFORMATION -->
-      <fieldset>
-        <legend>Company Information</legend>
-        <div class="grid">
-          <div class="field">
-            <label>Company Name <span class="required">*</span></label>
-            <input type="text" bind:value={form.company} class={errors.company ? "error-input" : ""} />
-            {#if errors.company}<span class="error">{errors.company}</span>{/if}
-          </div>
-          <div class="field">
-            <label>Contact Person <span class="required">*</span></label>
-            <input type="text" bind:value={form.contact} class={errors.contact ? "error-input" : ""} />
-            {#if errors.contact}<span class="error">{errors.contact}</span>{/if}
-          </div>
-          <div class="field">
-            <label>Email <span class="required">*</span></label>
-            <input type="email" bind:value={form.email} class={errors.email ? "error-input" : ""} />
-            {#if errors.email}<span class="error">{errors.email}</span>{/if}
-          </div>
-          <div class="field">
-            <label>Phone <span class="required">*</span></label>
-            <input id="phone" type="tel" class={errors.phone ? "error-input" : ""} />
-            {#if errors.phone}<span class="error">{errors.phone}</span>{/if}
-          </div>
-          <div class="field">
-            <label>Company Website</label>
-            <input type="url" bind:value={form.website} placeholder="https://example.com" />
-          </div>
-          <div class="field">
-            <label>Company Size</label>
-            <select bind:value={form.companySize}>
-              <option value="">Select</option>
-              <option>1-10</option><option>11-50</option><option>51-200</option><option>201-500</option><option>500+</option>
-            </select>
-          </div>
-          <div class="field full-width">
-            <label>Brief Details about Company</label>
-            <textarea rows="2" bind:value={form.briefDetails} placeholder="Tell us a little about your company..."></textarea>
-          </div>
-        </div>
-      </fieldset>
+    <form on:submit|preventDefault={submitForm} class="main-form">
 
-      <!-- 2. HIRING PREFERENCE -->
-      <fieldset>
-        <legend>Hiring Preference</legend>
-        <div class="field">
-          <label>How soon do you want to fill the position? <span class="required">*</span></label>
-          <div class="button-group">
-            <button type="button" class:selected={form.hireSpeed === "immediate"} on:click={() => form.hireSpeed = "immediate"}>Immediately (1-2 weeks)</button>
-            <button type="button" class:selected={form.hireSpeed === "wait"} on:click={() => form.hireSpeed = "wait"}>Can wait (3-4 weeks)</button>
+      <!-- ── 1. COMPANY INFORMATION ── -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <h2>Company Information</h2>
+        </div>
+        <div class="section-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Company Name <span class="req">*</span></label>
+              <input type="text" bind:value={form.company} class:err={errors.company} placeholder="e.g. Acme Technologies" />
+              {#if errors.company}<span class="error-msg">{errors.company}</span>{/if}
+            </div>
+            <div class="field">
+              <label>Contact Person <span class="req">*</span></label>
+              <input type="text" bind:value={form.contact} class:err={errors.contact} placeholder="Full name" />
+              {#if errors.contact}<span class="error-msg">{errors.contact}</span>{/if}
+            </div>
           </div>
-          {#if errors.hireSpeed}<span class="error">{errors.hireSpeed}</span>{/if}
-        </div>
-        <div class="field">
-          <label>How often do you need to hire? <span class="required">*</span></label>
-          <select bind:value={form.hireFrequency} class={errors.hireFrequency ? "error-input" : ""}>
-            <option value="">Select</option>
-            <option>One-time hire</option><option>Every Month</option><option>Once in a few months</option><option>Not sure</option>
-          </select>
-          {#if errors.hireFrequency}<span class="error">{errors.hireFrequency}</span>{/if}
-        </div>
-      </fieldset>
-
-      <!-- 3. JOB DETAILS -->
-      <fieldset>
-        <legend>Job Details</legend>
-        <div class="grid">
+          <div class="grid-2">
+            <div class="field">
+              <label>Email Address <span class="req">*</span></label>
+              <input type="email" bind:value={form.email} class:err={errors.email} placeholder="contact@company.com" />
+              {#if errors.email}<span class="error-msg">{errors.email}</span>{/if}
+            </div>
+            <div class="field">
+              <label>Phone Number <span class="req">*</span></label>
+              <div class="phone-wrap">
+                <input id="phone" type="tel" class:err={errors.phone} />
+              </div>
+              {#if errors.phone}<span class="error-msg">{errors.phone}</span>{/if}
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label>Company Website</label>
+              <input type="url" bind:value={form.website} placeholder="https://company.com" />
+            </div>
+            <div class="field">
+              <label>Company Size</label>
+              <select bind:value={form.companySize}>
+                <option value="">Select range</option>
+                <option>1–10</option><option>11–50</option><option>51–200</option><option>201–500</option><option>500+</option>
+              </select>
+            </div>
+          </div>
           <div class="field">
-            <label>Job Title <span class="required">*</span></label>
-            <input type="text" bind:value={form.jobTitle} class={errors.jobTitle ? "error-input" : ""} />
-            {#if errors.jobTitle}<span class="error">{errors.jobTitle}</span>{/if}
+            <label>Brief Company Description</label>
+            <textarea rows="3" bind:value={form.briefDetails} placeholder="Tell candidates a bit about your company culture, mission, and values…"></textarea>
           </div>
-          <div class="field department-wrapper">
-            <label>Department</label>
-            <div class="dropdown-container">
-              <div class="dropdown-input-group">
-                <input type="text" placeholder="Search or add department" bind:value={departmentSearch}
-                  on:input={searchDepartment} on:focus={() => showDepartmentDropdown = true} on:blur={closeDropdownDelayed} />
-                <button type="button" class="dropdown-toggle-btn" on:click={toggleDepartmentDropdown}>
-                  {showDepartmentDropdown ? '▲' : '▼'}
+        </div>
+      </section>
+
+      <!-- ── 2. HIRING PREFERENCE ── -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2>Hiring Preference</h2>
+        </div>
+        <div class="section-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>How soon do you want to fill this position? <span class="req">*</span></label>
+              <div class="pill-group">
+                <button type="button" class:active={form.hireSpeed === "immediate"} on:click={() => form.hireSpeed = "immediate"}>
+                  ⚡ Immediately (1–2 weeks)
+                </button>
+                <button type="button" class:active={form.hireSpeed === "wait"} on:click={() => form.hireSpeed = "wait"}>
+                  🕐 Can wait (3–4 weeks)
                 </button>
               </div>
-              {#if showDepartmentDropdown}
-                <div class="dropdown">
-                  {#each filteredDepartments as dept}
-                    <div class="dropdown-item" on:mousedown|preventDefault={() => selectDepartment(dept)}>{dept}</div>
+              {#if errors.hireSpeed}<span class="error-msg">{errors.hireSpeed}</span>{/if}
+            </div>
+            <div class="field">
+              <label>How often do you need to hire? <span class="req">*</span></label>
+              <select bind:value={form.hireFrequency} class:err={errors.hireFrequency}>
+                <option value="">Select frequency</option>
+                <option>One-time hire</option><option>Every Month</option>
+                <option>Once in a few months</option><option>Not sure</option>
+              </select>
+              {#if errors.hireFrequency}<span class="error-msg">{errors.hireFrequency}</span>{/if}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 3. JOB DETAILS ── -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h2>Job Details</h2>
+        </div>
+        <div class="section-body">
+          <div class="grid-2">
+            <div class="field">
+              <label>Job Title <span class="req">*</span></label>
+              <input type="text" bind:value={form.jobTitle} class:err={errors.jobTitle} placeholder="e.g. Senior Software Engineer" />
+              {#if errors.jobTitle}<span class="error-msg">{errors.jobTitle}</span>{/if}
+            </div>
+            <div class="field dept-wrapper">
+              <label>Department</label>
+              <div class="combo-wrap">
+                <input type="text" placeholder="Search or add department"
+                  bind:value={departmentSearch}
+                  on:input={searchDepartment}
+                  on:focus={() => showDepartmentDropdown = true}
+                  on:blur={closeDropdownDelayed} />
+                <button type="button" class="caret-btn" on:click={toggleDepartmentDropdown}>{showDepartmentDropdown ? '▲' : '▼'}</button>
+                {#if showDepartmentDropdown}
+                  <div class="float-dropdown">
+                    {#each filteredDepartments as dept}
+                      <div class="dd-item" on:mousedown|preventDefault={() => selectDepartment(dept)}>{dept}</div>
+                    {/each}
+                    {#if filteredDepartments.length === 0 && departmentSearch.trim()}
+                      <div class="dd-item dd-add" on:mousedown|preventDefault={addNewDepartment}>+ Add "{departmentSearch}"</div>
+                    {/if}
+                  </div>
+                {/if}
+              </div>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label>Job Location <span class="req">*</span></label>
+              <input type="text" bind:value={form.location} class:err={errors.location} placeholder="e.g. Ahmedabad, Gujarat" />
+              {#if errors.location}<span class="error-msg">{errors.location}</span>{/if}
+            </div>
+            <div class="field">
+              <label>Work Mode <span class="req">*</span></label>
+              <select bind:value={form.workMode} class:err={errors.workMode}>
+                <option value="">Select mode</option>
+                <option>Onsite</option><option>Remote</option><option>Hybrid</option>
+              </select>
+              {#if errors.workMode}<span class="error-msg">{errors.workMode}</span>{/if}
+            </div>
+          </div>
+          <div class="grid-3">
+            <div class="field">
+              <label>Employment Type <span class="req">*</span></label>
+              <select bind:value={form.employmentType} class:err={errors.employmentType}>
+                <option value="">Select type</option>
+                <option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option>
+              </select>
+              {#if errors.employmentType}<span class="error-msg">{errors.employmentType}</span>{/if}
+            </div>
+            <div class="field">
+              <label>Position Type</label>
+              <select bind:value={form.positionType}>
+                <option value="">Select type</option>
+                <option>Skilled</option><option>Semi Skilled</option><option>Unskilled</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>No. of Positions</label>
+              <input type="number" bind:value={form.positions} min="1" placeholder="1" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 4. EDUCATION & EXPERIENCE ── -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <h2>Education &amp; Experience</h2>
+        </div>
+        <div class="section-body">
+
+          <!-- Degree Selection -->
+          <div class="grid-2">
+            <div class="field">
+              <label>Main Subject / Degree <span class="req">*</span></label>
+              <div class="add-select-row">
+                <select bind:value={selectedMainSubject} on:change={(e) => onMainSubjectChange(e.target.value)} class:err={errors.mainSubject}>
+                  <option value="">— Select Degree —</option>
+                  {#each mainSubjects as s}<option value={s}>{s}</option>{/each}
+                </select>
+                <button type="button" class="add-chip-btn" on:click={() => showNewMainSubjectInput = !showNewMainSubjectInput}>+ Add</button>
+              </div>
+              {#if errors.mainSubject}<span class="error-msg">{errors.mainSubject}</span>{/if}
+              {#if showNewMainSubjectInput}
+                <div class="inline-add-row">
+                  <input type="text" bind:value={newMainSubjectInput} placeholder="e.g. PhD" />
+                  <button type="button" class="save-btn" on:click={addNewMainSubject}>Save</button>
+                  <button type="button" class="cancel-btn" on:click={() => showNewMainSubjectInput = false}>Cancel</button>
+                </div>
+              {/if}
+            </div>
+
+            {#if selectedMainSubject}
+              <div class="field">
+                <label>Specialization / Sub-Subject</label>
+                <div class="add-select-row">
+                  <select bind:value={selectedSubSubject}>
+                    <option value="">— Select Specialization —</option>
+                    {#each subSubjectsMap[selectedMainSubject] || [] as sub}<option value={sub}>{sub}</option>{/each}
+                  </select>
+                  <button type="button" class="add-chip-btn" on:click={() => showNewSubSubjectInput = !showNewSubSubjectInput}>+ Add</button>
+                </div>
+                {#if showNewSubSubjectInput}
+                  <div class="inline-add-row">
+                    <input type="text" bind:value={newSubSubjectInput} placeholder="e.g. Quantum Physics" />
+                    <button type="button" class="save-btn" on:click={addNewSubSubject}>Save</button>
+                    <button type="button" class="cancel-btn" on:click={() => showNewSubSubjectInput = false}>Cancel</button>
+                  </div>
+                {/if}
+              </div>
+            {/if}
+          </div>
+
+          <!-- Experience Type -->
+          <div class="field">
+            <label>Experience Required <span class="req">*</span></label>
+            <div class="pill-group trio">
+              <button type="button" class:active={form.expType === "any"} on:click={() => form.expType = "any"}>Any Experience</button>
+              <button type="button" class:active={form.expType === "fresher"} on:click={() => form.expType = "fresher"}>Fresher Only</button>
+              <button type="button" class:active={form.expType === "experienced"} on:click={() => form.expType = "experienced"}>Experienced Only</button>
+            </div>
+          </div>
+
+          {#if form.expType === "any"}
+            <div class="info-pill">ℹ Both freshers and experienced candidates can apply.</div>
+            <div class="field half-width">
+              <label>Preferred Experience</label>
+              <select bind:value={form.anyExperience}>
+                <option value="">Select preferred range</option>
+                <option>Fresher</option><option>0–1 Years</option><option>1–2 Years</option>
+                <option>2–3 Years</option><option>3–5 Years</option><option>5+ Years</option>
+              </select>
+            </div>
+          {:else if form.expType === "fresher"}
+            <div class="info-pill">ℹ Only fresher candidates will be considered for this role.</div>
+          {:else if form.expType === "experienced"}
+            <div class="grid-2 half-mt">
+              <div class="field">
+                <label>Minimum Experience</label>
+                <select bind:value={form.minExp}>
+                  <option value="">Select min</option>
+                  {#each ["1 Year","2 Years","3 Years","4 Years","5 Years","6 Years","7 Years","8 Years","9 Years","10 Years"] as y}<option>{y}</option>{/each}
+                </select>
+              </div>
+              <div class="field">
+                <label>Maximum Experience</label>
+                <select bind:value={form.maxExp}>
+                  <option value="">Select max</option>
+                  {#each ["2 Years","3 Years","4 Years","5 Years","6 Years","7 Years","8 Years","9 Years","10 Years","12 Years","15 Years"] as y}<option>{y}</option>{/each}
+                </select>
+              </div>
+            </div>
+          {/if}
+
+          <!-- Compensation -->
+          <div class="comp-card">
+            <div class="comp-card-header">💰 Compensation</div>
+            {#if showStipend}
+              <div class="grid-2">
+                <div class="field">
+                  <label>Min. Stipend (₹) <span class="req">*</span></label>
+                  <input type="number" bind:value={form.stipendMin} class:err={errors.stipendMin} placeholder="e.g. 8000" />
+                  {#if errors.stipendMin}<span class="error-msg">{errors.stipendMin}</span>{/if}
+                </div>
+                <div class="field">
+                  <label>Max. Stipend (₹) <span class="req">*</span></label>
+                  <input type="number" bind:value={form.stipendMax} class:err={errors.stipendMax} placeholder="e.g. 15000" />
+                  {#if errors.stipendMax}<span class="error-msg">{errors.stipendMax}</span>{/if}
+                </div>
+              </div>
+            {/if}
+            {#if showSalary}
+              <div class="grid-2">
+                <div class="field">
+                  <label>Min. Salary (₹/yr) <span class="req">*</span></label>
+                  <input type="number" bind:value={form.salaryMin} class:err={errors.salaryMin} placeholder="e.g. 300000" />
+                  {#if errors.salaryMin}<span class="error-msg">{errors.salaryMin}</span>{/if}
+                </div>
+                <div class="field">
+                  <label>Max. Salary (₹/yr) <span class="req">*</span></label>
+                  <input type="number" bind:value={form.salaryMax} class:err={errors.salaryMax} placeholder="e.g. 600000" />
+                  {#if errors.salaryMax}<span class="error-msg">{errors.salaryMax}</span>{/if}
+                </div>
+              </div>
+              <div class="field">
+                <label>Performance Bonus / Incentives?</label>
+                <div class="pill-group small">
+                  <button type="button" class:active={form.bonus === "yes"} on:click={() => form.bonus = "yes"}>✓ Yes</button>
+                  <button type="button" class:active={form.bonus === "no"} on:click={() => form.bonus = "no"}>✗ No</button>
+                </div>
+              </div>
+            {/if}
+          </div>
+
+          <!-- Certificates Multi-Select -->
+          <div class="field">
+            <label>Certificates / Courses Required</label>
+            <div class="multi-select cert-multi-select">
+              <div class="ms-box" on:click={() => showCertDropdown = true}>
+                <div class="ms-tags">
+                  {#each selectedCertificates as item}
+                    <span class="ms-tag">{item}<span class="ms-remove" on:click|stopPropagation={() => toggleCertificate(item)}>×</span></span>
                   {/each}
-                  {#if filteredDepartments.length === 0 && departmentSearch.trim() !== ""}
-                    <div class="dropdown-item add" on:mousedown|preventDefault={addNewDepartment}>+ Add "{departmentSearch}"</div>
+                  <input type="text" placeholder={selectedCertificates.length ? "" : "Search certificates…"}
+                         bind:value={certSearchTerm} on:focus={() => showCertDropdown = true} on:keydown={handleCertKey} />
+                </div>
+                <button type="button" class="caret-btn" on:click|stopPropagation={() => showCertDropdown = !showCertDropdown}>{showCertDropdown ? '▲' : '▼'}</button>
+              </div>
+              {#if showCertDropdown}
+                <div class="ms-dropdown">
+                  {#each filteredCertificates as item, i}
+                    <div class="ms-item" class:ms-active={certHighlightedIndex === i} on:mousedown={() => toggleCertificate(item)}>
+                      <input type="checkbox" checked={selectedCertificates.includes(item)} readonly /> {item}
+                    </div>
+                  {/each}
+                  {#if filteredCertificates.length === 0}<div class="ms-empty">No matches found</div>{/if}
+                  {#if certSearchTerm && !allCertificates.includes(certSearchTerm)}
+                    <div class="ms-add-new" on:mousedown={() => addCertificate(certSearchTerm)}>➕ Add "{certSearchTerm}"</div>
                   {/if}
                 </div>
               {/if}
             </div>
           </div>
-          <div class="field">
-            <label>Job Location <span class="required">*</span></label>
-            <input type="text" bind:value={form.location} class={errors.location ? "error-input" : ""} />
-            {#if errors.location}<span class="error">{errors.location}</span>{/if}
-          </div>
-          <div class="field">
-            <label>Work Mode <span class="required">*</span></label>
-            <select bind:value={form.workMode} class={errors.workMode ? "error-input" : ""}>
-              <option value="">Select</option><option>Onsite</option><option>Remote</option><option>Hybrid</option>
-            </select>
-            {#if errors.workMode}<span class="error">{errors.workMode}</span>{/if}
-          </div>
-        </div>
-        <div class="triple-row">
-          <div class="field">
-            <label>Employment Type <span class="required">*</span></label>
-            <select bind:value={form.employmentType} class={errors.employmentType ? "error-input" : ""}>
-              <option value="">Select</option><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option>
-            </select>
-            {#if errors.employmentType}<span class="error">{errors.employmentType}</span>{/if}
-          </div>
-          <div class="field">
-            <label>Position Type</label>
-            <select bind:value={form.positionType}>
-              <option value="">Select</option><option>Skilled</option><option>Semi Skilled</option><option>Unskilled</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Number of Positions</label>
-            <input type="number" bind:value={form.positions} min="1" />
-          </div>
-        </div>
-      </fieldset>
 
-      <!-- 4. EDUCATIONAL QUALIFICATION & EXPERIENCE -->
-      <fieldset>
-        <legend>Educational Qualification & Experience</legend>
-        <div class="field">
-          <label>Main Subject / Degree <span class="required">*</span></label>
-          <div class="subject-select-wrapper">
-            <select bind:value={selectedMainSubject} on:change={(e) => onMainSubjectChange(e.target.value)} class={errors.mainSubject ? "error-input" : ""}>
-              <option value="">-- Select Main Subject --</option>
-              {#each mainSubjects as subject}<option value={subject}>{subject}</option>{/each}
-            </select>
-            <button type="button" class="add-btn" on:click={() => showNewMainSubjectInput = !showNewMainSubjectInput}>+ Add New</button>
-          </div>
-          {#if errors.mainSubject}<span class="error">{errors.mainSubject}</span>{/if}
-          {#if showNewMainSubjectInput}
-            <div class="inline-add">
-              <input type="text" bind:value={newMainSubjectInput} placeholder="e.g. PhD" />
-              <button on:click={addNewMainSubject}>Save</button>
-              <button on:click={() => showNewMainSubjectInput = false}>Cancel</button>
-            </div>
-          {/if}
-        </div>
-
-        {#if selectedMainSubject}
+          <!-- Skills Multi-Select -->
           <div class="field">
-            <label>Sub-Subject / Specialization</label>
-            <div class="subject-select-wrapper">
-              <select bind:value={selectedSubSubject}>
-                <option value="">-- Select Sub-Subject --</option>
-                {#each subSubjectsMap[selectedMainSubject] || [] as sub}<option value={sub}>{sub}</option>{/each}
-              </select>
-              <button type="button" class="add-btn" on:click={() => showNewSubSubjectInput = !showNewSubSubjectInput}>+ Add New</button>
-            </div>
-            {#if showNewSubSubjectInput}
-              <div class="inline-add">
-                <input type="text" bind:value={newSubSubjectInput} placeholder="e.g. Quantum Physics" />
-                <button on:click={addNewSubSubject}>Save</button>
-                <button on:click={() => showNewSubSubjectInput = false}>Cancel</button>
-              </div>
-            {/if}
-          </div>
-        {/if}
-
-        <div class="field">
-          <label>Total Experience Required <span class="required">*</span></label>
-          <div class="button-group">
-            <button type="button" class:selected={form.expType === "any"} on:click={() => form.expType = "any"}>Any Experience</button>
-            <button type="button" class:selected={form.expType === "fresher"} on:click={() => form.expType = "fresher"}>Fresher Only</button>
-            <button type="button" class:selected={form.expType === "experienced"} on:click={() => form.expType = "experienced"}>Experienced Only</button>
-          </div>
-        </div>
-
-        {#if form.expType === "any"}
-          <div class="info-box">Both freshers and experienced candidates can apply.</div>
-          <div class="field">
-            <label>Preferred Experience</label>
-            <select bind:value={form.anyExperience}>
-              <option value="">Select Experience</option>
-              <option>Fresher</option><option>0-1 Years</option><option>1-2 Years</option><option>2-3 Years</option><option>3-5 Years</option><option>5+ Years</option>
-            </select>
-          </div>
-        {:else if form.expType === "fresher"}
-          <div class="info-box">Only Fresher candidates can apply.</div>
-        {:else if form.expType === "experienced"}
-          <div class="grid">
-            <div class="field">
-              <label>Minimum Experience <span class="required">*</span></label>
-              <select bind:value={form.minExp}>
-                <option value="">Select Min</option>
-                <option>1 Year</option><option>2 Years</option><option>3 Years</option><option>4 Years</option><option>5 Years</option>
-                <option>6 Years</option><option>7 Years</option><option>8 Years</option><option>9 Years</option><option>10 Years</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Maximum Experience <span class="required">*</span></label>
-              <select bind:value={form.maxExp}>
-                <option value="">Select Max</option>
-                <option>2 Years</option><option>3 Years</option><option>4 Years</option><option>5 Years</option><option>6 Years</option>
-                <option>7 Years</option><option>8 Years</option><option>9 Years</option><option>10 Years</option><option>12 Years</option><option>15 Years</option>
-              </select>
-            </div>
-          </div>
-        {/if}
-
-        <!-- Dynamic Compensation -->
-        <div class="compensation-section">
-          <h3>💰 Compensation</h3>
-          {#if showStipend}
-            <div class="grid">
-              <div class="field">
-                <label>Minimum Stipend (₹) <span class="required">*</span></label>
-                <input type="number" bind:value={form.stipendMin} class={errors.stipendMin ? "error-input" : ""} />
-                {#if errors.stipendMin}<span class="error">{errors.stipendMin}</span>{/if}
-              </div>
-              <div class="field">
-                <label>Maximum Stipend (₹) <span class="required">*</span></label>
-                <input type="number" bind:value={form.stipendMax} class={errors.stipendMax ? "error-input" : ""} />
-                {#if errors.stipendMax}<span class="error">{errors.stipendMax}</span>{/if}
-              </div>
-            </div>
-          {/if}
-          {#if showSalary}
-            <div class="grid">
-              <div class="field">
-                <label>Minimum Salary (₹) <span class="required">*</span></label>
-                <input type="number" bind:value={form.salaryMin} class={errors.salaryMin ? "error-input" : ""} />
-                {#if errors.salaryMin}<span class="error">{errors.salaryMin}</span>{/if}
-              </div>
-              <div class="field">
-                <label>Maximum Salary (₹) <span class="required">*</span></label>
-                <input type="number" bind:value={form.salaryMax} class={errors.salaryMax ? "error-input" : ""} />
-                {#if errors.salaryMax}<span class="error">{errors.salaryMax}</span>{/if}
-              </div>
-            </div>
-            <div class="field">
-              <label>Performance Bonus / Incentives?</label>
-              <div class="toggle-group">
-                <button type="button" class:selected={form.bonus === "yes"} on:click={() => form.bonus = "yes"}>Yes</button>
-                <button type="button" class:selected={form.bonus === "no"} on:click={() => form.bonus = "no"}>No</button>
-              </div>
-            </div>
-          {/if}
-        </div>
-
-        <!-- Certificates Dropdown Multi-Select -->
-        <div class="field">
-          <label>Certificates / Courses</label>
-          <div class="multi-select cert-multi-select">
-            <div class="select-box" on:click={() => showCertDropdown = true}>
-              <div class="tags">
-                {#each selectedCertificates as item}
-                  <span class="tag">{item}<span class="remove" on:click|stopPropagation={() => toggleCertificate(item)}>×</span></span>
-                {/each}
-                <input type="text" placeholder="Search or add certificate..." bind:value={certSearchTerm}
-                       on:focus={() => showCertDropdown = true}
-                       on:keydown={handleCertKey} />
-              </div>
-              <button type="button" class="dropdown-toggle-btn" on:click|stopPropagation={toggleCertDropdown}>
-                {showCertDropdown ? '▲' : '▼'}
-              </button>
-            </div>
-            {#if showCertDropdown}
-              <div class="dropdown-box">
-                {#if filteredCertificates.length > 0}
-                  {#each filteredCertificates as item, i}
-                    <div class="dropdown-item {certHighlightedIndex === i ? 'active' : ''}"
-                         on:mousedown={() => toggleCertificate(item)}>
-                      <input type="checkbox" checked={selectedCertificates.includes(item)} readonly /> {item}
-                    </div>
+            <label>Skills Required</label>
+            <div class="multi-select skills-multi-select">
+              <div class="ms-box" on:click={() => showSkillsDropdown = true}>
+                <div class="ms-tags">
+                  {#each selectedSkillsList as item}
+                    <span class="ms-tag">{item}<span class="ms-remove" on:click|stopPropagation={() => toggleSkill(item)}>×</span></span>
                   {/each}
-                {:else}<div class="no-data">No match found</div>{/if}
-                {#if certSearchTerm && !allCertificates.includes(certSearchTerm)}
-                  <div class="add-new" on:mousedown={() => addCertificate(certSearchTerm)}>➕ Add "{certSearchTerm}"</div>
-                {/if}
+                  <input type="text" placeholder={selectedSkillsList.length ? "" : "Search skills…"}
+                         bind:value={skillsSearchTerm} on:focus={() => showSkillsDropdown = true} on:keydown={handleSkillsKey} />
+                </div>
+                <button type="button" class="caret-btn" on:click|stopPropagation={() => showSkillsDropdown = !showSkillsDropdown}>{showSkillsDropdown ? '▲' : '▼'}</button>
               </div>
-            {/if}
-          </div>
-        </div>
-
-        <!-- Skills Dropdown Multi-Select -->
-        <div class="field">
-          <label>Skills Required</label>
-          <div class="multi-select skills-multi-select">
-            <div class="select-box" on:click={() => showSkillsDropdown = true}>
-              <div class="tags">
-                {#each selectedSkillsList as item}
-                  <span class="tag">{item}<span class="remove" on:click|stopPropagation={() => toggleSkill(item)}>×</span></span>
-                {/each}
-                <input type="text" placeholder="Search or add skill..." bind:value={skillsSearchTerm}
-                       on:focus={() => showSkillsDropdown = true}
-                       on:keydown={handleSkillsKey} />
-              </div>
-              <button type="button" class="dropdown-toggle-btn" on:click|stopPropagation={toggleSkillsDropdown}>
-                {showSkillsDropdown ? '▲' : '▼'}
-              </button>
-            </div>
-            {#if showSkillsDropdown}
-              <div class="dropdown-box">
-                {#if filteredSkills.length > 0}
+              {#if showSkillsDropdown}
+                <div class="ms-dropdown">
                   {#each filteredSkills as item, i}
-                    <div class="dropdown-item {skillsHighlightedIndex === i ? 'active' : ''}"
-                         on:mousedown={() => toggleSkill(item)}>
+                    <div class="ms-item" class:ms-active={skillsHighlightedIndex === i} on:mousedown={() => toggleSkill(item)}>
                       <input type="checkbox" checked={selectedSkillsList.includes(item)} readonly /> {item}
                     </div>
                   {/each}
-                {:else}<div class="no-data">No match found</div>{/if}
-                {#if skillsSearchTerm && !allSkills.includes(skillsSearchTerm)}
-                  <div class="add-new" on:mousedown={() => addSkill(skillsSearchTerm)}>➕ Add "{skillsSearchTerm}"</div>
-                {/if}
+                  {#if filteredSkills.length === 0}<div class="ms-empty">No matches found</div>{/if}
+                  {#if skillsSearchTerm && !allSkills.includes(skillsSearchTerm)}
+                    <div class="ms-add-new" on:mousedown={() => addSkill(skillsSearchTerm)}>➕ Add "{skillsSearchTerm}"</div>
+                  {/if}
+                </div>
+              {/if}
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Additional Skills (free text)</label>
+            <textarea rows="2" bind:value={form.skills} placeholder="Any other skills, tools or technologies not listed above…"></textarea>
+          </div>
+
+          <!-- Languages -->
+          <div class="field">
+            <label>Languages Required</label>
+            <div class="lang-grid">
+              {#each defaultLanguages as lang}
+                <label class="lang-chip" class:lang-selected={selectedLanguages.includes(lang)}>
+                  <input type="checkbox" value={lang} bind:group={selectedLanguages} />
+                  {lang}
+                </label>
+              {/each}
+              {#each customLanguages as lang}
+                <label class="lang-chip lang-custom" class:lang-selected={selectedLanguages.includes(lang)}>
+                  <input type="checkbox" value={lang} bind:group={selectedLanguages} />
+                  {lang}
+                  <button type="button" class="lang-remove" on:click={() => removeCustomLanguage(lang)}>×</button>
+                </label>
+              {/each}
+              <button type="button" class="add-chip-btn" on:click={() => showNewLanguageInput = !showNewLanguageInput}>+ Add</button>
+            </div>
+            {#if showNewLanguageInput}
+              <div class="inline-add-row">
+                <input type="text" bind:value={newLanguageInput} placeholder="e.g. Japanese" />
+                <button type="button" class="save-btn" on:click={addNewLanguage}>Save</button>
+                <button type="button" class="cancel-btn" on:click={() => showNewLanguageInput = false}>Cancel</button>
               </div>
             {/if}
           </div>
-        </div>
 
-        <div class="field">
-          <label>Additional Skills (free text)</label>
-          <textarea rows="2" bind:value={form.skills} placeholder="Any other skills not listed above..."></textarea>
         </div>
+      </section>
 
-        <!-- Languages (checkboxes) -->
-        <div class="field">
-          <label>Languages Required</label>
-          <div class="checkbox-group">
-            <div class="checkbox-row">
-              {#each defaultLanguages as lang}
-                <label class="checkbox-option"><input type="checkbox" value={lang} bind:group={selectedLanguages} /><span>{lang}</span></label>
-              {/each}
-              {#each customLanguages as lang}
-                <label class="checkbox-option custom-option"><input type="checkbox" value={lang} bind:group={selectedLanguages} /><span>{lang}</span><button type="button" class="remove-option" on:click={() => removeCustomLanguage(lang)}>×</button></label>
-              {/each}
-              <button type="button" class="add-option-btn" on:click={() => showNewLanguageInput = !showNewLanguageInput}>+ Add Other</button>
+      <!-- ── 5. JOB DESCRIPTION ── -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <h2>Job Description</h2>
+        </div>
+        <div class="section-body">
+          <div class="field">
+            <label>Job Summary / Role Overview</label>
+            <textarea rows="3" bind:value={form.summary} placeholder="Briefly describe the role, its purpose and the team it belongs to…"></textarea>
+          </div>
+          <div class="field">
+            <label>Key Responsibilities</label>
+            <textarea rows="4" bind:value={form.responsibilities} placeholder="• Lead development of new features&#10;• Collaborate with cross-functional teams&#10;• Mentor junior developers"></textarea>
+          </div>
+          <div class="field">
+            <label>Requirements &amp; Qualifications</label>
+            <textarea rows="4" bind:value={form.requirements} placeholder="• Bachelor's degree in relevant field&#10;• 3+ years of experience&#10;• Strong communication skills"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 6. AGE CRITERIA ── -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">06</span>
+          <h2>Age Criteria</h2>
+        </div>
+        <div class="section-body">
+          <div class="grid-2 half-width-grid">
+            <div class="field">
+              <label>Minimum Age</label>
+              <input type="number" bind:value={form.minAge} min="18" placeholder="e.g. 21" />
+            </div>
+            <div class="field">
+              <label>Maximum Age</label>
+              <input type="number" bind:value={form.maxAge} placeholder="e.g. 45" />
             </div>
           </div>
-          {#if showNewLanguageInput}
-            <div class="inline-add">
-              <input type="text" bind:value={newLanguageInput} placeholder="e.g. French" />
-              <button on:click={addNewLanguage}>Save</button>
-              <button on:click={() => showNewLanguageInput = false}>Cancel</button>
-            </div>
-          {/if}
         </div>
-      </fieldset>
+      </section>
 
-      <!-- 5. JOB DESCRIPTION -->
-      <fieldset>
-        <legend>Job Description</legend>
-        <div class="field">
-          <label>Job Summary / Functions</label>
-          <textarea rows="2" bind:value={form.summary} placeholder="Brief overview of the role..."></textarea>
+      <!-- ── 7. FACILITIES & BENEFITS ── -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">07</span>
+          <h2>Facilities &amp; Benefits</h2>
         </div>
-        <div class="field">
-          <label>Key Responsibilities</label>
-          <textarea rows="2" bind:value={form.responsibilities} placeholder="• Lead development of new features&#10;• Collaborate with cross-functional teams"></textarea>
-        </div>
-        <div class="field">
-          <label>Requirements & Qualifications</label>
-          <textarea rows="2" bind:value={form.requirements} placeholder="• Bachelor's degree in relevant field&#10;• 3+ years of experience"></textarea>
-        </div>
-      </fieldset>
+        <div class="section-body">
 
-      <!-- 6. AGE -->
-      <fieldset>
-        <legend>Age Criteria</legend>
-        <div class="grid">
-          <div class="field"><label>Minimum Age</label><input type="number" bind:value={form.minAge} min="18" /></div>
-          <div class="field"><label>Maximum Age</label><input type="number" bind:value={form.maxAge} /></div>
-        </div>
-      </fieldset>
-
-      <!-- 7. FACILITIES & BENEFITS -->
-      <fieldset>
-        <legend>Facilities & Benefits</legend>
-        <div class="field full-width">
-          <label>Other Facilities</label>
-          <div class="multi-select facility-multi-select">
-            <div class="select-box" on:click={() => showFacilityDropdown = true}>
-              <div class="tags">
-                {#each selectedFacilities as item}
-                  <span class="tag">{item}<span class="remove" on:click|stopPropagation={() => toggleFacility(item)}>×</span></span>
-                {/each}
-                <input type="text" placeholder="Search or add..." bind:value={facilitySearchTerm}
-                       on:focus={() => showFacilityDropdown = true}
-                       on:keydown={handleFacilityKey} />
+          <!-- Benefits Multi-Select -->
+          <div class="field">
+            <label>Benefits &amp; Perks</label>
+            <div class="multi-select facility-multi-select">
+              <div class="ms-box" on:click={() => showFacilityDropdown = true}>
+                <div class="ms-tags">
+                  {#each selectedFacilities as item}
+                    <span class="ms-tag">{item}<span class="ms-remove" on:click|stopPropagation={() => toggleFacility(item)}>×</span></span>
+                  {/each}
+                  <input type="text" placeholder={selectedFacilities.length ? "" : "Search or add benefits…"}
+                         bind:value={facilitySearchTerm} on:focus={() => showFacilityDropdown = true} on:keydown={handleFacilityKey} />
+                </div>
+                <button type="button" class="caret-btn" on:click|stopPropagation={() => showFacilityDropdown = !showFacilityDropdown}>{showFacilityDropdown ? '▲' : '▼'}</button>
               </div>
-              <button type="button" class="dropdown-toggle-btn" on:click|stopPropagation={toggleFacilityDropdown}>
-                {showFacilityDropdown ? '▲' : '▼'}
-              </button>
-            </div>
-            {#if showFacilityDropdown}
-              <div class="dropdown-box">
-                {#if filteredFacilities.length > 0}
+              {#if showFacilityDropdown}
+                <div class="ms-dropdown">
                   {#each filteredFacilities as item, i}
-                    <div class="dropdown-item {facilityHighlightedIndex === i ? 'active' : ''}"
-                         on:mousedown={() => toggleFacility(item)}>
+                    <div class="ms-item" class:ms-active={facilityHighlightedIndex === i} on:mousedown={() => toggleFacility(item)}>
                       <input type="checkbox" checked={selectedFacilities.includes(item)} readonly /> {item}
                     </div>
                   {/each}
-                {:else}<div class="no-data">No match found</div>{/if}
-                {#if facilitySearchTerm && !allFacilities.includes(facilitySearchTerm)}
-                  <div class="add-new" on:mousedown={() => addFacility(facilitySearchTerm)}>➕ Add "{facilitySearchTerm}"</div>
-                {/if}
-              </div>
-            {/if}
-          </div>
-        </div>
-
-        <div class="sub-section">
-          <h3>🏠 Accommodation</h3>
-          <div class="field">
-            <label>Type of Accommodation</label>
-            <div class="radio-group">
-              <label><input type="radio" value="sharing" bind:group={form.accommodationType} /> Sharing</label>
-              <label><input type="radio" value="separateRoom" bind:group={form.accommodationType} /> Separate Room</label>
-              <label><input type="radio" value="quarter" bind:group={form.accommodationType} /> Quarter</label>
-              <label><input type="radio" value="none" bind:group={form.accommodationType} /> Not provided</label>
+                  {#if filteredFacilities.length === 0}<div class="ms-empty">No matches</div>{/if}
+                  {#if facilitySearchTerm && !allFacilities.includes(facilitySearchTerm)}
+                    <div class="ms-add-new" on:mousedown={() => addFacility(facilitySearchTerm)}>➕ Add "{facilitySearchTerm}"</div>
+                  {/if}
+                </div>
+              {/if}
             </div>
           </div>
-        </div>
 
-        <div class="sub-section">
-          <h3>🚌 Transportation</h3>
-          <div class="grid">
-            <div class="field">
-              <label>Transport Type</label>
-              <div class="radio-group">
-                <label><input type="radio" value="free" bind:group={form.transportType} /> Free</label>
-                <label><input type="radio" value="chargeable" bind:group={form.transportType} /> Chargeable</label>
-                <label><input type="radio" value="none" bind:group={form.transportType} /> Not provided</label>
-              </div>
+          <!-- Accommodation -->
+          <div class="sub-block">
+            <div class="sub-block-title">🏠 Accommodation</div>
+            <div class="radio-row">
+              <label class="radio-chip" class:radio-active={form.accommodationType === "sharing"}><input type="radio" value="sharing" bind:group={form.accommodationType} /> Sharing</label>
+              <label class="radio-chip" class:radio-active={form.accommodationType === "separateRoom"}><input type="radio" value="separateRoom" bind:group={form.accommodationType} /> Separate Room</label>
+              <label class="radio-chip" class:radio-active={form.accommodationType === "quarter"}><input type="radio" value="quarter" bind:group={form.accommodationType} /> Quarter</label>
+              <label class="radio-chip" class:radio-active={form.accommodationType === "none"}><input type="radio" value="none" bind:group={form.accommodationType} /> Not Provided</label>
+            </div>
+          </div>
+
+          <!-- Transportation -->
+          <div class="sub-block">
+            <div class="sub-block-title">🚌 Transportation</div>
+            <div class="radio-row">
+              <label class="radio-chip" class:radio-active={form.transportType === "free"}><input type="radio" value="free" bind:group={form.transportType} /> Free</label>
+              <label class="radio-chip" class:radio-active={form.transportType === "chargeable"}><input type="radio" value="chargeable" bind:group={form.transportType} /> Chargeable</label>
+              <label class="radio-chip" class:radio-active={form.transportType === "none"}><input type="radio" value="none" bind:group={form.transportType} /> Not Provided</label>
             </div>
             {#if form.transportType && form.transportType !== "none"}
-              <div class="field"><label>Transportation Route</label><input type="text" bind:value={form.transportRoute} placeholder="e.g. City → Office" /></div>
+              <div class="field" style="margin-top: 12px;">
+                <label>Route</label>
+                <input type="text" bind:value={form.transportRoute} placeholder="e.g. City Centre → Office Campus" />
+              </div>
             {/if}
-            <div class="field full-width"><label>Other Transport Details</label><input type="text" bind:value={form.transportOther} placeholder="Any other transport information" /></div>
+            <div class="field" style="margin-top: 12px;">
+              <label>Other Transport Details</label>
+              <input type="text" bind:value={form.transportOther} placeholder="Any additional transport information…" />
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── 8. HIRING TIMELINE ── -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">08</span>
+          <h2>Hiring Timeline</h2>
+        </div>
+        <div class="section-body">
+          <div class="grid-2 half-width-grid">
+            <div class="field">
+              <label>Application Deadline</label>
+              <input id="deadline" type="text" bind:value={form.deadline} placeholder="DD/MM/YYYY" readonly />
+            </div>
+            <div class="field">
+              <label>Expected Joining Date</label>
+              <input id="joiningDate" type="text" bind:value={form.joiningDate} placeholder="DD/MM/YYYY" readonly />
+            </div>
           </div>
         </div>
-      </fieldset>
+      </section>
 
-      <!-- 8. HIRING TIMELINE -->
-      <fieldset>
-        <legend>Hiring Timeline</legend>
-        <div class="grid">
-          <div class="field"><label>Application Deadline</label><input id="deadline" type="text" bind:value={form.deadline} placeholder="DD/MM/YYYY" /></div>
-          <div class="field"><label>Expected Joining Date</label><input id="joiningDate" type="text" bind:value={form.joiningDate} placeholder="DD/MM/YYYY" /></div>
-        </div>
-      </fieldset>
+      <!-- Submit -->
+      <div class="submit-row">
+        <button type="submit" class="submit-btn">
+          <span>Post Job &amp; Find Talent</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
 
-      <button type="submit" class="submit-btn">Post Job & Find Talent</button>
     </form>
   </div>
-</section>
+</div>
 
 <style>
-  /* ================= GLOBAL RESET ================= */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
 
-  body {
-    font-family: "Poppins", sans-serif;
-    background: #f1f5f9;
-    overflow-x: hidden;
-  }
+  /* ── CSS Variables ── */
+  :global(*) { box-sizing: border-box; margin: 0; padding: 0; }
+  :global(body) { font-family: 'DM Sans', sans-serif; background: #f0f4f8; }
 
-  /* ================= MAIN CONTAINER ================= */
-  .container {
+  /* ── Page background ── */
+  .page-bg {
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 90px 1rem 40px;
-    background: #f1f5f9;
+    background: linear-gradient(160deg, #eef2ff 0%, #f0f9ff 50%, #f8fafc 100%);
+    padding: 32px 16px 60px;
   }
 
-  /* ================= FORM CARD ================= */
-  .form-card {
-    width: 100%;
-    max-width: 1000px;
+  .page-wrapper {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .form-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    color: white;
+    padding: 24px 32px;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+  }
+  .header-icon {
+    width: 52px; height: 52px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .form-header h1 { font-size: 1.45rem; font-weight: 700; line-height: 1.2; }
+  .form-header p { font-size: 0.875rem; opacity: 0.8; margin-top: 3px; }
+
+  /* ── Main Form ── */
+  .main-form {
     background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.07);
     overflow: hidden;
   }
 
-  /* ================= HEADER ================= */
-  .form-header {
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    padding: 24px 28px;
-    color: white;
+  /* ── Sections ── */
+  .form-section {
+    border-bottom: 1px solid #f1f5f9;
   }
+  .form-section:last-of-type { border-bottom: none; }
 
-  .form-header h1 {
-    font-size: 1.6rem;
-    font-weight: 600;
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 28px 0;
   }
-
-  .form-header p {
-    font-size: 0.9rem;
-    opacity: 0.9;
-    margin-top: 4px;
-  }
-
-  /* ================= FORM ================= */
-  form {
-    padding: 28px;
-  }
-
-  /* ================= FIELDSET ================= */
-  fieldset {
-    border: none;
-    margin-bottom: 28px;
-  }
-
-  legend {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #1e3a8a;
-    margin-bottom: 16px;
-    border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 6px;
-  }
-
-  .sub-section {
-    margin-bottom: 1.8rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #eef2ff;
-  }
-  .sub-section:last-child {
-    border-bottom: none;
-  }
-  h3 {
-    font-size: 1rem;
-    font-weight: 600;
+  .section-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
     color: #2563eb;
-    margin-bottom: 1rem;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    padding: 3px 8px;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 1rem;
+    font-weight: 650;
+    color: #0f172a;
   }
 
-  /* ================= GRID ================= */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  .section-body {
+    padding: 16px 28px 24px;
+    display: flex;
+    flex-direction: column;
     gap: 16px;
   }
 
-  .triple-row {
+  /* ── Grids ── */
+  .grid-2 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 16px;
   }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .half-width-grid { max-width: 560px; }
 
-  /* ================= FIELD ================= */
+  /* ── Fields ── */
   .field {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
   }
-
-  .full-width {
-    grid-column: 1 / -1;
-  }
+  .half-width { max-width: 380px; }
+  .half-mt { margin-top: 4px; }
 
   label {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #334155;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #374151;
+    letter-spacing: 0.01em;
   }
+  .req { color: #ef4444; }
 
-  .required {
-    color: red;
-  }
-
-  /* ================= INPUT ================= */
-  input:not([type="checkbox"]):not([type="radio"]),
+  /* ── Base Inputs ── */
+  input:not([type="checkbox"]):not([type="radio"]):not(.iti__tel-input),
   select,
   textarea {
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid #cbd5e1;
-    font-size: 0.85rem;
-    transition: 0.2s;
+    height: 42px;
+    padding: 0 12px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 9px;
+    font-size: 0.875rem;
+    font-family: 'DM Sans', sans-serif;
+    color: #0f172a;
+    background: #fafbfc;
+    transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
     width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
   }
-
-  input:focus,
-  select:focus,
-  textarea:focus {
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+  }
+  textarea {
+    height: auto;
+    padding: 10px 12px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+  input:focus, select:focus, textarea:focus {
     outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
-  }
-
-  .error-input {
-    border-color: red;
-  }
-  .error {
-    font-size: 0.75rem;
-    color: red;
-  }
-
-  /* ================= BUTTON GROUP ================= */
-  .button-group {
-    display: flex;
-    gap: 8px;
-  }
-  .button-group button {
-    flex: 1;
-    padding: 8px;
-    border-radius: 20px;
-    border: 1px solid #cbd5e1;
-    background: #f8fafc;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: 0.2s;
-  }
-  .button-group button.selected {
-    background: #2563eb;
-    color: white;
-    border: none;
-  }
-
-  .toggle-group {
-    display: flex;
-    gap: 8px;
-  }
-  .toggle-group button {
-    flex: 1;
-    padding: 8px;
-    border-radius: 20px;
-    border: 1px solid #cbd5e1;
-    background: #f8fafc;
-    cursor: pointer;
-    font-size: 0.8rem;
-  }
-  .toggle-group button.selected {
-    background: #2563eb;
-    color: white;
-    border: none;
-  }
-
-  /* ================= DROPDOWN TOGGLE BUTTON ================= */
-  .dropdown-input-group {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-  .dropdown-input-group input {
-    flex: 1;
-  }
-  .dropdown-toggle-btn {
-    background: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: #1e40af;
-    transition: 0.2s;
-  }
-  .dropdown-toggle-btn:hover {
-    background: #e2e8f0;
     border-color: #3b82f6;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
   }
+  .err { border-color: #f87171 !important; background: #fff8f8 !important; }
+  .error-msg { font-size: 0.72rem; color: #ef4444; font-weight: 500; margin-top: 2px; }
 
-  /* ================= RADIO & CHECKBOX ================= */
-  .radio-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+  /* ── Phone Input ── */
+  .phone-wrap { width: 100%; }
+  .phone-wrap :global(.iti) { width: 100%; }
+  .phone-wrap :global(.iti__flag-container) { z-index: 3; }
+  .phone-wrap :global(input.iti__tel-input),
+  .phone-wrap :global(#phone) {
+    height: 42px;
+    width: 100%;
+    padding-left: 90px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 9px;
+    font-size: 0.875rem;
+    font-family: 'DM Sans', sans-serif;
+    background: #fafbfc;
+    transition: border-color 0.18s, box-shadow 0.18s;
   }
-  .radio-group label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.8rem;
-    cursor: pointer;
-  }
-  input[type="radio"] {
-    width: 16px;
-    height: 16px;
-    accent-color: #3b82f6;
-  }
-
-  .checkbox-group {
-    background: #f8fafc;
-    border-radius: 14px;
-    border: 1px solid #e2e8f0;
-    padding: 8px;
-  }
-  .checkbox-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-  }
-  .checkbox-option {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    background: white;
-    padding: 4px 12px;
-    border-radius: 30px;
-    border: 1px solid #cbd5e1;
-    transition: 0.2s;
-  }
-  .checkbox-option:hover {
+  .phone-wrap :global(#phone:focus) {
+    outline: none;
     border-color: #3b82f6;
-    background: #eff6ff;
-  }
-  .checkbox-option input {
-    width: 14px;
-    height: 14px;
-    accent-color: #3b82f6;
-  }
-  .custom-option {
-    background: #eef2ff;
-    border-color: #bfdbfe;
-  }
-  .remove-option {
-    background: none;
-    border: none;
-    color: #ef4444;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-left: 4px;
-    border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .remove-option:hover {
-    background: #fee2e2;
-  }
-  .add-option-btn {
-    background: #eef2ff;
-    border: 1px solid #bfdbfe;
-    border-radius: 30px;
-    padding: 4px 12px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #1e40af;
-    cursor: pointer;
-    transition: 0.2s;
-  }
-  .add-option-btn:hover {
-    background: #e0edff;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+    background: #fff;
   }
 
-  /* ================= SUBJECT SELECT ================= */
-  .subject-select-wrapper {
+  /* ── Pill / Button Groups ── */
+  .pill-group {
     display: flex;
     gap: 8px;
-    align-items: center;
+    flex-wrap: wrap;
   }
-  .subject-select-wrapper select {
-    flex: 1;
-  }
-  .add-btn {
-    background: #eef2ff;
-    border: 1px solid #bfdbfe;
-    border-radius: 40px;
-    padding: 8px 16px;
-    font-size: 0.8rem;
+  .pill-group button {
+    padding: 9px 18px;
+    border-radius: 50px;
+    border: 1.5px solid #e2e8f0;
+    background: #f8fafc;
+    font-size: 0.82rem;
     font-weight: 500;
-    color: #1e40af;
+    font-family: 'DM Sans', sans-serif;
+    color: #475569;
     cursor: pointer;
+    transition: all 0.18s;
     white-space: nowrap;
   }
-  .add-btn:hover {
-    background: #e0edff;
+  .pill-group button:hover { border-color: #93c5fd; background: #eff6ff; color: #2563eb; }
+  .pill-group button.active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.25);
   }
-  .inline-add {
+  .pill-group.trio button { flex: 1; text-align: center; min-width: 130px; }
+  .pill-group.small button { padding: 7px 20px; }
+
+  /* ── Compensation Card ── */
+  .comp-card {
+    background: linear-gradient(135deg, #f0f9ff, #eff6ff);
+    border: 1.5px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 16px 20px;
     display: flex;
-    gap: 8px;
-    margin-top: 8px;
-    align-items: center;
+    flex-direction: column;
+    gap: 14px;
   }
-  .inline-add input {
-    flex: 1;
-  }
-  .inline-add button {
-    padding: 6px 12px;
-    border-radius: 30px;
-    border: none;
-    background: #3b82f6;
-    color: white;
-    cursor: pointer;
-    font-size: 0.75rem;
-  }
-  .inline-add button:last-child {
-    background: #e2e8f0;
-    color: #1e293b;
+  .comp-card-header {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #1d4ed8;
+    letter-spacing: 0.01em;
   }
 
-  /* ================= DEPARTMENT DROPDOWN ================= */
-  .department-wrapper {
-    position: relative;
+  /* ── Info Pill ── */
+  .info-pill {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 0.8rem;
+    color: #166534;
+    font-weight: 500;
   }
-  .dropdown-container {
+
+  /* ── Combo Input (Department) ── */
+  .combo-wrap {
     position: relative;
+    display: flex;
+    gap: 0;
   }
-  .dropdown {
+  .combo-wrap input {
+    border-radius: 9px 0 0 9px;
+    border-right: none;
+    flex: 1;
+  }
+  .combo-wrap input:focus { z-index: 1; }
+  .caret-btn {
+    height: 42px;
+    padding: 0 13px;
+    border: 1.5px solid #e2e8f0;
+    border-left: none;
+    border-radius: 0 9px 9px 0;
+    background: #f1f5f9;
+    font-size: 0.7rem;
+    color: #2563eb;
+    cursor: pointer;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+  .caret-btn:hover { background: #e2e8f0; }
+  .float-dropdown {
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #cbd5e1;
-    border-radius: 12px;
-    margin-top: 4px;
+    top: calc(100% + 4px);
+    left: 0; right: 0;
+    background: #fff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     max-height: 200px;
     overflow-y: auto;
-    z-index: 20;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    z-index: 50;
   }
-  .dropdown-item {
+  .dd-item {
+    padding: 9px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: #374151;
+  }
+  .dd-item:hover { background: #eff6ff; color: #1d4ed8; }
+  .dd-add { color: #2563eb; font-weight: 600; border-top: 1px solid #f1f5f9; }
+
+  /* ── Multi-Select ── */
+  .multi-select { position: relative; }
+  .ms-box {
+    min-height: 42px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 9px;
+    padding: 5px 6px 5px 8px;
+    display: flex;
+    align-items: flex-start;
+    background: #fafbfc;
+    gap: 6px;
+    cursor: text;
+    transition: border-color 0.18s, box-shadow 0.18s;
+  }
+  .ms-box:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+    background: #fff;
+  }
+  .ms-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    flex: 1;
+    align-items: center;
+    min-height: 30px;
+  }
+  .ms-tags input {
+    height: 28px;
+    border: none;
+    padding: 0 4px;
+    background: transparent;
+    font-size: 0.85rem;
+    min-width: 100px;
+    flex: 1;
+    box-shadow: none !important;
+  }
+  .ms-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #2563eb;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .ms-remove { cursor: pointer; font-size: 1rem; line-height: 1; opacity: 0.7; }
+  .ms-remove:hover { opacity: 1; }
+  .ms-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0; right: 0;
+    background: #fff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    max-height: 210px;
+    overflow-y: auto;
+    z-index: 60;
+  }
+  .ms-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
     padding: 8px 12px;
     font-size: 0.85rem;
     cursor: pointer;
+    color: #374151;
   }
-  .dropdown-item:hover {
-    background: #eff6ff;
-  }
-  .dropdown-item.add {
+  .ms-item:hover, .ms-active { background: #eff6ff; color: #1d4ed8; }
+  .ms-item input[type="checkbox"] { width: 14px; height: 14px; accent-color: #2563eb; pointer-events: none; }
+  .ms-add-new {
+    padding: 9px 12px;
+    font-size: 0.82rem;
     color: #2563eb;
     font-weight: 600;
-    border-top: 1px solid #e2e8f0;
+    cursor: pointer;
+    border-top: 1px solid #f1f5f9;
+    background: #f8fafc;
+    text-align: center;
+  }
+  .ms-add-new:hover { background: #eff6ff; }
+  .ms-empty { padding: 12px; text-align: center; color: #94a3b8; font-size: 0.8rem; }
+
+  /* ── Language Grid ── */
+  .lang-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    align-items: center;
+  }
+  .lang-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 30px;
+    border: 1.5px solid #e2e8f0;
+    background: #f8fafc;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .lang-chip input[type="checkbox"] { display: none; }
+  .lang-chip:hover { border-color: #93c5fd; background: #eff6ff; color: #2563eb; }
+  .lang-selected { background: #dbeafe; border-color: #2563eb; color: #1d4ed8; }
+  .lang-custom { border-style: dashed; }
+  .lang-remove {
+    background: none; border: none; color: #ef4444;
+    font-size: 1rem; font-weight: bold; cursor: pointer;
+    margin-left: 2px; padding: 0 2px;
   }
 
-  /* ================= MULTI-SELECT DROPDOWNS ================= */
-  .multi-select {
-    position: relative;
-  }
-  .select-box {
-    border: 1px solid #cbd5e1;
-    border-radius: 12px;
-    min-height: 42px;
-    padding: 6px;
+  /* ── Add Select Row ── */
+  .add-select-row {
     display: flex;
+    gap: 8px;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-    background: white;
   }
-  .select-box:focus-within {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+  .add-select-row select { flex: 1; }
+  .add-chip-btn {
+    height: 42px;
+    padding: 0 16px;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 9px;
+    background: #eff6ff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1d4ed8;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    flex-shrink: 0;
   }
-  .tags {
+  .add-chip-btn:hover { background: #dbeafe; border-color: #2563eb; }
+
+  /* ── Inline Add Row ── */
+  .inline-add-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 8px;
+  }
+  .inline-add-row input { flex: 1; height: 38px; }
+  .save-btn {
+    height: 38px; padding: 0 16px;
+    background: #2563eb; color: #fff;
+    border: none; border-radius: 8px;
+    font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .save-btn:hover { background: #1d4ed8; }
+  .cancel-btn {
+    height: 38px; padding: 0 14px;
+    background: #f1f5f9; color: #475569;
+    border: 1.5px solid #e2e8f0; border-radius: 8px;
+    font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .cancel-btn:hover { background: #e2e8f0; }
+
+  /* ── Sub Blocks (Accommodation, Transport) ── */
+  .sub-block {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .sub-block-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 12px;
+  }
+  .radio-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    flex: 1;
+    gap: 8px;
   }
-  .tags input {
-    border: none;
-    outline: none;
-    flex: 1;
-    min-width: 120px;
-    font-size: 0.85rem;
-    padding: 4px 0;
-    background: transparent;
-  }
-  .tag {
-    background: #2563eb;
-    color: white;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
+  .radio-chip {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-  }
-  .tag .remove {
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    line-height: 1;
-  }
-  .dropdown-box {
-    position: absolute;
-    top: calc(100% + 4px);
-    left: 0;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    background: white;
-    border: 1px solid #cbd5e1;
-    border-radius: 12px;
-    z-index: 100;
-    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-  }
-  .dropdown-item {
-    padding: 8px 12px;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-  }
-  .dropdown-item:hover, .dropdown-item.active {
-    background: #eff6ff;
-  }
-  .dropdown-item input[type="checkbox"] {
-    width: 14px;
-    height: 14px;
-    accent-color: #3b82f6;
-    pointer-events: none;
-  }
-  .add-new {
-    padding: 8px 12px;
-    text-align: center;
-    color: #2563eb;
-    font-weight: 600;
-    cursor: pointer;
-    border-top: 1px solid #e2e8f0;
-    background: #f8fafc;
-  }
-  .add-new:hover {
-    background: #eff6ff;
-  }
-  .no-data {
-    padding: 12px;
-    text-align: center;
-    color: #94a3b8;
-    font-size: 0.8rem;
-  }
-
-  /* ================= INFO BOX ================= */
-  .info-box {
-    background: #eff6ff;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    margin-bottom: 10px;
-  }
-
-  /* ================= COMPENSATION SECTION ================= */
-  .compensation-section {
-    background: #f8fafc;
-    border-radius: 16px;
-    padding: 1rem;
-    margin: 1rem 0;
-  }
-
-  /* ================= PHONE INPUT ================= */
-  .iti {
-    width: 100%;
-  }
-  .iti__flag-container {
-    z-index: 2;
-  }
-  .iti--separate-dial-code .iti__selected-flag {
-    background-color: #f1f5f9;
-    border-radius: 10px 0 0 10px;
-  }
-
-  /* ================= SUBMIT BUTTON ================= */
-  .submit-btn {
-    display: block;
-    margin: 30px auto 0;
-    width: 60%;
-    max-width: 400px;
-    padding: 12px;
+    padding: 7px 14px;
     border-radius: 30px;
+    border: 1.5px solid #e2e8f0;
+    background: #fff;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .radio-chip input[type="radio"] { display: none; }
+  .radio-chip:hover { border-color: #93c5fd; color: #2563eb; }
+  .radio-active { background: #dbeafe; border-color: #2563eb; color: #1d4ed8; }
+
+  /* ── Submit ── */
+  .submit-row {
+    padding: 24px 28px 32px;
+    display: flex;
+    justify-content: center;
+  }
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 44px;
+    border-radius: 50px;
     border: none;
     background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: white;
-    font-size: 0.9rem;
-    font-weight: 500;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.02em;
     cursor: pointer;
-    transition: 0.3s;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
   .submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45);
   }
+  .submit-btn:active { transform: translateY(0); }
 
-  /* ================= RESPONSIVE ================= */
-  @media (max-width: 768px) {
-    .container {
-      padding: 100px 12px 30px;
-    }
-    .form-card {
-      border-radius: 12px;
-    }
-    form {
-      padding: 20px;
-    }
-    .grid, .triple-row {
-      grid-template-columns: 1fr;
-    }
-    .full-width {
-      grid-column: auto;
-    }
-    .dropdown-input-group {
-      flex-direction: column;
-    }
-    .dropdown-input-group input {
-      width: 100%;
-    }
-    .dropdown-toggle-btn {
-      width: 100%;
-    }
-    .submit-btn {
-      width: 100%;
-    }
-    .checkbox-row {
-      gap: 6px;
-    }
-    .checkbox-option {
-      font-size: 0.75rem;
-      padding: 2px 8px;
-    }
+  /* ── Responsive ── */
+  @media (max-width: 720px) {
+    .page-bg { padding: 16px 10px 48px; }
+    .form-header { padding: 20px 22px; border-radius: 12px 12px 0 0; }
+    .form-header h1 { font-size: 1.2rem; }
+    .section-header { padding: 18px 20px 0; }
+    .section-body { padding: 14px 20px 20px; gap: 14px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .half-width-grid { max-width: 100%; }
+    .pill-group.trio { flex-direction: column; }
+    .pill-group.trio button { min-width: unset; }
+    .submit-btn { padding: 13px 32px; font-size: 0.9rem; }
   }
 
   @media (max-width: 480px) {
-    form {
-      padding: 16px;
-    }
-    legend {
-      font-size: 1rem;
-    }
-    .button-group button {
-      width: 100%;
-    }
-    .subject-select-wrapper {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .add-btn {
-      text-align: center;
-    }
+    .form-header { gap: 12px; }
+    .header-icon { width: 44px; height: 44px; border-radius: 10px; }
+    .submit-row { padding: 20px 20px 28px; }
+    .submit-btn { width: 100%; justify-content: center; }
+    .add-select-row { flex-direction: column; align-items: stretch; }
+    .add-chip-btn { width: 100%; justify-content: center; }
+    .inline-add-row { flex-wrap: wrap; }
+    .inline-add-row input { min-width: 100%; }
   }
 </style>
